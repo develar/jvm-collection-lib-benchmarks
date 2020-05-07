@@ -63,6 +63,11 @@ questions.
       <artifactId>trove4j</artifactId>
       <version>3.0.3</version>
     </dependency>
+    <dependency>
+      <groupId>org.jetbrains.intellij.deps</groupId>
+      <artifactId>trove4j</artifactId>
+      <version>1.0.20200330</version>
+    </dependency>
 
     <!-- Koloboke -->
     <dependency>
@@ -198,4 +203,10 @@ questions.
       </plugins>
     </pluginManagement>
   </build>
+  <repositories>
+    <repository>
+      <id>intellij-third-party-dependencies</id>
+      <url>https://jetbrains.bintray.com/intellij-third-party-dependencies</url>
+    </repository>
+  </repositories>
 </project>

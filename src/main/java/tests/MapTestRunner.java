@@ -62,6 +62,7 @@ public class MapTestRunner {
     GsMutableMapTest.class,
     KolobokeMutableMapTest.class, //+
     HppcMapTest.class,
+    TroveJbMapTest.class, //+
     TroveMapTest.class, //+
   };
   private static final Class[] TESTS_WRAPPER = {
@@ -73,6 +74,7 @@ public class MapTestRunner {
     GsObjMapTest.class,
     JdkMapTest.class,  //+
     JdkMapTestDifferentCapacity.class,  //+
+    TroveJbObjMapTest.class,   //+
     TroveObjMapTest.class,   //+
     ObjObjMapTest.class   //
   };
@@ -81,6 +83,7 @@ public class MapTestRunner {
     GsIntObjectMapTest.class,
     KolobokeIntObjectMapTest.class,   //+
     HppcIntObjectMapTest.class,
+    TroveJbIntObjectMapTest.class,   //+
     TroveIntObjectMapTest.class,   //+
   };
   private static final Class[] TESTS_WRAPPER_PRIMITIVE = {
@@ -88,6 +91,7 @@ public class MapTestRunner {
     GsObjectIntMapTest.class,
     KolobokeObjectIntMapTest.class,   //+
     HppcObjectIntMapTest.class,
+    TroveJbObjectIntMapTest.class,   //+
     TroveObjectIntMapTest.class,   //+
   };
 
@@ -97,6 +101,7 @@ public class MapTestRunner {
     KolobokeIdentityMapTest.class,
     HppcIdentityMapTest.class,
     JDKIdentityMapTest.class,
+    TroveJbIdentityMapTest.class,
     TroveIdentityMapTest.class,
   };
 
