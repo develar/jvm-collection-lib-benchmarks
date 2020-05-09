@@ -1,38 +1,39 @@
 package tests.maptests.primitive;
 
-import gnu.trove.map.TIntIntMap;
-import gnu.trove.map.hash.TIntIntHashMap;
+import org.eclipse.collections.api.map.primitive.IntIntMap;
+import org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap;
 import tests.maptests.IMapTest;
 import tests.maptests.ITestSet;
 
 /**
- * Trove TIntIntHashMap test
+ * GS IntIntHashMap test. Fixed fill factor = 0.5
  */
-public class TroveMapTest implements ITestSet
+public class GsIntToIntMapTest implements ITestSet
 {
     @Override
     public IMapTest getTest() {
-        return new TroveGetTest();
+        return new GsMutableGetTest();
     }
 
     @Override
     public IMapTest putTest() {
-        return new TrovePutTest();
+        return new GsMutablePutTest();
     }
 
     @Override
     public IMapTest removeTest() {
-        return new TroveRemoveTest();
+        return new GsMutableRemoveTest();
     }
 
-    private static class TroveGetTest extends AbstractPrimPrimGetTest {
-        private TIntIntMap m_map;
+    private static class GsMutableGetTest extends AbstractPrimPrimGetTest {
+        IntIntMap m_map;
 
         @Override
-        public void setup(final int[] keys, final float fillFactor, int oneFailOutOf) {
-            super.setup( keys, fillFactor, oneFailOutOf );
-            m_map = new TIntIntHashMap( keys.length, fillFactor );
-            for (int key : keys) m_map.put( key + (key % oneFailOutOf == 0 ? 1 : 0), key );
+        public void setup(int[] keys, float fillFactor, final int oneFailOutOf ) {
+            super.setup( keys, fillFactor, oneFailOutOf);
+            IntIntHashMap map = new IntIntHashMap(keys.length);
+            for (int key : keys) map.put( key + (key % oneFailOutOf == 0 ? 1 : 0), key );
+            m_map = map;
         }
 
         @Override
@@ -44,10 +45,10 @@ public class TroveMapTest implements ITestSet
         }
     }
 
-    private static class TrovePutTest extends AbstractPrimPrimPutTest {
+    private static class GsMutablePutTest extends AbstractPrimPrimPutTest {
         @Override
         public int test() {
-            final TIntIntMap m_map = new TIntIntHashMap( m_keys.length, m_fillFactor );
+            final IntIntHashMap m_map = new IntIntHashMap(m_keys.length);
             for ( int i = 0; i < m_keys.length; ++i )
                 m_map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys.length; ++i )
@@ -56,10 +57,10 @@ public class TroveMapTest implements ITestSet
         }
     }
 
-    private static class TroveRemoveTest extends AbstractPrimPrimPutTest {
+    private static class GsMutableRemoveTest extends AbstractPrimPrimPutTest {
         @Override
         public int test() {
-            final TIntIntMap m_map = new TIntIntHashMap( m_keys.length / 2 + 1, m_fillFactor );
+            final IntIntHashMap m_map = new IntIntHashMap(m_keys.length / 2 + 1);
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {

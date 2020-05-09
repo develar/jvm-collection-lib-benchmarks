@@ -1,37 +1,36 @@
 package tests.maptests.primitive;
 
-import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import gnu.trove.TIntIntHashMap;
 import tests.maptests.IMapTest;
 import tests.maptests.ITestSet;
 
 /**
- * FastUtil Int2IntOpenHashMap test
+ * Trove TIntIntHashMap test
  */
-public class FastUtilMapTest implements ITestSet
+public class TroveJbIntToIntMapTest implements ITestSet
 {
-
     @Override
     public IMapTest getTest() {
-        return new FastUtilGetTest();
+        return new TroveGetTest();
     }
 
     @Override
     public IMapTest putTest() {
-        return new FastUtilPutTest();
+        return new TrovePutTest();
     }
 
     @Override
     public IMapTest removeTest() {
-        return new FastUtilRemoveTest();
+        return new TroveRemoveTest();
     }
 
-    private static class FastUtilGetTest extends AbstractPrimPrimGetTest {
-        private Int2IntOpenHashMap m_map;
+    private static class TroveGetTest extends AbstractPrimPrimGetTest {
+        private TIntIntHashMap m_map;
 
         @Override
-        public void setup(final int[] keys, final float fillFactor, final int oneFailOutOf) {
-            super.setup(keys, fillFactor, oneFailOutOf);
-            m_map = new Int2IntOpenHashMap( keys.length, fillFactor );
+        public void setup(final int[] keys, final float fillFactor, int oneFailOutOf) {
+            super.setup( keys, fillFactor, oneFailOutOf );
+            m_map = new TIntIntHashMap( keys.length, fillFactor );
             for (int key : keys) m_map.put( key + (key % oneFailOutOf == 0 ? 1 : 0), key );
         }
 
@@ -44,22 +43,22 @@ public class FastUtilMapTest implements ITestSet
         }
     }
 
-    private static class FastUtilPutTest extends AbstractPrimPrimPutTest {
+    private static class TrovePutTest extends AbstractPrimPrimPutTest {
         @Override
         public int test() {
-            final Int2IntOpenHashMap m_map = new Int2IntOpenHashMap( m_keys.length, m_fillFactor );
+            final TIntIntHashMap m_map = new TIntIntHashMap( m_keys.length, m_fillFactor );
             for ( int i = 0; i < m_keys.length; ++i )
-                m_map.put( m_keys[ i ],m_keys[ i ] );
+                m_map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys.length; ++i )
-                m_map.put( m_keys[ i ],m_keys[ i ] );
+                m_map.put( m_keys[ i ], m_keys[ i ] );
             return m_map.size();
         }
     }
 
-    private static class FastUtilRemoveTest extends AbstractPrimPrimPutTest {
+    private static class TroveRemoveTest extends AbstractPrimPrimPutTest {
         @Override
         public int test() {
-            final Int2IntOpenHashMap m_map = new Int2IntOpenHashMap( m_keys.length / 2 + 1, m_fillFactor );
+            final TIntIntHashMap m_map = new TIntIntHashMap( m_keys.length / 2 + 1, m_fillFactor );
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {
@@ -72,5 +71,6 @@ public class FastUtilMapTest implements ITestSet
             return m_map.size();
         }
     }
+
 }
 

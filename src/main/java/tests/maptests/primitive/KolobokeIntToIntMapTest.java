@@ -9,7 +9,7 @@ import tests.maptests.ITestSet;
 /**
  * Koloboke HashIntIntMaps.newMutableMap test
  */
-public class KolobokeMutableMapTest implements ITestSet
+public class KolobokeIntToIntMapTest implements ITestSet
 {
     @Override
     public IMapTest getTest() {

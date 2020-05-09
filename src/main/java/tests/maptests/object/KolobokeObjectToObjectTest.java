@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Koloboke mutable object map test
  */
-public class KolobokeMutableObjTest implements ITestSet
+public class KolobokeObjectToObjectTest implements ITestSet
 {
     @Override
     public IMapTest getTest() {

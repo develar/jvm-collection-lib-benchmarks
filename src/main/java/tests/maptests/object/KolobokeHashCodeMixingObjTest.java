@@ -11,7 +11,7 @@ import java.util.Map;
  *
  * BEFORE REMOVAL MAKE INNER CLASSES STATIC IN THE PARENT CLASS!!!
  */
-public class KolobokeHashCodeMixingObjTest extends KolobokeMutableObjTest {
+public class KolobokeHashCodeMixingObjTest extends KolobokeObjectToObjectTest {
     protected <T, V> Map<T, V> makeMap( final int size, final float fillFactor )
     {
         return HashObjObjMaps.getDefaultFactory()

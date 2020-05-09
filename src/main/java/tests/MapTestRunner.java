@@ -58,24 +58,24 @@ public class MapTestRunner {
   };
 
   private static final Class[] TESTS_PRIMITIVE = {
-    FastUtilMapTest.class,
-    GsMutableMapTest.class,
-    KolobokeMutableMapTest.class, //+
-    HppcMapTest.class,
-    TroveJbMapTest.class, //+
-    TroveMapTest.class, //+
+    FastUtilIntToIntMapTest.class,
+    GsIntToIntMapTest.class,
+    KolobokeIntToIntMapTest.class, //+
+    HppcIntToIntMapTest.class,
+    TroveJbIntToIntMapTest.class, //+
+    TroveIntToIntMapTest.class, //+
   };
   private static final Class[] TESTS_WRAPPER = {
-    FastUtilObjMapTest.class,
-    KolobokeMutableObjTest.class, //+
+    FastUtilObjectToObjectMapTest.class,
+    KolobokeObjectToObjectTest.class, //+
     KolobokeNotNullKeyObjTest.class,
     KolobokeHashCodeMixingObjTest.class,
-    HppcObjMapTest.class,
-    GsObjMapTest.class,
-    JdkMapTest.class,  //+
+    HppcObjectToObjectMapTest.class,
+    GsObjObjectToObjectMapTest.class,
+    JdkObjectToObjectMapTest.class,  //+
     JdkMapTestDifferentCapacity.class,  //+
-    TroveJbObjMapTest.class,   //+
-    TroveObjMapTest.class,   //+
+    TroveJbObjectToObjectMapTest.class,   //+
+    TroveObjectToObjectMapTest.class,   //+
     ObjObjMapTest.class   //
   };
   private static final Class[] TESTS_PRIMITIVE_WRAPPER = {

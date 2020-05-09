@@ -1,46 +1,39 @@
 package tests.maptests.object;
 
+import com.carrotsearch.hppc.ObjectObjectMap;
+import com.carrotsearch.hppc.ObjectObjectHashMap;
 import tests.maptests.IMapTest;
 import tests.maptests.ITestSet;
 import tests.maptests.object_prim.AbstractObjKeyGetTest;
 import tests.maptests.object_prim.AbstractObjKeyPutTest;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * JDK Map<Integer, Integer> tests
+ * HPPC ObjectObjectHashMap test
  */
-public class JdkMapTest implements ITestSet
+public class HppcObjectToObjectMapTest implements ITestSet
 {
     @Override
     public IMapTest getTest() {
-        return new JdkMapGetTest();
+        return new HppcObjMapGetTest();
     }
 
     @Override
     public IMapTest putTest() {
-        return new JdkMapPutTest();
+        return new HppcObjMapPutTest();
     }
 
     @Override
     public IMapTest removeTest() {
-        return new JdkMapRemoveTest();
+        return new HppcObjMapRemoveTest();
     }
 
-    protected <T, V> Map<T, V> makeMap( final int size, final float fillFactor )
-    {
-        return new HashMap<>( size, fillFactor );
-    }
-
-    //classes are non static due to a subclass presence
-    private class JdkMapGetTest extends AbstractObjKeyGetTest {
-        private Map<Integer, Integer> m_map;
+    private static class HppcObjMapGetTest extends AbstractObjKeyGetTest {
+        private ObjectObjectMap<Integer, Integer> m_map;
 
         @Override
         public void setup(final int[] keys, final float fillFactor, final int oneFailureOutOf ) {
             super.setup( keys, fillFactor, oneFailureOutOf );
-            m_map = makeMap( keys.length, fillFactor );
+            m_map = new ObjectObjectHashMap<>( keys.length, fillFactor );
             for (Integer key : m_keys)
                 m_map.put(new Integer( key % oneFailureOutOf == 0 ? key + 1 : key ), key);
         }
@@ -54,34 +47,33 @@ public class JdkMapTest implements ITestSet
         }
     }
 
-    private class JdkMapPutTest extends AbstractObjKeyPutTest {
+    private static class HppcObjMapPutTest extends AbstractObjKeyPutTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> map = makeMap( m_keys.length, m_fillFactor );
+            final ObjectObjectMap<Integer, Integer> m_map = new ObjectObjectHashMap<>( m_keys.length, m_fillFactor );
             for ( int i = 0; i < m_keys.length; ++i )
-                map.put( m_keys[ i ], m_keys[ i ] );
+                m_map.put( m_keys[ i ], m_keys[ i ] );
             for ( int i = 0; i < m_keys2.length; ++i )
-                map.put( m_keys2[ i ], m_keys2[ i ] );
-            return map.size();
+                m_map.put( m_keys2[ i ], m_keys2[ i ] );
+            return m_map.size();
         }
     }
 
-    private class JdkMapRemoveTest extends AbstractObjKeyPutTest {
+    private static class HppcObjMapRemoveTest extends AbstractObjKeyPutTest {
         @Override
         public int test() {
-            final Map<Integer, Integer> map = makeMap( m_keys.length / 2 + 1, m_fillFactor );
+            final ObjectObjectMap<Integer, Integer> m_map = new ObjectObjectHashMap<>( m_keys.length / 2 + 1, m_fillFactor );
             int add = 0, remove = 0;
             while ( add < m_keys.length )
             {
-                map.put( m_keys[ add ], m_keys[ add ] );
+                m_map.put( m_keys[ add ], m_keys[ add ] );
                 ++add;
-                map.put( m_keys[ add ], m_keys[ add ] );
+                m_map.put( m_keys[ add ], m_keys[ add ] );
                 ++add;
-                map.remove( m_keys2[ remove++ ] );
+                m_map.remove( m_keys2[ remove++ ] );
             }
-            return map.size();
+            return m_map.size();
         }
     }
-
 }
 
