@@ -4,35 +4,33 @@
 am4core.options.onlyShowOnViewport = true
 am4core.useTheme(am4themes_animated)
 
-fetch("data.json")
-  .then(response => response.json())
-  .then(data => {
-    let g = createGroupElement()
-    buildChart("IntToInt", "get", "Int to Int \"get\" (50% get failures)", data, g)
-    buildChart("IntToInt", "put", "Int to Int \"put\"", data, g)
-    buildChart("IntToInt", "remove", "Int to Int \"remove\"", data, g)
+document.addEventListener("DOMContentLoaded", function(event) {
+  const data = chartData
+  let g = createGroupElement()
+  buildChart("IntToInt", "get", "Int to Int \"get\" (50% get failures)", data, g)
+  buildChart("IntToInt", "put", "Int to Int \"put\"", data, g)
+  buildChart("IntToInt", "remove", "Int to Int \"remove\"", data, g)
 
-    g = createGroupElement()
-    buildChart("IntToObject", "get", "Int to Object \"get\" (50% get failures)", data, g)
-    buildChart("IntToObject", "put", "Int to Object \"put\"", data, g)
-    buildChart("IntToObject", "remove", "Int to Object \"remove\"", data, g)
+  g = createGroupElement()
+  buildChart("IntToObject", "get", "Int to Object \"get\" (50% get failures)", data, g)
+  buildChart("IntToObject", "put", "Int to Object \"put\"", data, g)
+  buildChart("IntToObject", "remove", "Int to Object \"remove\"", data, g)
 
-    g = createGroupElement()
-    buildChart("ObjectToInt", "get", "Object to Int \"get\" (50% get failures)", data, g)
-    buildChart("ObjectToInt", "put", "Object to Int \"put\"", data, g)
-    buildChart("ObjectToInt", "remove", "Object to Int \"remove\"", data, g)
+  g = createGroupElement()
+  buildChart("ObjectToInt", "get", "Object to Int \"get\" (50% get failures)", data, g)
+  buildChart("ObjectToInt", "put", "Object to Int \"put\"", data, g)
+  buildChart("ObjectToInt", "remove", "Object to Int \"remove\"", data, g)
 
-    g = createGroupElement()
-    buildChart("ObjectToObject", "get", "Object to Object \"get\" (50% get failures)", data, g)
-    buildChart("ObjectToObject", "put", "Object to Object \"put\"", data, g)
-    buildChart("ObjectToObject", "remove", "Object to Object \"remove\"", data, g)
+  g = createGroupElement()
+  buildChart("ObjectToObject", "get", "Object to Object \"get\" (50% get failures)", data, g)
+  buildChart("ObjectToObject", "put", "Object to Object \"put\"", data, g)
+  buildChart("ObjectToObject", "remove", "Object to Object \"remove\"", data, g)
 
-    g = createGroupElement()
-    buildChart("ReferenceToObject", "get", "Ref to Object \"get\" (50% get failures)", data, g)
-    buildChart("ReferenceToObject", "put", "Ref to Object \"put\"", data, g)
-    buildChart("ReferenceToObject", "remove", "Ref to Object \"remove\"", data, g)
-  })
-  .catch(error => console.error(error))
+  g = createGroupElement()
+  buildChart("ReferenceToObject", "get", "Ref to Object \"get\" (50% get failures)", data, g)
+  buildChart("ReferenceToObject", "put", "Ref to Object \"put\"", data, g)
+  buildChart("ReferenceToObject", "remove", "Ref to Object \"remove\"", data, g)
+})
 
 function createGroupElement() {
   const element = document.createElement("div")
@@ -64,13 +62,14 @@ function buildChart(type, operation, titleText, data, container) {
   const sizeAxis = chart.xAxes.push(new am4charts.ValueAxis())
   sizeAxis.dataFields.value = "size"
   sizeAxis.logarithmic = true
-  // sizeAxis.strictMinMax = true
+  sizeAxis.strictMinMax = true
   sizeAxis.renderer.grid.template.disabled = true
   sizeAxis.renderer.labels.template.disabled = true
 
   const valueAxis = chart.yAxes.push(new am4charts.ValueAxis())
   valueAxis.dataFields.value = operation
-  valueAxis.renderer.minGridDistance = 62
+  valueAxis.logarithmic = true
+  valueAxis.strictMinMax = true
 
   if (data == null) {
     throw new Error(`data is not provided (type=${type}, operation=${operation})`)

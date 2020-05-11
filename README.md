@@ -4,6 +4,13 @@ The original article was updated in 2015. Provided benchmarks results executed 9
 
 See [benchmark result charts](https://collection-libs-comparison.develar.org/).
 
+```
+export JAVA_HOME=~/Downloads/jbr/Contents/Home
+
+mvn package
+java -jar benchmark/target/benchmarks.jar -bm ss -i 20 -wi 10 -f 1 -foe true -p mapSize=100,1K,10K,100K,1M -tu ms -to 100m -rf json -e '.+\.IntToObjectBenchmark.object.+'
+```
+
 JVM: JDK 11.0.7, OpenJDK 64-Bit Server VM, 11.0.7+10-b909 ([JetBrains Runtime](https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime)).
 Machine:
 ```
