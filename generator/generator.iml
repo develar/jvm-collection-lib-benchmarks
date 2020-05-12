@@ -34,11 +34,10 @@
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.4-M1" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains:annotations:13.0" level="project" />
     <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4-M1" level="project" />
-    <orderEntry type="module" module-name="common" />
-    <orderEntry type="library" name="Maven: com.amazon.ion:ion-java:1.6.1" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.dataformat:jackson-dataformat-ion:2.11.0" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.11.0" level="project" />
-    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.11.0" level="project" />
+    <orderEntry type="module" module-name="common" />
+    <orderEntry type="library" name="Maven: it.unimi.dsi:fastutil:8.3.1" level="project" />
   </component>
 </module>

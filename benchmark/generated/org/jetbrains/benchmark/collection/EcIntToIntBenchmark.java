@@ -10,7 +10,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class EcIntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map;
+    public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map;
     int[] keys;
 
     @Setup
@@ -38,7 +38,7 @@ public class EcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = new org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -48,10 +48,11 @@ public class EcIntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = new org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap();
     int add = 0;
     int remove = 0;
@@ -64,5 +65,6 @@ public class EcIntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

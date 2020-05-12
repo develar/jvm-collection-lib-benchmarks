@@ -10,7 +10,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class TroveJbIntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    gnu.trove.TIntIntHashMap map;
+    public gnu.trove.TIntIntHashMap map;
     int[] keys;
 
     @Setup
@@ -38,7 +38,7 @@ public class TroveJbIntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.TIntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.TIntIntHashMap map = new gnu.trove.TIntIntHashMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -48,10 +48,11 @@ public class TroveJbIntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.TIntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.TIntIntHashMap map = new gnu.trove.TIntIntHashMap();
     int add = 0;
     int remove = 0;
@@ -64,5 +65,6 @@ public class TroveJbIntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

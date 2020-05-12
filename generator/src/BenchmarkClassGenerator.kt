@@ -5,7 +5,7 @@ import java.nio.file.Paths
 
 private const val packageDir = "org/jetbrains/benchmark/collection"
 
-private val libraries = listOf(
+internal val libraries = listOf(
   Library(
     name = "fastutil",
     objectToObjectClassName = "it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap",
@@ -60,18 +60,50 @@ private val libraries = listOf(
   ),
 )
 
+private val memoryBenchmarkClassNames = listOf("IntToIntMemoryBenchmark", "IntToObjectMemoryBenchmark", "ObjectToIntMemoryBenchmark", "ObjectToObjectMemoryBenchmark", "ReferenceToObjectMemoryBenchmark")
+
 fun main() {
   val inDir = Paths.get("benchmark/src/$packageDir")
 
   val outDir = Paths.get("benchmark/generated/$packageDir")
   val existingFiles = Files.newDirectoryStream(outDir).use { it.toHashSet() }
 
+  val memoryBenchmarkCode = Files.readAllBytes(Paths.get("memory-benchmark/src/MemoryBenchmark.kt")).toString(Charsets.UTF_8)
+  val memoryBenchmarkOutDir = Paths.get("memory-benchmark/generated")
+  Files.createDirectories(memoryBenchmarkOutDir)
+  var memoryMeasurerListCode = "package org.jetbrains.benchmark.collection\n\nval measurers = listOf("
+  for (name in memoryBenchmarkClassNames) {
+    memoryMeasurerListCode += "\n  $name(),"
+  }
+  for (library in libraries) {
+    var code = memoryBenchmarkCode
+    val classPrefix = library.classPrefix
+    code = code
+      .replace("class ", "class $classPrefix")
+      .replace("java_", "${library.name}_")
+    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark")) {
+      code = code
+        .replace(" $name(", " ${classPrefix}$name(")
+        .replace(": $name", ": ${classPrefix}$name")
+        .replace("= $name.", "= ${classPrefix}$name.")
+    }
+
+    for (name in memoryBenchmarkClassNames) {
+      memoryMeasurerListCode += "\n  $classPrefix$name(),"
+    }
+
+    Files.write(memoryBenchmarkOutDir.resolve("${classPrefix}MemoryBenchmark.kt"), code.toByteArray(Charsets.UTF_8))
+  }
+  memoryMeasurerListCode += "\n)"
+  Files.write(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode.toByteArray(Charsets.UTF_8))
+
   for (input in listOf(Input("ObjectToObjectBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
     val inClassName = input.name
     val inPath = inDir.resolve("$inClassName.java")
     Files.createDirectories(outDir)
+
     for (library in libraries) {
-      val className = "${toCamelCase(library.name)}$inClassName"
+      val className = "${library.classPrefix}$inClassName"
       var code = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
       when {
         input.name.startsWith("Object") -> {
@@ -139,6 +171,7 @@ private data class Input(val name: String)
 
 private fun replaceNewMap(code: String, library: Library): String {
   val factory = library.factory?.let { "org.jetbrains.benchmark.collection.factory.$it" }
+
   @Suppress("NAME_SHADOWING")
   var code = code
   if (library.name == "koloboke") {
@@ -161,7 +194,7 @@ private fun replaceNewMap(code: String, library: Library): String {
   }
 }
 
-private fun toCamelCase(s: String): String? {
+private fun toCamelCase(s: String): String {
   val builder = StringBuilder()
   for (part in s.splitToSequence("-")) {
     builder.append(part.substring(0, 1).toUpperCase() + part.substring(1))
@@ -169,10 +202,13 @@ private fun toCamelCase(s: String): String? {
   return builder.toString()
 }
 
-private data class Library(val name: String,
-                           val objectToObjectClassName: String,
-                           val referenceToObjectClassName: String,
-                           val intToIntClassName: String,
-                           val intToObjectClassName: String,
-                           val objectToIntClassName: String,
-                           val factory: String? = null)
+data class Library(val name: String,
+                   val objectToObjectClassName: String,
+                   val referenceToObjectClassName: String,
+                   val intToIntClassName: String,
+                   val intToObjectClassName: String,
+                   val objectToIntClassName: String,
+                   val factory: String? = null) {
+  val classPrefix: String
+    get() = if (name == "java") "" else toCamelCase(name)
+}

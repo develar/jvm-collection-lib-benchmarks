@@ -19,7 +19,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class EcObjectToObjectBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map;
+    public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -43,7 +43,7 @@ public class EcObjectToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class IdentityBenchmarkState extends BaseBenchmarkState {
-    org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map;
+    public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -83,7 +83,7 @@ public class EcObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>();
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -93,10 +93,11 @@ public class EcObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>();
     int add = 0;
     int remove = 0;
@@ -110,6 +111,7 @@ public class EcObjectToObjectBenchmark {
       map.remove(keys2[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
@@ -127,7 +129,7 @@ public class EcObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.EcFactory.createReferenceToObject();
     ArbitraryPojo[] keys = state.keys;
     for (ArbitraryPojo key : keys) {
@@ -139,10 +141,11 @@ public class EcObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.EcFactory.createReferenceToObject();
     int add = 0;
     int remove = 0;
@@ -155,5 +158,6 @@ public class EcObjectToObjectBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

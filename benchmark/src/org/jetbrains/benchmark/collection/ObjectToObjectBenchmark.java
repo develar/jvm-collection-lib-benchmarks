@@ -21,7 +21,7 @@ import java.util.IdentityHashMap;
 public class ObjectToObjectBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    HashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public HashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -45,7 +45,7 @@ public class ObjectToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class IdentityBenchmarkState extends BaseBenchmarkState {
-    IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -85,7 +85,7 @@ public class ObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public HashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>();
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -95,10 +95,11 @@ public class ObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public HashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>();
     int add = 0;
     int remove = 0;
@@ -112,6 +113,7 @@ public class ObjectToObjectBenchmark {
       map.remove(keys2[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
@@ -129,7 +131,7 @@ public class ObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = new IdentityHashMap<>();
     ArbitraryPojo[] keys = state.keys;
     for (ArbitraryPojo key : keys) {
@@ -141,10 +143,11 @@ public class ObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = new IdentityHashMap<>();
     int add = 0;
     int remove = 0;
@@ -157,5 +160,6 @@ public class ObjectToObjectBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

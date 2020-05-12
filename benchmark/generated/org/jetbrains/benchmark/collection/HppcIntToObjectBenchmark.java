@@ -7,12 +7,11 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 
-
 @SuppressWarnings("DuplicatedCode")
 public class HppcIntToObjectBenchmark {
   @State(Scope.Thread)
   public static class IntToObjectGetBenchmarkState extends BaseBenchmarkState {
-    com.carrotsearch.hppc.IntObjectHashMap map;
+    public com.carrotsearch.hppc.IntObjectHashMap map;
     int[] keys;
 
     @Setup
@@ -32,7 +31,7 @@ public class HppcIntToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class ObjectToIntGetBenchmarkState extends BaseBenchmarkState {
-    com.carrotsearch.hppc.ObjectIntHashMap map;
+    public com.carrotsearch.hppc.ObjectIntHashMap map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -68,7 +67,7 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.IntObjectHashMap put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap();
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
@@ -80,10 +79,11 @@ public class HppcIntToObjectBenchmark {
       map.put(keys[i], values[i]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.IntObjectHashMap remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap();
     int add = 0;
     int remove = 0;
@@ -97,6 +97,7 @@ public class HppcIntToObjectBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
@@ -111,7 +112,7 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.ObjectIntHashMap objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap();
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
@@ -124,10 +125,11 @@ public class HppcIntToObjectBenchmark {
       map.put(keys2[i], values[i]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.ObjectIntHashMap objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap();
     int add = 0;
     int remove = 0;
@@ -142,5 +144,6 @@ public class HppcIntToObjectBenchmark {
       map.remove(keys2[remove++]); // removeInt
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

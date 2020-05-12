@@ -10,7 +10,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class KolobokeIntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    com.koloboke.collect.map.hash.HashIntIntMap map;
+    public com.koloboke.collect.map.hash.HashIntIntMap map;
     int[] keys;
 
     @Setup
@@ -38,7 +38,7 @@ public class KolobokeIntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.koloboke.collect.map.hash.HashIntIntMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashIntIntMap map = com.koloboke.collect.map.hash.HashIntIntMaps.newMutableMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -48,10 +48,11 @@ public class KolobokeIntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.koloboke.collect.map.hash.HashIntIntMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashIntIntMap map = com.koloboke.collect.map.hash.HashIntIntMaps.newMutableMap();
     int add = 0;
     int remove = 0;
@@ -64,5 +65,6 @@ public class KolobokeIntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

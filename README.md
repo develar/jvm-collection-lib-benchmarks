@@ -1,6 +1,6 @@
 HashMap performance tests from java-performance.info for [Large HashMap overview](http://java-performance.info/hashmap-overview-jdk-fastutil-goldman-sachs-hppc-koloboke-trove-january-2015/#comments).
 
-The original article was updated in 2015. Provided benchmarks results executed 9 May 2020.
+Provided benchmarks results executed 9 May 2020.
 
 See [benchmark result charts](https://collection-libs-comparison.develar.org/).
 
@@ -8,7 +8,14 @@ See [benchmark result charts](https://collection-libs-comparison.develar.org/).
 export JAVA_HOME=~/Downloads/jbr/Contents/Home
 
 mvn package
-java -jar benchmark/target/benchmarks.jar -bm ss -i 20 -wi 10 -f 1 -foe true -p mapSize=100,1K,10K,100K,1M -tu ms -to 100m -rf json -e '.+\.IntToObjectBenchmark.object.+'
+java -jar benchmark/target/benchmarks.jar -bm ss -wi 40 -i 40 -f 1 -foe true -p mapSize=100,1K,10K,100K,1M,10M -tu ms -to 100m -rf json -e '.+\.IntToObjectBenchmark.object.+'
+```
+
+Memory usage measured using [JOL](https://openjdk.java.net/projects/code-tools/jol/).
+```
+mvn package
+# sudo is required for JOL for ptrace_scope
+sudo ~/Downloads/jbr/Contents/Home/bin/java -Djdk.attach.allowAttachSelf=true -Djdk.module.illegalAccess.silent=true -jar memory-benchmark/target/memory-benchmark.jar
 ```
 
 JVM: JDK 11.0.7, OpenJDK 64-Bit Server VM, 11.0.7+10-b909 ([JetBrains Runtime](https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime)).
@@ -26,4 +33,4 @@ Hyper-Threading Technology:	Enabled
 Memory:	32 GB
 ```
 
-The full test set takes around 36 hours to complete. 
+The full test set takes around 8 hours to complete. 

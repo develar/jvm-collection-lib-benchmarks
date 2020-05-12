@@ -10,7 +10,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class HppcIntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    com.carrotsearch.hppc.IntIntHashMap map;
+    public com.carrotsearch.hppc.IntIntHashMap map;
     int[] keys;
 
     @Setup
@@ -38,7 +38,7 @@ public class HppcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.IntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -48,10 +48,11 @@ public class HppcIntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public com.carrotsearch.hppc.IntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap();
     int add = 0;
     int remove = 0;
@@ -64,5 +65,6 @@ public class HppcIntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

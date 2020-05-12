@@ -7,10 +7,13 @@
   <version>${revision}</version>
   <packaging>pom</packaging>
 
+  <name>jvm-collection-lib-benchmarks</name>
+
   <modules>
     <module>common</module>
     <module>generator</module>
     <module>benchmark</module>
+    <module>memory-benchmark</module>
   </modules>
 
   <properties>

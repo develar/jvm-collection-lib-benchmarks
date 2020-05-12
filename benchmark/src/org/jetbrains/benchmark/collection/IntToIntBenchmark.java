@@ -12,7 +12,7 @@ import java.util.Objects;
 public class IntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    HashMap<Integer, Integer> map;
+    public HashMap<Integer, Integer> map;
     int[] keys;
 
     @Setup
@@ -40,7 +40,7 @@ public class IntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public HashMap<Integer, Integer> put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<Integer, Integer> map = new HashMap<>();
     for (int key : state.keys) {
       map.put(key, key);
@@ -50,10 +50,11 @@ public class IntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public HashMap<Integer, Integer> remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<Integer, Integer> map = new HashMap<>();
     int add = 0;
     int remove = 0;
@@ -66,5 +67,6 @@ public class IntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

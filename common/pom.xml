@@ -9,18 +9,6 @@
   </parent>
   <artifactId>common</artifactId>
 
-  <dependencies>
-    <dependency>
-      <groupId>com.amazon.ion</groupId>
-      <artifactId>ion-java</artifactId>
-      <version>1.6.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.dataformat</groupId>
-      <artifactId>jackson-dataformat-ion</artifactId>
-      <version>2.11.0</version>
-    </dependency>
-  </dependencies>
   <build>
     <plugins>
       <plugin>

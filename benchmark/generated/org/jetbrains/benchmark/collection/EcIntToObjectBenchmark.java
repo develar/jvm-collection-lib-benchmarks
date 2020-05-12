@@ -7,12 +7,11 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 
-
 @SuppressWarnings("DuplicatedCode")
 public class EcIntToObjectBenchmark {
   @State(Scope.Thread)
   public static class IntToObjectGetBenchmarkState extends BaseBenchmarkState {
-    org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap map;
+    public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap map;
     int[] keys;
 
     @Setup
@@ -32,7 +31,7 @@ public class EcIntToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class ObjectToIntGetBenchmarkState extends BaseBenchmarkState {
-    org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap map;
+    public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -68,7 +67,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap();
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
@@ -80,10 +79,11 @@ public class EcIntToObjectBenchmark {
       map.put(keys[i], values[i]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap();
     int add = 0;
     int remove = 0;
@@ -97,6 +97,7 @@ public class EcIntToObjectBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
@@ -111,7 +112,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap();
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
@@ -124,10 +125,11 @@ public class EcIntToObjectBenchmark {
       map.put(keys2[i], values[i]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap();
     int add = 0;
     int remove = 0;
@@ -142,5 +144,6 @@ public class EcIntToObjectBenchmark {
       map.remove(keys2[remove++]); // removeInt
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

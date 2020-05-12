@@ -10,7 +10,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class FastutilIntToIntBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap map;
+    public it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap map;
     int[] keys;
 
     @Setup
@@ -38,7 +38,7 @@ public class FastutilIntToIntBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap map = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -48,10 +48,11 @@ public class FastutilIntToIntBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap map = new it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap();
     int add = 0;
     int remove = 0;
@@ -64,5 +65,6 @@ public class FastutilIntToIntBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

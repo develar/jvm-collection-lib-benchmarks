@@ -1,2 +1,8 @@
-/.idea/
+/.idea/inspectionProfiles
+/.idea/shelf
+/.idea/libraries
+/.idea/compiler.xml
+/.idea/encodings.xml
+/.idea/workspace.xml
+/.idea/uiDesigner.xml
 target

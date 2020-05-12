@@ -19,7 +19,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class TroveObjectToObjectBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkState extends BaseBenchmarkState {
-    gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -43,7 +43,7 @@ public class TroveObjectToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class IdentityBenchmarkState extends BaseBenchmarkState {
-    gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -83,7 +83,7 @@ public class TroveObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> map = new gnu.trove.map.hash.THashMap<>();
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -93,10 +93,11 @@ public class TroveObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.THashMap<ArbitraryPojo, ArbitraryPojo> map = new gnu.trove.map.hash.THashMap<>();
     int add = 0;
     int remove = 0;
@@ -110,6 +111,7 @@ public class TroveObjectToObjectBenchmark {
       map.remove(keys2[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
@@ -127,7 +129,7 @@ public class TroveObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.TroveFactory.createReferenceToObject();
     ArbitraryPojo[] keys = state.keys;
     for (ArbitraryPojo key : keys) {
@@ -139,10 +141,11 @@ public class TroveObjectToObjectBenchmark {
       map.put(key, key);
     }
     blackhole.consume(map.size());
+    return map;
   }
 
   @Benchmark
-  public void identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.TCustomHashMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.TroveFactory.createReferenceToObject();
     int add = 0;
     int remove = 0;
@@ -155,5 +158,6 @@ public class TroveObjectToObjectBenchmark {
       map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
+    return map;
   }
 }

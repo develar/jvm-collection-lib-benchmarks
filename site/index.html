@@ -6,18 +6,59 @@
   <title>Collection Libraries Comparison</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css" integrity="sha256-qS+snwBgqr+iFVpBB58C9UCxKFhyL03YHpZfdNUhSEw=" crossorigin="anonymous">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 
   <script src="data.js"></script>
-  <script src="https://www.amcharts.com/lib/version/4.9.19/core.js"></script>
-  <script src="https://www.amcharts.com/lib/version/4.9.19/charts.js"></script>
-  <script src="https://www.amcharts.com/lib/version/4.9.19/themes/animated.js"></script>
+  <script src="memory.js"></script>
+  <script src="https://www.amcharts.com/lib/version/4.9.20/core.js"></script>
+  <script src="https://www.amcharts.com/lib/version/4.9.20/charts.js"></script>
+  <!--<script src="https://www.amcharts.com/lib/version/4.9.20/themes/animated.js"></script>-->
 
+  <script src="chart-common.js"></script>
+  <script src="memory-chart-builder.js"></script>
   <script src="chart-builder.js"></script>
+  <!--suppress CssUnusedSymbol -->
   <style>
     .resultChart {
-      width: 1000px;
-      height: 400px;
+      width: 100%;
+      height: 500px;
     }
   </style>
 </head>
+<nav class="tabs" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <ul>
+      <li id="intLink" class="tab is-active" onclick="askTab('int')"><a>Int</a></li>
+      <li id="intToObjectLink" class="tab" onclick="askTab('intToObject')"><a>Int to Object</a></li>
+      <li id="objectLink" class="tab" onclick="askTab('object')"><a>Object</a></li>
+      <li id="refToObjectLink" class="tab" onclick="askTab('refToObject')"><a>Ref to Object</a></li>
+      <li id="objectToIntLink" class="tab" onclick="askTab('objectToInt')"><a>Object to Int</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a class="navbar-item" href="https://github.com/develar/jvm-collection-lib-benchmarks" title="Go to repository">
+    <span class="icon">
+      <i class="fab fa-lg fa-github-alt" aria-hidden="true"></i>
+    </span>
+    </a>
+  </div>
+</nav>
+
+<div id="tabs">
+  <div id="int" class="content-tab" style="display:none"></div>
+  <div id="intToObject" class="content-tab" style="display:none"></div>
+  <div id="object" class="content-tab" style="display:none"></div>
+  <div id="refToObject" class="content-tab" style="display:none"></div>
+  <div id="objectToInt" class="content-tab" style="display:none"></div>
+</div>
+
+<div class="content">
+  <ul>
+    <li>"get" test: Populate a map with a pre-generated set of keys (in the JMH setup), make ~50% successful and ~50% unsuccessful "get" calls.
+      For non-identity maps with object keys a distinct set of keys is used (the different object with the same value is used for successful "get" calls).</li>
+    <li>"put/update" test: Add a pre-generated set of keys to the map. In the second loop add the equal set of keys (different objects with the same values) to this map again (make the updates).
+      Identical keys are used for identity maps and for maps with primitive keys.</li>
+    <li>"put/remove" test: In a loop: add 2 entries to a map, remove 1 of existing entries ("add" pointer is increased by 2 on each iteration, "remove" pointer is increased by 1).</li>
+  </ul>
+</div>
 </html>

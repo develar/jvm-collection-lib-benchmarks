@@ -1,33 +1,26 @@
 package org.jetbrains.benchmark.collection;
 
-import com.amazon.ion.IonReader;
-import com.amazon.ion.system.IonReaderBuilder;
-import com.fasterxml.jackson.dataformat.ion.IonObjectMapper;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Random;
 
 public final class Util {
   private Util() {
   }
 
-  public static ArbitraryPojo[] loadObjectArray(String mapSize) throws IOException {
-    Path inputFile = Paths.get("testData", formatSize(parseSize(mapSize)) + ".ion");
-    try (IonReader reader = IonReaderBuilder.standard().build(Files.newInputStream(inputFile))) {
-      return new IonObjectMapper().readValue(reader, ArbitraryPojo[].class);
+  public static ArbitraryPojo[] loadObjectArray(String mapSize) {
+    int[] ints = loadIntArray(mapSize);
+    ArbitraryPojo[] result = new ArbitraryPojo[ints.length];
+    for (int i = 0, n = ints.length; i < n; i++) {
+      int anInt = ints[i];
+      result[i] = new ArbitraryPojo(anInt, anInt * 31);
     }
+    return result;
   }
 
-  public static int[] loadIntArray(String mapSize) throws IOException {
-    Path inputFile = Paths.get("testData", "int-" + formatSize(parseSize(mapSize)) + ".ion");
-    try (IonReader reader = IonReaderBuilder.standard().build(Files.newInputStream(inputFile))) {
-      return new IonObjectMapper().readValue(reader, int[].class);
-    }
+  public static int[] loadIntArray(String mapSize) {
+    return KeyGenerator.getInts(parseSize(mapSize));
   }
 
-  private static int parseSize(String value) {
+  public static int parseSize(String value) {
     for (ConversionUnit unit : ConversionUnit.conversionMatrix) {
       int endIndex = value.indexOf(unit.suffix);
       if (endIndex > -1) {
@@ -52,6 +45,28 @@ public final class Util {
       }
     }
     return Integer.toString(value);
+  }
+}
+
+final class KeyGenerator {
+  private static int[] values;
+
+  public static int[] getInts(int mapSize) {
+    int[] values = KeyGenerator.values;
+    if (values != null && mapSize == values.length) {
+      return values;
+    }
+
+    KeyGenerator.values = null;
+    values = new int[mapSize];
+    // constant seed to produce same numbers
+    Random random = new Random(1234);
+    for (int i = 0; i < mapSize; i++) {
+      values[i] = random.nextInt();
+    }
+
+    KeyGenerator.values = values;
+    return values;
   }
 }
 
