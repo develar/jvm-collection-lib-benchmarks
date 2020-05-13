@@ -6,7 +6,7 @@ function buildMemoryChart(type, operation, titleText, data, container) {
   container.appendChild(element)
 
   const chart = createXYChart(element)
-  chart.numberFormatter.numberFormat = "#.b"
+  chart.numberFormatter.numberFormat = "#.#b"
   chart.data = data[type]
 
   configureCursor(chart)
