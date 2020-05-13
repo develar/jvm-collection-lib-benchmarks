@@ -5,8 +5,7 @@ function buildMemoryChart(type, operation, titleText, data, container) {
   element.className = "resultChart column"
   container.appendChild(element)
 
-  const chart = am4core.create(element, am4charts.XYChart)
-  chart.colors.step = 3
+  const chart = createXYChart(element)
   chart.numberFormatter.numberFormat = "#.b"
   chart.data = data[type]
 
@@ -26,13 +25,6 @@ function buildMemoryChart(type, operation, titleText, data, container) {
     series.dataFields.valueY = `${libraryName}_${operation}`
     series.name = libraryName
     series.segments.template.tooltipText = `Series: ${libraryName}`
-    // series.tooltipText = `Series: ${libEntry.name}`
-    series.tooltip.pointerOrientation = "down"
-
-    series.strokeWidth = 3
-
     configureSegments(series, chart)
   }
-
-  configureLegend(chart)
 }

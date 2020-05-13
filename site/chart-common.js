@@ -1,3 +1,10 @@
+function createXYChart(element) {
+  const chart = am4core.create(element, am4charts.XYChart)
+  chart.colors.step = 3
+  configureLegend(chart)
+  return chart
+}
+
 function configureCursor(chart) {
   const cursor = new am4charts.XYCursor()
   cursor.behavior = "zoomXY"
@@ -22,6 +29,10 @@ function createSizeAxis(chart) {
 }
 
 function configureSegments(series, chart) {
+  series.strokeWidth = 3
+  series.legendSettings.labelText = "[{stroke}]{name}[/]"
+  series.tooltip.pointerOrientation = "down"
+
   const segment = series.segments.template
   segment.interactionsEnabled = true
 
@@ -42,8 +53,11 @@ function configureSegments(series, chart) {
 
 function configureLegend(chart) {
   chart.legend = new am4charts.Legend()
-  chart.legend.position = "right"
-  const template = chart.legend.itemContainers.template
+  const legend = chart.legend
+  legend.markers.template.disabled = true
+  legend.position = "right"
+
+  const template = legend.itemContainers.template
   template.events.on("over", event => {
     processOver(chart, event.target.dataItem.dataContext)
   })

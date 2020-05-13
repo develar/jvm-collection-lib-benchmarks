@@ -117,8 +117,7 @@ function buildChart(type, operation, titleText, data, container) {
   element.className = "resultChart column"
   container.appendChild(element)
 
-  const chart = am4core.create(element, am4charts.XYChart)
-  chart.colors.step = 3
+  const chart = createXYChart(element)
   chart.numberFormatter.numberFormat = "#.##"
 
   configureCursor(chart)
@@ -142,15 +141,8 @@ function buildChart(type, operation, titleText, data, container) {
     series.name = libEntry.name
     series.data = libEntry.data
     series.segments.template.tooltipText = `Series: ${libEntry.name}`
-    // series.tooltipText = `Series: ${libEntry.name}`
-    series.tooltip.pointerOrientation = "down"
-
-    series.strokeWidth = 3
-
     configureSegments(series, chart)
   }
-
-  configureLegend(chart)
 }
 
 const si = [
