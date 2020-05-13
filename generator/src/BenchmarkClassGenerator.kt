@@ -112,11 +112,15 @@ fun main() {
         library.name == "koloboke" -> {
           if (input.name == "IntToObjectBenchmark") {
             code = code
-              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "${library.intToObjectClassName}<ArbitraryPojo> map = com.koloboke.collect.map.hash.HashIntObjMaps.newMutableMap(")
-              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "${library.objectToIntClassName}<ArbitraryPojo> map = com.koloboke.collect.map.hash.HashObjIntMaps.newMutableMap(")
+              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(0, state.loadFactor)", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToInt(state.loadFactor)")
+              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToInt(")
+              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor)", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToObject(state.loadFactor)")
+              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToObject(")
           }
           else {
-            code = code.replace("new HashMap<>(", "com.koloboke.collect.map.hash.HashIntIntMaps.newMutableMap(")
+            code = code
+              .replace("new HashMap<>(0, state.loadFactor)", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(state.loadFactor)")
+              .replace("new HashMap<>(", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(")
           }
         }
         else -> {
@@ -125,6 +129,12 @@ fun main() {
             .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "${library.intToObjectClassName}<ArbitraryPojo> map = new ${library.intToObjectClassName}(")
             .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "${library.objectToIntClassName}<ArbitraryPojo> map = new ${library.objectToIntClassName}(")
         }
+      }
+
+      if (input.name.startsWith("Int") && library.name == "ec") {
+        code = code
+          .replace(", loadFactor);", ");")
+          .replace("0, state.loadFactor);", ");")
       }
 
       code = code
@@ -136,8 +146,8 @@ fun main() {
         .replace(" HashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.objectToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
         .replace(" IdentityHashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.referenceToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
         .replace(" HashMap<Integer, Integer> ", " ${library.intToIntClassName} ")
-        .replace(" HashMap<Integer, ArbitraryPojo> ", " ${library.intToObjectClassName} ")
-        .replace(" HashMap<ArbitraryPojo, Integer> ", " ${library.objectToIntClassName} ")
+        .replace(" HashMap<Integer, ArbitraryPojo> ", " ${library.intToObjectClassName}<ArbitraryPojo> ")
+        .replace(" HashMap<ArbitraryPojo, Integer> ", " ${library.objectToIntClassName}<ArbitraryPojo> ")
 
       if (input.name.startsWith("Int")) {
         if (library.name == "fastutil") {
@@ -187,10 +197,10 @@ private fun replaceNewMap(code: String, library: Library): String {
   }
   else {
     return code
-      .replace("new HashMap<>(keys.length)", "$factory.createObjectToObject(keys.length)")
-      .replace("new IdentityHashMap<>(keys.length)", "$factory.createReferenceToObject(keys.length)")
-      .replace("new HashMap<>()", "$factory.createObjectToObject()")
-      .replace("new IdentityHashMap<>()", "$factory.createReferenceToObject()")
+      .replace("new HashMap<>(keys.length, loadFactor)", "$factory.createObjectToObject(keys.length, loadFactor)")
+      .replace("new IdentityHashMap<>(keys.length)", "$factory.createReferenceToObject(keys.length, loadFactor)")
+      .replace("new HashMap<>(0, state.loadFactor)", "$factory.createObjectToObject(state.loadFactor)")
+      .replace("new IdentityHashMap<>()", "$factory.createReferenceToObject(state.loadFactor)")
   }
 }
 

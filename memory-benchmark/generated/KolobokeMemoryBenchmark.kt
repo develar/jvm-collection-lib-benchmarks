@@ -17,7 +17,7 @@ internal class KolobokeIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeIntToIntBenchmark.BenchmarkState()
+    val state = KolobokeIntToIntBenchmark.GetBenchmarkState()
     state.mapSize = size
     state.setup()
 
@@ -86,7 +86,7 @@ internal class KolobokeObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeObjectToObjectBenchmark.BenchmarkState()
+    val state = KolobokeObjectToObjectBenchmark.BenchmarkGetState()
     state.mapSize = size
     state.setup()
 
@@ -109,7 +109,7 @@ internal class KolobokeReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeObjectToObjectBenchmark.IdentityBenchmarkState()
+    val state = KolobokeObjectToObjectBenchmark.IdentityBenchmarkGetState()
     state.mapSize = size
     state.setup()
 

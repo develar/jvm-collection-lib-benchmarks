@@ -18,14 +18,14 @@ import org.openjdk.jmh.infra.Blackhole;
  */
 public class KolobokeObjectToObjectBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(keys.length);
+      com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
@@ -42,14 +42,14 @@ public class KolobokeObjectToObjectBenchmark {
   }
 
   @State(Scope.Thread)
-  public static class IdentityBenchmarkState extends BaseBenchmarkState {
+  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
     public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject(keys.length);
+      com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey;
@@ -69,7 +69,7 @@ public class KolobokeObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -84,7 +84,7 @@ public class KolobokeObjectToObjectBenchmark {
 
   @Benchmark
   public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject();
+    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
     }
@@ -98,7 +98,7 @@ public class KolobokeObjectToObjectBenchmark {
 
   @Benchmark
   public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject();
+    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;
@@ -115,7 +115,7 @@ public class KolobokeObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityGet(IdentityBenchmarkState state, Blackhole blackhole) {
+  public void identityGet(IdentityBenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -130,7 +130,7 @@ public class KolobokeObjectToObjectBenchmark {
 
   @Benchmark
   public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject();
+    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject(state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     for (ArbitraryPojo key : keys) {
       map.put(key, key);
@@ -146,7 +146,7 @@ public class KolobokeObjectToObjectBenchmark {
 
   @Benchmark
   public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject();
+    com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createReferenceToObject(state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

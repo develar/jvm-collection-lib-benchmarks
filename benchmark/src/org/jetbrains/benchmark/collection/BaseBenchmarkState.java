@@ -10,8 +10,11 @@ public abstract class BaseBenchmarkState {
   @Param("1K")
   public String mapSize;
 
-  @Param("0.5")
-  public float oneFailureOutOf;
+  @Param("0.75")
+  public float loadFactor;
+
+  @Param("2")
+  public int oneFailureOutOf;
 
   @State(Scope.Thread)
   public static class ReferencePutOrRemoveBenchmarkState extends BaseBenchmarkState {

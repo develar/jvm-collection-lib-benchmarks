@@ -1,3 +1,4 @@
+import com.koloboke.collect.map.hash.HashObjObjMaps
 import it.unimi.dsi.fastutil.objects.Object2LongArrayMap
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap
 import org.jetbrains.benchmark.collection.*

@@ -17,7 +17,7 @@ internal class IntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: IntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = IntToIntBenchmark.BenchmarkState()
+    val state = IntToIntBenchmark.GetBenchmarkState()
     state.mapSize = size
     state.setup()
 
@@ -86,7 +86,7 @@ internal class ObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: ObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = ObjectToObjectBenchmark.BenchmarkState()
+    val state = ObjectToObjectBenchmark.BenchmarkGetState()
     state.mapSize = size
     state.setup()
 
@@ -109,7 +109,7 @@ internal class ReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: ObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = ObjectToObjectBenchmark.IdentityBenchmarkState()
+    val state = ObjectToObjectBenchmark.IdentityBenchmarkGetState()
     state.mapSize = size
     state.setup()
 

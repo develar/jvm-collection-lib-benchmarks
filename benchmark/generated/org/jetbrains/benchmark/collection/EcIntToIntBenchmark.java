@@ -9,13 +9,14 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class EcIntToIntBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class GetBenchmarkState extends BaseBenchmarkState {
     public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
+      int oneFailureOutOf = this.oneFailureOutOf;
       org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = new org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap(keys.length);
       for (int key : keys) {
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), key);
@@ -27,7 +28,7 @@ public class EcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = state.map;

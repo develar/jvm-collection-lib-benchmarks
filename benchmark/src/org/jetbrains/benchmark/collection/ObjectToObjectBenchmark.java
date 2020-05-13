@@ -20,14 +20,14 @@ import java.util.IdentityHashMap;
  */
 public class ObjectToObjectBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public HashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(keys.length);
+      HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
@@ -44,7 +44,7 @@ public class ObjectToObjectBenchmark {
   }
 
   @State(Scope.Thread)
-  public static class IdentityBenchmarkState extends BaseBenchmarkState {
+  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
     public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
@@ -71,7 +71,7 @@ public class ObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     HashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -86,7 +86,7 @@ public class ObjectToObjectBenchmark {
 
   @Benchmark
   public HashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>();
+    HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
     }
@@ -100,7 +100,7 @@ public class ObjectToObjectBenchmark {
 
   @Benchmark
   public HashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>();
+    HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;
@@ -117,7 +117,7 @@ public class ObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityGet(IdentityBenchmarkState state, Blackhole blackhole) {
+  public void identityGet(IdentityBenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;

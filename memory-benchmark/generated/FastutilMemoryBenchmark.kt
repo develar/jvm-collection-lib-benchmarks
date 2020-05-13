@@ -17,7 +17,7 @@ internal class FastutilIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: FastutilIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = FastutilIntToIntBenchmark.BenchmarkState()
+    val state = FastutilIntToIntBenchmark.GetBenchmarkState()
     state.mapSize = size
     state.setup()
 
@@ -86,7 +86,7 @@ internal class FastutilObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: FastutilObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = FastutilObjectToObjectBenchmark.BenchmarkState()
+    val state = FastutilObjectToObjectBenchmark.BenchmarkGetState()
     state.mapSize = size
     state.setup()
 
@@ -109,7 +109,7 @@ internal class FastutilReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: FastutilObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = FastutilObjectToObjectBenchmark.IdentityBenchmarkState()
+    val state = FastutilObjectToObjectBenchmark.IdentityBenchmarkGetState()
     state.mapSize = size
     state.setup()
 

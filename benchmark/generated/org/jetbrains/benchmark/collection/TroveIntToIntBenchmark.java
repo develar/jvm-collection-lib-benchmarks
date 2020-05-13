@@ -9,14 +9,15 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class TroveIntToIntBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class GetBenchmarkState extends BaseBenchmarkState {
     public gnu.trove.map.hash.TIntIntHashMap map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
-      gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap(keys.length);
+      int oneFailureOutOf = this.oneFailureOutOf;
+      gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap(keys.length, loadFactor);
       for (int key : keys) {
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), key);
       }
@@ -27,7 +28,7 @@ public class TroveIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     gnu.trove.map.hash.TIntIntHashMap map = state.map;
@@ -39,7 +40,7 @@ public class TroveIntToIntBenchmark {
 
   @Benchmark
   public gnu.trove.map.hash.TIntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap();
+    gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap(0, state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
     }
@@ -53,7 +54,7 @@ public class TroveIntToIntBenchmark {
 
   @Benchmark
   public gnu.trove.map.hash.TIntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap();
+    gnu.trove.map.hash.TIntIntHashMap map = new gnu.trove.map.hash.TIntIntHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;

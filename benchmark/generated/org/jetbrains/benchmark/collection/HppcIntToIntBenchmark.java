@@ -9,14 +9,15 @@ import org.openjdk.jmh.infra.Blackhole;
 
 public class HppcIntToIntBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class GetBenchmarkState extends BaseBenchmarkState {
     public com.carrotsearch.hppc.IntIntHashMap map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
-      com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(keys.length);
+      int oneFailureOutOf = this.oneFailureOutOf;
+      com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(keys.length, loadFactor);
       for (int key : keys) {
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), key);
       }
@@ -27,7 +28,7 @@ public class HppcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     com.carrotsearch.hppc.IntIntHashMap map = state.map;
@@ -39,7 +40,7 @@ public class HppcIntToIntBenchmark {
 
   @Benchmark
   public com.carrotsearch.hppc.IntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap();
+    com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(0, state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
     }
@@ -53,7 +54,7 @@ public class HppcIntToIntBenchmark {
 
   @Benchmark
   public com.carrotsearch.hppc.IntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap();
+    com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;

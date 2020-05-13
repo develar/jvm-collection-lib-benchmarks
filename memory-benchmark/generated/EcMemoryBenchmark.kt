@@ -17,7 +17,7 @@ internal class EcIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: EcIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = EcIntToIntBenchmark.BenchmarkState()
+    val state = EcIntToIntBenchmark.GetBenchmarkState()
     state.mapSize = size
     state.setup()
 
@@ -86,7 +86,7 @@ internal class EcObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: EcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = EcObjectToObjectBenchmark.BenchmarkState()
+    val state = EcObjectToObjectBenchmark.BenchmarkGetState()
     state.mapSize = size
     state.setup()
 
@@ -109,7 +109,7 @@ internal class EcReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: EcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = EcObjectToObjectBenchmark.IdentityBenchmarkState()
+    val state = EcObjectToObjectBenchmark.IdentityBenchmarkGetState()
     state.mapSize = size
     state.setup()
 

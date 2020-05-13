@@ -11,14 +11,15 @@ import java.util.Objects;
 
 public class IntToIntBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class GetBenchmarkState extends BaseBenchmarkState {
     public HashMap<Integer, Integer> map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
-      HashMap<Integer, Integer> map = new HashMap<>(keys.length);
+      int oneFailureOutOf = this.oneFailureOutOf;
+      HashMap<Integer, Integer> map = new HashMap<>(keys.length, loadFactor);
       for (int key : keys) {
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), key);
       }
@@ -29,7 +30,7 @@ public class IntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     HashMap<Integer, Integer> map = state.map;
@@ -41,7 +42,7 @@ public class IntToIntBenchmark {
 
   @Benchmark
   public HashMap<Integer, Integer> put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<Integer, Integer> map = new HashMap<>();
+    HashMap<Integer, Integer> map = new HashMap<>(0, state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
     }
@@ -55,7 +56,7 @@ public class IntToIntBenchmark {
 
   @Benchmark
   public HashMap<Integer, Integer> remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<Integer, Integer> map = new HashMap<>();
+    HashMap<Integer, Integer> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;

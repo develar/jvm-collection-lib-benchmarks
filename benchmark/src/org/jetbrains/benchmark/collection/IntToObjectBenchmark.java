@@ -20,7 +20,7 @@ public class IntToObjectBenchmark {
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
       ArbitraryPojo[] values = Util.loadObjectArray(mapSize);
-      HashMap<Integer, ArbitraryPojo> map = new HashMap<>(keys.length);
+      HashMap<Integer, ArbitraryPojo> map = new HashMap<>(keys.length, loadFactor);
       for (int i = 0, n = keys.length; i < n; i++) {
         int key = keys[i];
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), values[i]);
@@ -40,7 +40,7 @@ public class IntToObjectBenchmark {
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       int[] values = Util.loadIntArray(mapSize);
-      HashMap<ArbitraryPojo, Integer> map = new HashMap<>(keys.length);
+      HashMap<ArbitraryPojo, Integer> map = new HashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
@@ -70,7 +70,7 @@ public class IntToObjectBenchmark {
 
   @Benchmark
   public HashMap<Integer, ArbitraryPojo> put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<Integer, ArbitraryPojo> map = new HashMap<>();
+    HashMap<Integer, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
     for (int i = 0, n = keys.length; i < n; i++) {
@@ -86,7 +86,7 @@ public class IntToObjectBenchmark {
 
   @Benchmark
   public HashMap<Integer, ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<Integer, ArbitraryPojo> map = new HashMap<>();
+    HashMap<Integer, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;
@@ -115,7 +115,7 @@ public class IntToObjectBenchmark {
 
   @Benchmark
   public HashMap<ArbitraryPojo, Integer> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<ArbitraryPojo, Integer> map = new HashMap<>();
+    HashMap<ArbitraryPojo, Integer> map = new HashMap<>(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
     int[] values = state.values;
@@ -132,7 +132,7 @@ public class IntToObjectBenchmark {
 
   @Benchmark
   public HashMap<ArbitraryPojo, Integer> objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    HashMap<ArbitraryPojo, Integer> map = new HashMap<>();
+    HashMap<ArbitraryPojo, Integer> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

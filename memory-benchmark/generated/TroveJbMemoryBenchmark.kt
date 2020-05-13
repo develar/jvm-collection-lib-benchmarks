@@ -17,7 +17,7 @@ internal class TroveJbIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveJbIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveJbIntToIntBenchmark.BenchmarkState()
+    val state = TroveJbIntToIntBenchmark.GetBenchmarkState()
     state.mapSize = size
     state.setup()
 
@@ -86,7 +86,7 @@ internal class TroveJbObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveJbObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveJbObjectToObjectBenchmark.BenchmarkState()
+    val state = TroveJbObjectToObjectBenchmark.BenchmarkGetState()
     state.mapSize = size
     state.setup()
 
@@ -109,7 +109,7 @@ internal class TroveJbReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveJbObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveJbObjectToObjectBenchmark.IdentityBenchmarkState()
+    val state = TroveJbObjectToObjectBenchmark.IdentityBenchmarkGetState()
     state.mapSize = size
     state.setup()
 
