@@ -11,14 +11,14 @@ import org.openjdk.jmh.infra.Blackhole;
 public class FastutilIntToObjectBenchmark {
   @State(Scope.Thread)
   public static class IntToObjectGetBenchmarkState extends BaseBenchmarkState {
-    public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap map;
+    public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
       ArbitraryPojo[] values = Util.loadObjectArray(mapSize);
-      it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap(keys.length);
+      it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap(keys.length, loadFactor);
       for (int i = 0, n = keys.length; i < n; i++) {
         int key = keys[i];
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), values[i]);
@@ -31,14 +31,14 @@ public class FastutilIntToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class ObjectToIntGetBenchmarkState extends BaseBenchmarkState {
-    public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap map;
+    public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       int[] values = Util.loadIntArray(mapSize);
-      it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap(keys.length);
+      it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
@@ -57,7 +57,7 @@ public class FastutilIntToObjectBenchmark {
   public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
-    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap map = state.map;
+    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = state.map;
     for (int key : keys) {
       if (map.get(key) != null) {
         result ^= 1;
@@ -67,8 +67,8 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap();
+  public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap(0, state.loadFactor);
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
     for (int i = 0, n = keys.length; i < n; i++) {
@@ -83,8 +83,8 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap();
+  public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;
@@ -104,7 +104,7 @@ public class FastutilIntToObjectBenchmark {
   public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
-    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap map = state.map;
+    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = state.map;
     for (ArbitraryPojo key : keys) {
       result ^= map.getInt(key);
     }
@@ -112,8 +112,8 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap();
+  public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
     int[] values = state.values;
@@ -129,8 +129,8 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap();
+  public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

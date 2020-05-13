@@ -9,7 +9,7 @@ internal class TroveIntToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("trove_put", operations, benchmark.put(state, blackhole))
@@ -17,8 +17,8 @@ internal class TroveIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveIntToIntBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = TroveIntToIntBenchmark.GetBenchmarkState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -32,7 +32,7 @@ internal class TroveIntToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("trove_put", operations, benchmark.put(state, blackhole))
@@ -41,7 +41,7 @@ internal class TroveIntToObjectMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: TroveIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = TroveIntToObjectBenchmark.IntToObjectGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -55,7 +55,7 @@ internal class TroveObjectToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("trove_put", operations, benchmark.objectPut(state, blackhole))
@@ -64,7 +64,7 @@ internal class TroveObjectToIntMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: TroveIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = TroveIntToObjectBenchmark.ObjectToIntGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.objectGet(state, blackhole)
@@ -78,7 +78,7 @@ internal class TroveObjectToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("trove_put", operations, benchmark.put(state, blackhole))
@@ -86,8 +86,8 @@ internal class TroveObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveObjectToObjectBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = TroveObjectToObjectBenchmark.BenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -101,7 +101,7 @@ internal class TroveReferenceToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("trove_put", operations, benchmark.identityPut(state, blackhole))
@@ -109,8 +109,8 @@ internal class TroveReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: TroveObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = TroveObjectToObjectBenchmark.IdentityBenchmarkState()
-    state.mapSize = size
+    val state = TroveObjectToObjectBenchmark.IdentityBenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.identityGet(state, blackhole)

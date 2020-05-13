@@ -11,14 +11,14 @@ import org.openjdk.jmh.infra.Blackhole;
 public class HppcIntToObjectBenchmark {
   @State(Scope.Thread)
   public static class IntToObjectGetBenchmarkState extends BaseBenchmarkState {
-    public com.carrotsearch.hppc.IntObjectHashMap map;
+    public com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map;
     int[] keys;
 
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
       ArbitraryPojo[] values = Util.loadObjectArray(mapSize);
-      com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap(keys.length);
+      com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap(keys.length, loadFactor);
       for (int i = 0, n = keys.length; i < n; i++) {
         int key = keys[i];
         map.put(key + (key % oneFailureOutOf == 0 ? 1 : 0), values[i]);
@@ -31,14 +31,14 @@ public class HppcIntToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class ObjectToIntGetBenchmarkState extends BaseBenchmarkState {
-    public com.carrotsearch.hppc.ObjectIntHashMap map;
+    public com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       int[] values = Util.loadIntArray(mapSize);
-      com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap(keys.length);
+      com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
@@ -57,7 +57,7 @@ public class HppcIntToObjectBenchmark {
   public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
-    com.carrotsearch.hppc.IntObjectHashMap map = state.map;
+    com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = state.map;
     for (int key : keys) {
       if (map.get(key) != null) {
         result ^= 1;
@@ -67,8 +67,8 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.IntObjectHashMap put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap();
+  public com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap(0, state.loadFactor);
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
     for (int i = 0, n = keys.length; i < n; i++) {
@@ -83,8 +83,8 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.IntObjectHashMap remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap();
+  public com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.IntObjectHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     int[] keys = state.keys;
@@ -104,7 +104,7 @@ public class HppcIntToObjectBenchmark {
   public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
-    com.carrotsearch.hppc.ObjectIntHashMap map = state.map;
+    com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = state.map;
     for (ArbitraryPojo key : keys) {
       result ^= map.get(key);
     }
@@ -112,8 +112,8 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.ObjectIntHashMap objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap();
+  public com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
     int[] values = state.values;
@@ -129,8 +129,8 @@ public class HppcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.ObjectIntHashMap objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap();
+  public com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectIntHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

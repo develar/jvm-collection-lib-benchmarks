@@ -11,7 +11,7 @@ import org.openjdk.jmh.infra.Blackhole;
 public class EcIntToObjectBenchmark {
   @State(Scope.Thread)
   public static class IntToObjectGetBenchmarkState extends BaseBenchmarkState {
-    public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap map;
+    public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map;
     int[] keys;
 
     @Setup
@@ -31,7 +31,7 @@ public class EcIntToObjectBenchmark {
 
   @State(Scope.Thread)
   public static class ObjectToIntGetBenchmarkState extends BaseBenchmarkState {
-    public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap map;
+    public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
@@ -57,7 +57,7 @@ public class EcIntToObjectBenchmark {
   public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
-    org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap map = state.map;
+    org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = state.map;
     for (int key : keys) {
       if (map.get(key) != null) {
         result ^= 1;
@@ -67,7 +67,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> put(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap();
     int[] keys = state.keys;
     ArbitraryPojo[] values = state.values;
@@ -83,7 +83,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap();
     int add = 0;
     int remove = 0;
@@ -104,7 +104,7 @@ public class EcIntToObjectBenchmark {
   public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
-    org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap map = state.map;
+    org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = state.map;
     for (ArbitraryPojo key : keys) {
       result ^= map.get(key);
     }
@@ -112,7 +112,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap();
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;
@@ -129,7 +129,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> objectRemove(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap();
     int add = 0;
     int remove = 0;

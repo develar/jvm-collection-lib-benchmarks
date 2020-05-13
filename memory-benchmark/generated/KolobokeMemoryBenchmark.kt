@@ -9,7 +9,7 @@ internal class KolobokeIntToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("koloboke_put", operations, benchmark.put(state, blackhole))
@@ -17,8 +17,8 @@ internal class KolobokeIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeIntToIntBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = KolobokeIntToIntBenchmark.GetBenchmarkState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -32,7 +32,7 @@ internal class KolobokeIntToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("koloboke_put", operations, benchmark.put(state, blackhole))
@@ -41,7 +41,7 @@ internal class KolobokeIntToObjectMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: KolobokeIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = KolobokeIntToObjectBenchmark.IntToObjectGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -55,7 +55,7 @@ internal class KolobokeObjectToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("koloboke_put", operations, benchmark.objectPut(state, blackhole))
@@ -64,7 +64,7 @@ internal class KolobokeObjectToIntMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: KolobokeIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = KolobokeIntToObjectBenchmark.ObjectToIntGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.objectGet(state, blackhole)
@@ -78,7 +78,7 @@ internal class KolobokeObjectToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("koloboke_put", operations, benchmark.put(state, blackhole))
@@ -86,8 +86,8 @@ internal class KolobokeObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeObjectToObjectBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = KolobokeObjectToObjectBenchmark.BenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -101,7 +101,7 @@ internal class KolobokeReferenceToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("koloboke_put", operations, benchmark.identityPut(state, blackhole))
@@ -109,8 +109,8 @@ internal class KolobokeReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: KolobokeObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = KolobokeObjectToObjectBenchmark.IdentityBenchmarkState()
-    state.mapSize = size
+    val state = KolobokeObjectToObjectBenchmark.IdentityBenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.identityGet(state, blackhole)

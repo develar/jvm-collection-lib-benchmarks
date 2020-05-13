@@ -15,3 +15,9 @@ internal fun addOperation(operation: String, operations: Object2LongArrayMap<Str
     throw IllegalStateException("operation is already added")
   }
 }
+
+internal fun configureSetup(state: BaseBenchmarkState, size: String) {
+  state.mapSize = size
+  state.loadFactor = 0.75f
+  state.oneFailureOutOf = 2
+}

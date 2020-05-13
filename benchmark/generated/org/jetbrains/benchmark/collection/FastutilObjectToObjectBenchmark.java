@@ -18,14 +18,14 @@ import org.openjdk.jmh.infra.Blackhole;
  */
 public class FastutilObjectToObjectBenchmark {
   @State(Scope.Thread)
-  public static class BenchmarkState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>(keys.length);
+      it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
@@ -42,7 +42,7 @@ public class FastutilObjectToObjectBenchmark {
   }
 
   @State(Scope.Thread)
-  public static class IdentityBenchmarkState extends BaseBenchmarkState {
+  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
     public it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
@@ -69,7 +69,7 @@ public class FastutilObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(BenchmarkState state, Blackhole blackhole) {
+  public void get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -84,7 +84,7 @@ public class FastutilObjectToObjectBenchmark {
 
   @Benchmark
   public it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>();
+    it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
     }
@@ -98,7 +98,7 @@ public class FastutilObjectToObjectBenchmark {
 
   @Benchmark
   public it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>();
+    it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;
@@ -115,7 +115,7 @@ public class FastutilObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public void identityGet(IdentityBenchmarkState state, Blackhole blackhole) {
+  public void identityGet(IdentityBenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;

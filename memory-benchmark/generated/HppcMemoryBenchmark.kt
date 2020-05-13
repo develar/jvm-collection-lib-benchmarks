@@ -9,7 +9,7 @@ internal class HppcIntToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("hppc_put", operations, benchmark.put(state, blackhole))
@@ -17,8 +17,8 @@ internal class HppcIntToIntMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: HppcIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = HppcIntToIntBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = HppcIntToIntBenchmark.GetBenchmarkState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -32,7 +32,7 @@ internal class HppcIntToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("hppc_put", operations, benchmark.put(state, blackhole))
@@ -41,7 +41,7 @@ internal class HppcIntToObjectMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: HppcIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = HppcIntToObjectBenchmark.IntToObjectGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -55,7 +55,7 @@ internal class HppcObjectToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("hppc_put", operations, benchmark.objectPut(state, blackhole))
@@ -64,7 +64,7 @@ internal class HppcObjectToIntMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: HppcIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = HppcIntToObjectBenchmark.ObjectToIntGetBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     benchmark.objectGet(state, blackhole)
@@ -78,7 +78,7 @@ internal class HppcObjectToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("hppc_put", operations, benchmark.put(state, blackhole))
@@ -86,8 +86,8 @@ internal class HppcObjectToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: HppcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = HppcObjectToObjectBenchmark.BenchmarkState()
-    state.mapSize = size
+    val state = HppcObjectToObjectBenchmark.BenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.get(state, blackhole)
@@ -101,7 +101,7 @@ internal class HppcReferenceToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState()
-    state.mapSize = size
+    configureSetup(state, size)
     state.setup()
 
     addOperation("hppc_put", operations, benchmark.identityPut(state, blackhole))
@@ -109,8 +109,8 @@ internal class HppcReferenceToObjectMemoryBenchmark : Measurer {
   }
 
   private fun measureGet(benchmark: HppcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = HppcObjectToObjectBenchmark.IdentityBenchmarkState()
-    state.mapSize = size
+    val state = HppcObjectToObjectBenchmark.IdentityBenchmarkGetState()
+    configureSetup(state, size)
     state.setup()
 
     benchmark.identityGet(state, blackhole)
