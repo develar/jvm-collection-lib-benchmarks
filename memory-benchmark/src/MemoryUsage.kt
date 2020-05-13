@@ -27,7 +27,7 @@ fun main() {
     }
   }
 
-  writeJson("memoryChartData", Paths.get("site", "memory.js")) { writer ->
+  writeJson("memoryChartData", Paths.get("site", "memory-data.js")) { writer ->
     writer.writeStartObject()
     writeSizes(writer, sizes.asSequence().map { Util.parseSize(it) })
 
