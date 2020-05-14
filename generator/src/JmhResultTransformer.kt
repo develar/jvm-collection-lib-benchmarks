@@ -72,7 +72,7 @@ fun main() {
 
     val size = Util.parseSize(benchmark.params.mapSize)
     val entryMap = result.computeIfAbsent(type) { Object2ObjectOpenHashMap() }.computeIfAbsent(library) { Int2ObjectOpenHashMap() }
-    val entry = entryMap.computeIfAbsent(size, IntFunction(::Entry))
+    val entry = entryMap.computeIfAbsent(size, IntFunction { Entry(it) })
     val value = benchmark.primaryMetric.scorePercentiles.p50
     if (entry.operations.put(operation, value) > 0) {
       throw IllegalStateException("Operation value is already set: $operation")

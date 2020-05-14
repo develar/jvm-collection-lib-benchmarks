@@ -11,7 +11,6 @@ export JAVA_HOME=~/Downloads/jbr/Contents/Home
 mvn package
 
 java -jar benchmark/target/benchmarks.jar -bm ss -wi 40 -i 40 -f 1 -foe true -rf json \
-  -e '.+\.IntToObjectBenchmark.object.+' \    
   -p mapSize=100,1K,10K,100K,1M,10M -tu ms
 ```
 
