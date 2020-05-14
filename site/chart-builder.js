@@ -72,10 +72,10 @@ function createChartBox(type, typeTitle, box) {
   for (const operation of operations) {
     buildChart(type, operation, `${typeTitle} ${operationToChartTitle(operation)}`, chartData, subGroup)
   }
-  subGroup = createDiv(box)
-  for (const operation of operations) {
-    buildMemoryChart(type, operation, "Memory", memoryChartData, subGroup)
-  }
+  // subGroup = createDiv(box)
+  // for (const operation of operations) {
+  //   buildMemoryChart(type, operation, "Memory", memoryChartData, subGroup)
+  // }
   subGroup = createDiv(box)
   for (const operation of operations) {
     buildClusteredMemoryChart(type, operation, "Memory", memoryChartData, subGroup)

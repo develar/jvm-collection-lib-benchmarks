@@ -37,6 +37,7 @@ function buildClusteredMemoryChart(type, operation, titleText, data, container) 
   chart.colors.step = 3
   chart.data = data[type]
   chart.numberFormatter.numberFormat = "#.#b"
+  configureTitle(chart, titleText)
 
   const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
   categoryAxis.dataFields.category = "size"
@@ -65,5 +66,6 @@ function buildClusteredMemoryChart(type, operation, titleText, data, container) 
     categoryLabel.label.fill = am4core.color("#fff")
     categoryLabel.label.hideOversized = false
     categoryLabel.label.truncate = false
+    categoryLabel.label.tooltipText = "{name}: [bold]{valueX}[/]"
   }
 }
