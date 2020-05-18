@@ -9,17 +9,14 @@ internal class EcIntToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntPutOrRemoveBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
-
+    setup(state, size)
     addOperation("ec_put", operations, benchmark.put(state, blackhole))
     addOperation("ec_remove", operations, benchmark.remove(state, blackhole))
   }
 
   private fun measureGet(benchmark: EcIntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = EcIntToIntBenchmark.GetBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     benchmark.get(state, blackhole)
     addOperation("ec_get", operations, state.map)
@@ -32,8 +29,7 @@ internal class EcIntToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     addOperation("ec_put", operations, benchmark.put(state, blackhole))
     addOperation("ec_remove", operations, benchmark.remove(state, blackhole))
@@ -41,8 +37,7 @@ internal class EcIntToObjectMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: EcIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = EcIntToObjectBenchmark.IntToObjectGetBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     benchmark.get(state, blackhole)
     addOperation("ec_get", operations, state.map)
@@ -55,8 +50,7 @@ internal class EcObjectToIntMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     addOperation("ec_put", operations, benchmark.objectPut(state, blackhole))
     addOperation("ec_remove", operations, benchmark.objectRemove(state, blackhole))
@@ -64,8 +58,7 @@ internal class EcObjectToIntMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: EcIntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = EcIntToObjectBenchmark.ObjectToIntGetBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     benchmark.objectGet(state, blackhole)
     addOperation("ec_get", operations, state.map)
@@ -78,8 +71,7 @@ internal class EcObjectToObjectMemoryBenchmark : Measurer {
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     addOperation("ec_put", operations, benchmark.put(state, blackhole))
     addOperation("ec_remove", operations, benchmark.remove(state, blackhole))
@@ -87,8 +79,7 @@ internal class EcObjectToObjectMemoryBenchmark : Measurer {
 
   private fun measureGet(benchmark: EcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val state = EcObjectToObjectBenchmark.BenchmarkGetState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
     benchmark.get(state, blackhole)
     addOperation("ec_get", operations, state.map)
@@ -97,23 +88,21 @@ internal class EcObjectToObjectMemoryBenchmark : Measurer {
 
 internal class EcReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = EcObjectToObjectBenchmark()
+    val benchmark = EcReferenceToObjectMapBenchmark()
     measureGet(benchmark, size, operations, blackhole)
 
     val state = BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState()
-    configureSetup(state, size)
-    state.setup()
+    setup(state, size)
 
-    addOperation("ec_put", operations, benchmark.identityPut(state, blackhole))
-    addOperation("ec_remove", operations, benchmark.identityRemove(state, blackhole))
+    addOperation("ec_put", operations, benchmark.put(state, blackhole))
+    addOperation("ec_remove", operations, benchmark.remove(state, blackhole))
   }
 
-  private fun measureGet(benchmark: EcObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = EcObjectToObjectBenchmark.IdentityBenchmarkGetState()
-    configureSetup(state, size)
-    state.setup()
+  private fun measureGet(benchmark: EcReferenceToObjectMapBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
+    val state = EcReferenceToObjectMapBenchmark.IdentityBenchmarkGetState()
+    setup(state, size)
 
-    benchmark.identityGet(state, blackhole)
+    benchmark.get(state, blackhole)
     addOperation("ec_get", operations, state.map)
   }
 }

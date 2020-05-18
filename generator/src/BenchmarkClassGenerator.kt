@@ -1,6 +1,7 @@
 package org.jetbrains.benchmark.collection
 
 import java.nio.file.Files
+import java.nio.file.Path
 import java.nio.file.Paths
 
 private const val packageDir = "org/jetbrains/benchmark/collection"
@@ -81,7 +82,7 @@ fun main() {
     code = code
       .replace("class ", "class $classPrefix")
       .replace("java_", "${library.name}_")
-    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark")) {
+    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark", "ReferenceToObjectMapBenchmark")) {
       code = code
         .replace(" $name(", " ${classPrefix}$name(")
         .replace(": $name", ": ${classPrefix}$name")
@@ -97,17 +98,38 @@ fun main() {
   memoryMeasurerListCode += "\n)"
   Files.write(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode.toByteArray(Charsets.UTF_8))
 
-  for (input in listOf(Input("ObjectToObjectBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
+  generateBenchmarks(inDir, outDir, existingFiles)
+  generateLinkedMapBenchmarks(inDir, outDir, existingFiles)
+
+  existingFiles.forEach {
+    println("remove outdated file $it")
+    Files.delete(it)
+  }
+}
+
+private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
+  for (input in listOf(Input("ObjectToObjectBenchmark"), Input("ReferenceToObjectMapBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
     val inClassName = input.name
     val inPath = inDir.resolve("$inClassName.java")
     Files.createDirectories(outDir)
 
+    val inputCode = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
+
     for (library in libraries) {
       val className = "${library.classPrefix}$inClassName"
-      var code = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
+      var code = inputCode
+      code = code
+        .replace("import java.util.HashMap;\n", "")
+        .replace("import java.util.IdentityHashMap;\n", "")
+        .replace("import java.util.Objects;\n", "")
+        .replace("class $inClassName", "class $className")
+
       when {
-        input.name.startsWith("Object") -> {
-          code = replaceNewMap(code, library)
+        input.name == "ObjectToObjectBenchmark" -> {
+          code = replaceNewMap(code, library, useFactory = library.name == "koloboke")
+        }
+        input.name == "ReferenceToObjectMapBenchmark" -> {
+          code = replaceNewMap(code, library, useFactory = true)
         }
         library.name == "koloboke" -> {
           if (input.name == "IntToObjectBenchmark") {
@@ -123,46 +145,16 @@ fun main() {
               .replace("new HashMap<>(", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(")
           }
         }
-        else -> {
-          code = code
-            .replace("HashMap<Integer, Integer> map = new HashMap<>(", "${library.intToIntClassName} map = new ${library.intToIntClassName}(")
-            .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "${library.intToObjectClassName}<ArbitraryPojo> map = new ${library.intToObjectClassName}(")
-            .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "${library.objectToIntClassName}<ArbitraryPojo> map = new ${library.objectToIntClassName}(")
-        }
       }
-
-      if (input.name.startsWith("Int") && library.name == "ec") {
-        code = code
-          .replace(", loadFactor);", ");")
-          .replace("0, state.loadFactor);", ");")
-      }
-
-      code = code
-        .replace("import java.util.HashMap;\n", "")
-        .replace("import java.util.IdentityHashMap;\n", "")
-        .replace("import java.util.Objects;\n", "")
-        .replace("class $inClassName", "class $className")
-        // space before is important - avoid replacing THashMap
-        .replace(" HashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.objectToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
-        .replace(" IdentityHashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.referenceToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
-        .replace(" HashMap<Integer, Integer> ", " ${library.intToIntClassName} ")
-        .replace(" HashMap<Integer, ArbitraryPojo> ", " ${library.intToObjectClassName}<ArbitraryPojo> ")
-        .replace(" HashMap<ArbitraryPojo, Integer> ", " ${library.objectToIntClassName}<ArbitraryPojo> ")
 
       if (input.name.startsWith("Int")) {
-        if (library.name == "fastutil") {
-          if (input.name == "IntToObjectBenchmark") {
-            code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
-          }
-          code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeInt(keys2[remove++]);")
-        }
-        else if (library.name == "koloboke") {
-          if (input.name == "IntToObjectBenchmark") {
-            code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
-          }
-          code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeAsInt(keys2[remove++]);")
-        }
-        code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.get(key)")
+        code = replaceInt(code, input, library)
+      }
+      else {
+        // space before is important - avoid replacing THashMap
+        code = code
+          .replace(" HashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.objectToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
+          .replace(" IdentityHashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.referenceToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
       }
 
       val outFile = outDir.resolve("$className.java")
@@ -170,30 +162,76 @@ fun main() {
       Files.write(outFile, code.toByteArray(Charsets.UTF_8))
     }
   }
+}
 
-  existingFiles.forEach {
-    println("remove outdated file $it")
-    Files.delete(it)
+private fun generateLinkedMapBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
+  val inClassName = "ObjectToObjectBenchmark"
+  val inPath = inDir.resolve("$inClassName.java")
+  Files.createDirectories(outDir)
+
+  val inputCode = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
+
+  data class Item(val libraryName: String, val className: String)
+
+  for (item in listOf(Item("java", "java.util.LinkedHashMap"), Item("fastutil", "it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap"))) {
+    val className = "${toCamelCase(item.libraryName)}LinkedMapBenchmark"
+    var code = inputCode
+    val shortClassName = item.className.substring(item.className.lastIndexOf('.') + 1)
+    code = code
+      .replace("import java.util.HashMap;", "import ${item.className};")
+      .replace("class $inClassName", "class $className")
+      .replace("HashMap<", "${shortClassName}<")
+
+    val outFile = outDir.resolve("$className.java")
+    existingFiles.remove(outFile)
+    Files.write(outFile, code.toByteArray(Charsets.UTF_8))
   }
+}
+
+private fun replaceInt(code: String, input: Input, library: Library): String {
+  @Suppress("NAME_SHADOWING")
+  var code = code
+
+  code = code
+    .replace("HashMap<Integer, Integer> map = new HashMap<>(", "${library.intToIntClassName} map = new ${library.intToIntClassName}(")
+    .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "${library.intToObjectClassName}<ArbitraryPojo> map = new ${library.intToObjectClassName}(")
+    .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "${library.objectToIntClassName}<ArbitraryPojo> map = new ${library.objectToIntClassName}(")
+
+  if (library.name == "ec") {
+    code = code
+      .replace(", loadFactor);", ");")
+      .replace("0, state.loadFactor);", ");")
+  }
+
+  code = code
+    .replace(" HashMap<Integer, Integer> ", " ${library.intToIntClassName} ")
+    .replace(" HashMap<Integer, ArbitraryPojo> ", " ${library.intToObjectClassName}<ArbitraryPojo> ")
+    .replace(" HashMap<ArbitraryPojo, Integer> ", " ${library.objectToIntClassName}<ArbitraryPojo> ")
+
+  if (library.name == "fastutil") {
+    if (input.name == "IntToObjectBenchmark") {
+      code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
+    }
+    code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeInt(keys2[remove++]);")
+  }
+  else if (library.name == "koloboke") {
+    if (input.name == "IntToObjectBenchmark") {
+      code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
+    }
+    code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeAsInt(keys2[remove++]);")
+  }
+  code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.get(key)")
+  return code
 }
 
 private data class Input(val name: String)
 
-private fun replaceNewMap(code: String, library: Library): String {
-  val factory = library.factory?.let { "org.jetbrains.benchmark.collection.factory.$it" }
-
-  @Suppress("NAME_SHADOWING")
-  var code = code
-  if (library.name == "koloboke") {
-    code = code.replace("new HashMap<>()", "$factory.createObjectToObject()")
-  }
-  else {
-    code = code.replace("new HashMap<>(", "new ${library.objectToObjectClassName}<>(")
-  }
-
+private fun replaceNewMap(code: String, library: Library, useFactory: Boolean): String {
+  val factory = if (useFactory) library.factory?.let { "org.jetbrains.benchmark.collection.factory.$it" } else null
   if (factory == null) {
     return code
       .replace("new IdentityHashMap<>(", "new ${library.referenceToObjectClassName}<>(")
+      .replace("new HashMap<>(", "new ${library.objectToObjectClassName}<>(")
   }
   else {
     return code

@@ -16,6 +16,7 @@ public class IntToObjectBenchmark {
     public HashMap<Integer, ArbitraryPojo> map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
@@ -36,6 +37,7 @@ public class IntToObjectBenchmark {
     public HashMap<ArbitraryPojo, Integer> map;
     ArbitraryPojo[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);

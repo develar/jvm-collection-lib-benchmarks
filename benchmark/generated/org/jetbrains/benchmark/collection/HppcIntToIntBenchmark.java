@@ -13,6 +13,7 @@ public class HppcIntToIntBenchmark {
     public com.carrotsearch.hppc.IntIntHashMap map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);

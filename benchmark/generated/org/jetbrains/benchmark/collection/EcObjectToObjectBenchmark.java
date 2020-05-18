@@ -22,6 +22,7 @@ public class EcObjectToObjectBenchmark {
     public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
@@ -38,33 +39,6 @@ public class EcObjectToObjectBenchmark {
 
       this.keys = keys;
       this.map = map;
-    }
-  }
-
-  @State(Scope.Thread)
-  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
-    public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map;
-    ArbitraryPojo[] keys;
-
-    @Setup
-    public void setup() throws Exception {
-      ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.EcFactory.createReferenceToObject(keys.length, loadFactor);
-      for (int i = 0, l = keys.length; i < l; i++) {
-        ArbitraryPojo key = keys[i];
-        ArbitraryPojo newKey;
-        if (i % oneFailureOutOf == 0) {
-          newKey = new ArbitraryPojo(key.obj1, key.obj2);
-          newKey.index = i;
-        }
-        else {
-          newKey = key;
-        }
-        map.put(newKey, key);
-      }
-
-      this.map = map;
-      this.keys = keys;
     }
   }
 
@@ -96,6 +70,7 @@ public class EcObjectToObjectBenchmark {
     return map;
   }
 
+  @SuppressWarnings("DuplicatedCode")
   @Benchmark
   public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>(0, state.loadFactor);
@@ -109,53 +84,6 @@ public class EcObjectToObjectBenchmark {
       map.put(keys[add], keys[add]);
       add++;
       map.remove(keys2[remove++]);
-    }
-    blackhole.consume(map.size());
-    return map;
-  }
-
-  @Benchmark
-  public void identityGet(IdentityBenchmarkGetState state, Blackhole blackhole) {
-    int result = 0;
-    ArbitraryPojo[] keys = state.keys;
-    org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = state.map;
-    for (int i = 0, l = map.size(); i < l; i++) {
-      ArbitraryPojo key = keys[i];
-      if (map.get(key) == null) {
-        result ^= 1;
-      }
-    }
-    blackhole.consume(result);
-  }
-
-  @Benchmark
-  public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> identityPut(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.EcFactory.createReferenceToObject(state.loadFactor);
-    ArbitraryPojo[] keys = state.keys;
-    for (ArbitraryPojo key : keys) {
-      map.put(key, key);
-    }
-    blackhole.consume(map.size());
-    // same keys are use for identity test
-    for (ArbitraryPojo key : keys) {
-      map.put(key, key);
-    }
-    blackhole.consume(map.size());
-    return map;
-  }
-
-  @Benchmark
-  public org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> identityRemove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.EcFactory.createReferenceToObject(state.loadFactor);
-    int add = 0;
-    int remove = 0;
-    ArbitraryPojo[] keys = state.keys;
-    while (add < keys.length) {
-      map.put(keys[add], keys[add]);
-      ++add;
-      map.put(keys[add], keys[add]);
-      ++add;
-      map.remove(keys[remove++]);
     }
     blackhole.consume(map.size());
     return map;

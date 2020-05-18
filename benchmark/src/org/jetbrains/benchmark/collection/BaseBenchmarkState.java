@@ -16,10 +16,13 @@ public abstract class BaseBenchmarkState {
   @Param("2")
   public int oneFailureOutOf;
 
+  public abstract void setup() throws Exception;
+
   @State(Scope.Thread)
   public static class ReferencePutOrRemoveBenchmarkState extends BaseBenchmarkState {
     ArbitraryPojo[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       keys = Util.loadObjectArray(mapSize);
@@ -31,6 +34,7 @@ public abstract class BaseBenchmarkState {
     ArbitraryPojo[] keys;
     ArbitraryPojo[] keys2;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       keys = Util.loadObjectArray(mapSize);
@@ -46,6 +50,7 @@ public abstract class BaseBenchmarkState {
   public static class IntPutOrRemoveBenchmarkState extends BaseBenchmarkState {
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       keys = Util.loadIntArray(mapSize);
@@ -57,6 +62,7 @@ public abstract class BaseBenchmarkState {
     int[] keys;
     ArbitraryPojo[] values;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       keys = Util.loadIntArray(mapSize);
@@ -70,6 +76,7 @@ public abstract class BaseBenchmarkState {
     ArbitraryPojo[] keys2;
     int[] values;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       keys = Util.loadObjectArray(mapSize);

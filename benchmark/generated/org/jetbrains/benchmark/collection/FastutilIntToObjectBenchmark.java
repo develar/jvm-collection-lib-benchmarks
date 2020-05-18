@@ -14,6 +14,7 @@ public class FastutilIntToObjectBenchmark {
     public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
@@ -34,6 +35,7 @@ public class FastutilIntToObjectBenchmark {
     public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);

@@ -13,6 +13,7 @@ public class KolobokeIntToIntBenchmark {
     public com.koloboke.collect.map.hash.HashIntIntMap map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);

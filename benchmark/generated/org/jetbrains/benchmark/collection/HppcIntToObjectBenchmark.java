@@ -14,6 +14,7 @@ public class HppcIntToObjectBenchmark {
     public com.carrotsearch.hppc.IntObjectHashMap<ArbitraryPojo> map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
@@ -34,6 +35,7 @@ public class HppcIntToObjectBenchmark {
     public com.carrotsearch.hppc.ObjectIntHashMap<ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);

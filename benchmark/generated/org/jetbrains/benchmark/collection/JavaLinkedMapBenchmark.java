@@ -6,6 +6,7 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.LinkedHashMap;
 
 /**
  * “Get” test: Populate a map with a pre-generated set of keys (in the JMH setup), make ~50% successful and ~50% unsuccessful “get” calls.
@@ -16,17 +17,17 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class TroveJbObjectToObjectBenchmark {
+public class JavaLinkedMapBenchmark {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
-    public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = new gnu.trove.THashMap<>(keys.length, loadFactor);
+      LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = new LinkedHashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
         // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
@@ -46,7 +47,7 @@ public class TroveJbObjectToObjectBenchmark {
   public void get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
+    LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
     for (int i = 0, l = map.size(); i < l; i++) {
       ArbitraryPojo key = keys[i];
       if (map.get(key) == null) {
@@ -57,8 +58,8 @@ public class TroveJbObjectToObjectBenchmark {
   }
 
   @Benchmark
-  public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = new gnu.trove.THashMap<>(0, state.loadFactor);
+  public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = new LinkedHashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
     }
@@ -72,8 +73,8 @@ public class TroveJbObjectToObjectBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = new gnu.trove.THashMap<>(0, state.loadFactor);
+  public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = new LinkedHashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

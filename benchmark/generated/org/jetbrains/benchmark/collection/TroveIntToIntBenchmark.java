@@ -13,6 +13,7 @@ public class TroveIntToIntBenchmark {
     public gnu.trove.map.hash.TIntIntHashMap map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);

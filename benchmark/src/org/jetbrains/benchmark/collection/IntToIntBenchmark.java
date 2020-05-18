@@ -15,6 +15,7 @@ public class IntToIntBenchmark {
     public HashMap<Integer, Integer> map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);

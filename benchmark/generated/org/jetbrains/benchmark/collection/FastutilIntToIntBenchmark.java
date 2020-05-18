@@ -13,6 +13,7 @@ public class FastutilIntToIntBenchmark {
     public it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);

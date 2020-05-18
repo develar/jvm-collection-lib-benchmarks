@@ -13,6 +13,7 @@ public class EcIntToIntBenchmark {
     public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map;
     int[] keys;
 
+    @Override
     @Setup
     public void setup() throws Exception {
       int[] keys = Util.loadIntArray(mapSize);
