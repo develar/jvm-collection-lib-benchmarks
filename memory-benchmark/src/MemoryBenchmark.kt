@@ -49,8 +49,8 @@ internal class ObjectToObjectMemoryBenchmark : Measurer {
 
 internal class ReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = ReferenceToObjectMapBenchmark()
-    addOperation("java_get", operations, benchmark.get(setup(ReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
+    val benchmark = ReferenceToObjectBenchmark()
+    addOperation("java_get", operations, benchmark.get(setup(ReferenceToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
     val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.put(state, blackhole))

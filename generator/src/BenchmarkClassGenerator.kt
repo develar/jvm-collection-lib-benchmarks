@@ -82,7 +82,7 @@ fun main() {
     code = code
       .replace("class ", "class $classPrefix")
       .replace("java_", "${library.name}_")
-    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark", "ReferenceToObjectMapBenchmark", "LinkedMapMemoryBenchmark")) {
+    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark", "ReferenceToObjectBenchmark", "LinkedMapMemoryBenchmark")) {
       code = code
         .replace(" $name(", " ${classPrefix}$name(")
         .replace(": $name", ": ${classPrefix}$name")
@@ -111,7 +111,7 @@ fun main() {
 }
 
 private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
-  for (input in listOf(Input("ObjectToObjectBenchmark"), Input("ReferenceToObjectMapBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
+  for (input in listOf(Input("ObjectToObjectBenchmark"), Input("ReferenceToObjectBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
     val inClassName = input.name
     val inPath = inDir.resolve("$inClassName.java")
     Files.createDirectories(outDir)
@@ -132,9 +132,9 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
           code = replaceNewMap(code, library, useFactory = library.name == "koloboke")
             .replace("<ObjectToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
-        input.name == "ReferenceToObjectMapBenchmark" -> {
+        input.name == "ReferenceToObjectBenchmark" -> {
           code = replaceNewMap(code, library, useFactory = true)
-            .replace("<ReferenceToObjectMapBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
+            .replace("<ReferenceToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
         library.name == "koloboke" -> {
           if (input.name == "IntToObjectBenchmark") {

@@ -6,18 +6,19 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
+import java.util.IdentityHashMap;
 
-public class TroveJbReferenceToObjectMapBenchmark implements ObjectBenchmark<TroveJbReferenceToObjectMapBenchmark.BenchmarkGetState> {
+public class ReferenceToObjectBenchmark implements ObjectBenchmark<ReferenceToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
-    public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map;
+    public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
     @Override
     @Setup
     public void setup() throws Exception {
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
-      gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.TroveJbFactory.createReferenceToObject(keys.length, loadFactor);
+      IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = new IdentityHashMap<>(keys.length);
       for (int i = 0, l = keys.length; i < l; i++) {
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey;
@@ -41,7 +42,7 @@ public class TroveJbReferenceToObjectMapBenchmark implements ObjectBenchmark<Tro
   public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
+    IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
     for (int i = 0, l = map.size(); i < l; i++) {
       ArbitraryPojo key = keys[i];
       if (map.get(key) == null) {
@@ -53,8 +54,8 @@ public class TroveJbReferenceToObjectMapBenchmark implements ObjectBenchmark<Tro
   }
 
   @Benchmark
-  public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.TroveJbFactory.createReferenceToObject(state.loadFactor);
+  public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = new IdentityHashMap<>();
     ArbitraryPojo[] keys = state.keys;
     for (ArbitraryPojo key : keys) {
       map.put(key, key);
@@ -70,8 +71,8 @@ public class TroveJbReferenceToObjectMapBenchmark implements ObjectBenchmark<Tro
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
-    gnu.trove.THashMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.TroveJbFactory.createReferenceToObject(state.loadFactor);
+  public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState state, Blackhole blackhole) {
+    IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = new IdentityHashMap<>();
     int add = 0;
     int remove = 0;
     ArbitraryPojo[] keys = state.keys;

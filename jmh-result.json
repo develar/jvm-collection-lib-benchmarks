@@ -6553,7 +6553,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -6644,7 +6644,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -6735,7 +6735,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -6826,7 +6826,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -6917,7 +6917,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7008,7 +7008,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7099,7 +7099,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7190,7 +7190,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7281,7 +7281,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7372,7 +7372,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7463,7 +7463,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7554,7 +7554,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7645,7 +7645,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7736,7 +7736,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7827,7 +7827,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -7918,7 +7918,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -8009,7 +8009,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -8100,7 +8100,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.EcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16381,7 +16381,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16472,7 +16472,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16563,7 +16563,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16654,7 +16654,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16745,7 +16745,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16836,7 +16836,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -16927,7 +16927,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17018,7 +17018,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17109,7 +17109,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17200,7 +17200,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17291,7 +17291,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17382,7 +17382,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17473,7 +17473,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17564,7 +17564,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17655,7 +17655,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17746,7 +17746,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17837,7 +17837,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -17928,7 +17928,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.FastutilReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -24571,7 +24571,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -24662,7 +24662,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -24753,7 +24753,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -24844,7 +24844,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -24935,7 +24935,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25026,7 +25026,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25117,7 +25117,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25208,7 +25208,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25299,7 +25299,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25390,7 +25390,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25481,7 +25481,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25572,7 +25572,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25663,7 +25663,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25754,7 +25754,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25845,7 +25845,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -25936,7 +25936,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -26027,7 +26027,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -26118,7 +26118,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.HppcReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39313,7 +39313,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39404,7 +39404,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39495,7 +39495,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39586,7 +39586,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39677,7 +39677,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39768,7 +39768,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39859,7 +39859,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -39950,7 +39950,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40041,7 +40041,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40132,7 +40132,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40223,7 +40223,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40314,7 +40314,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40405,7 +40405,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40496,7 +40496,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40587,7 +40587,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40678,7 +40678,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40769,7 +40769,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -40860,7 +40860,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.KolobokeReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -42589,7 +42589,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -42680,7 +42680,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -42771,7 +42771,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -42862,7 +42862,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -42953,7 +42953,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43044,7 +43044,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43135,7 +43135,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43226,7 +43226,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43317,7 +43317,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43408,7 +43408,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43499,7 +43499,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43590,7 +43590,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43681,7 +43681,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43772,7 +43772,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43863,7 +43863,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -43954,7 +43954,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -44045,7 +44045,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -44136,7 +44136,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.ReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -55693,7 +55693,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -55784,7 +55784,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -55875,7 +55875,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -55966,7 +55966,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56057,7 +56057,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56148,7 +56148,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56239,7 +56239,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56330,7 +56330,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56421,7 +56421,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56512,7 +56512,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56603,7 +56603,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56694,7 +56694,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56785,7 +56785,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56876,7 +56876,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -56967,7 +56967,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -57058,7 +57058,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -57149,7 +57149,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -57240,7 +57240,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveJbReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -58969,7 +58969,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59060,7 +59060,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59151,7 +59151,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59242,7 +59242,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59333,7 +59333,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59424,7 +59424,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.get",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.get",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59515,7 +59515,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59606,7 +59606,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59697,7 +59697,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59788,7 +59788,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59879,7 +59879,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -59970,7 +59970,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.put",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.put",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60061,7 +60061,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60152,7 +60152,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60243,7 +60243,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60334,7 +60334,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60425,7 +60425,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,
@@ -60516,7 +60516,7 @@
     },
     {
         "jmhVersion" : "1.23",
-        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectMapBenchmark.remove",
+        "benchmark" : "org.jetbrains.benchmark.collection.TroveReferenceToObjectBenchmark.remove",
         "mode" : "ss",
         "threads" : 1,
         "forks" : 1,

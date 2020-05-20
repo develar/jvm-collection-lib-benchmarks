@@ -49,8 +49,8 @@ internal class TroveJbObjectToObjectMemoryBenchmark : Measurer {
 
 internal class TroveJbReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = TroveJbReferenceToObjectMapBenchmark()
-    addOperation("trove-jb_get", operations, benchmark.get(setup(TroveJbReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
+    val benchmark = TroveJbReferenceToObjectBenchmark()
+    addOperation("trove-jb_get", operations, benchmark.get(setup(TroveJbReferenceToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
     val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("trove-jb_put", operations, benchmark.put(state, blackhole))

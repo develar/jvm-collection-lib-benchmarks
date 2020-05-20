@@ -49,8 +49,8 @@ internal class HppcObjectToObjectMemoryBenchmark : Measurer {
 
 internal class HppcReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = HppcReferenceToObjectMapBenchmark()
-    addOperation("hppc_get", operations, benchmark.get(setup(HppcReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
+    val benchmark = HppcReferenceToObjectBenchmark()
+    addOperation("hppc_get", operations, benchmark.get(setup(HppcReferenceToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
     val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("hppc_put", operations, benchmark.put(state, blackhole))

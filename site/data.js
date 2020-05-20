@@ -930,7 +930,7 @@ const chartData = {
       "remove" : 4102.3486
     } ]
   } ],
-  "ReferenceToObjectMap" : [ {
+  "ReferenceToObject" : [ {
     "name" : "ec",
     "data" : [ {
       "size" : "100",

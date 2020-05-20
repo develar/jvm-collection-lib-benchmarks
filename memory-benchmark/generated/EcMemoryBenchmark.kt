@@ -49,8 +49,8 @@ internal class EcObjectToObjectMemoryBenchmark : Measurer {
 
 internal class EcReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = EcReferenceToObjectMapBenchmark()
-    addOperation("ec_get", operations, benchmark.get(setup(EcReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
+    val benchmark = EcReferenceToObjectBenchmark()
+    addOperation("ec_get", operations, benchmark.get(setup(EcReferenceToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
     val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("ec_put", operations, benchmark.put(state, blackhole))

@@ -49,8 +49,8 @@ internal class KolobokeObjectToObjectMemoryBenchmark : Measurer {
 
 internal class KolobokeReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val benchmark = KolobokeReferenceToObjectMapBenchmark()
-    addOperation("koloboke_get", operations, benchmark.get(setup(KolobokeReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
+    val benchmark = KolobokeReferenceToObjectBenchmark()
+    addOperation("koloboke_get", operations, benchmark.get(setup(KolobokeReferenceToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
     val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("koloboke_put", operations, benchmark.put(state, blackhole))
