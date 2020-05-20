@@ -65,10 +65,6 @@ fun main() {
       type = "ObjectToInt"
       operation = operation.removePrefix("object").toLowerCase()
     }
-    else if (type == "ObjectToObject" && operation.startsWith("identity")) {
-      type = "ReferenceToObject"
-      operation = operation.removePrefix("identity").toLowerCase()
-    }
 
     if (!(operation == "get" || operation == "remove" || operation == "put")) {
       throw IllegalStateException("Unsupported operation: $operation")
