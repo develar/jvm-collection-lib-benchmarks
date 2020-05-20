@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class JavaLinkedMapBenchmark {
+public class JavaLinkedMapBenchmark implements ObjectBenchmark<JavaLinkedMapBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -43,8 +43,9 @@ public class JavaLinkedMapBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -55,10 +56,11 @@ public class JavaLinkedMapBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = new LinkedHashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -73,7 +75,7 @@ public class JavaLinkedMapBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public LinkedHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     LinkedHashMap<ArbitraryPojo, ArbitraryPojo> map = new LinkedHashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

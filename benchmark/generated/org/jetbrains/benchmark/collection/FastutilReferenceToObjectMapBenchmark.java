@@ -7,9 +7,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 
-public class FastutilReferenceToObjectMapBenchmark {
+public class FastutilReferenceToObjectMapBenchmark implements ObjectBenchmark<FastutilReferenceToObjectMapBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
-  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
@@ -36,8 +36,9 @@ public class FastutilReferenceToObjectMapBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(IdentityBenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     it.unimi.dsi.fastutil.objects.Reference2ObjectOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -48,6 +49,7 @@ public class FastutilReferenceToObjectMapBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark

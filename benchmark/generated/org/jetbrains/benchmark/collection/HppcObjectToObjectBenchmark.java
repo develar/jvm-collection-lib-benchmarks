@@ -16,7 +16,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class HppcObjectToObjectBenchmark {
+public class HppcObjectToObjectBenchmark implements ObjectBenchmark<HppcObjectToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -42,8 +42,9 @@ public class HppcObjectToObjectBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -54,10 +55,11 @@ public class HppcObjectToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectObjectHashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -72,7 +74,7 @@ public class HppcObjectToObjectBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.ObjectObjectHashMap<ArbitraryPojo, ArbitraryPojo> map = new com.carrotsearch.hppc.ObjectObjectHashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

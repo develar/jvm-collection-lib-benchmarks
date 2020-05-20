@@ -56,7 +56,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
+  public Object get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = state.map;
@@ -66,6 +66,7 @@ public class EcIntToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
@@ -85,7 +86,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.IntObjectHashMap();
     int add = 0;
     int remove = 0;
@@ -103,7 +104,7 @@ public class EcIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
+  public Object objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = state.map;
@@ -111,10 +112,11 @@ public class EcIntToObjectBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap<ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap();
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;

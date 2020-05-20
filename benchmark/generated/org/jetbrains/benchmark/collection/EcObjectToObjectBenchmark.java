@@ -16,7 +16,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class EcObjectToObjectBenchmark {
+public class EcObjectToObjectBenchmark implements ObjectBenchmark<EcObjectToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -42,8 +42,9 @@ public class EcObjectToObjectBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -54,10 +55,11 @@ public class EcObjectToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -72,7 +74,7 @@ public class EcObjectToObjectBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

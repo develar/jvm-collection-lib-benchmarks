@@ -31,7 +31,7 @@ public class IntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(GetBenchmarkState state, Blackhole blackhole) {
+  public Object get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     HashMap<Integer, Integer> map = state.map;
@@ -39,10 +39,11 @@ public class IntToIntBenchmark {
       result ^= Objects.requireNonNullElse(map.get(key), -1);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public HashMap<Integer, Integer> put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<Integer, Integer> map = new HashMap<>(0, state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
@@ -56,7 +57,7 @@ public class IntToIntBenchmark {
   }
 
   @Benchmark
-  public HashMap<Integer, Integer> remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<Integer, Integer> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

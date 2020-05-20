@@ -56,7 +56,7 @@ public class KolobokeIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
+  public Object get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     com.koloboke.collect.map.hash.HashIntObjMap<ArbitraryPojo> map = state.map;
@@ -66,6 +66,7 @@ public class KolobokeIntToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
@@ -85,7 +86,7 @@ public class KolobokeIntToObjectBenchmark {
   }
 
   @Benchmark
-  public com.koloboke.collect.map.hash.HashIntObjMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashIntObjMap<ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToObject(state.loadFactor);
     int add = 0;
     int remove = 0;
@@ -103,7 +104,7 @@ public class KolobokeIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
+  public Object objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.koloboke.collect.map.hash.HashObjIntMap<ArbitraryPojo> map = state.map;
@@ -111,10 +112,11 @@ public class KolobokeIntToObjectBenchmark {
       result ^= map.getInt(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public com.koloboke.collect.map.hash.HashObjIntMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashObjIntMap<ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToInt(state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;

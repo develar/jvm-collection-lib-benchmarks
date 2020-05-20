@@ -56,7 +56,7 @@ public class TroveJbIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
+  public Object get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     gnu.trove.TIntObjectHashMap<ArbitraryPojo> map = state.map;
@@ -66,6 +66,7 @@ public class TroveJbIntToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
@@ -85,7 +86,7 @@ public class TroveJbIntToObjectBenchmark {
   }
 
   @Benchmark
-  public gnu.trove.TIntObjectHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.TIntObjectHashMap<ArbitraryPojo> map = new gnu.trove.TIntObjectHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
@@ -103,7 +104,7 @@ public class TroveJbIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
+  public Object objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     gnu.trove.TObjectIntHashMap<ArbitraryPojo> map = state.map;
@@ -111,10 +112,11 @@ public class TroveJbIntToObjectBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public gnu.trove.TObjectIntHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.TObjectIntHashMap<ArbitraryPojo> map = new gnu.trove.TObjectIntHashMap(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;

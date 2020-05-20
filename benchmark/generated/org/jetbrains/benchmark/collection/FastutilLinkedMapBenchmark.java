@@ -17,7 +17,7 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectLinkedOpenHashMap;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class FastutilLinkedMapBenchmark {
+public class FastutilLinkedMapBenchmark implements ObjectBenchmark<FastutilLinkedMapBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -43,8 +43,9 @@ public class FastutilLinkedMapBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -55,10 +56,11 @@ public class FastutilLinkedMapBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new Object2ObjectLinkedOpenHashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -73,7 +75,7 @@ public class FastutilLinkedMapBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new Object2ObjectLinkedOpenHashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

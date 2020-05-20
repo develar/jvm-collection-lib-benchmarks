@@ -56,7 +56,7 @@ public class TroveIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
+  public Object get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     gnu.trove.map.hash.TIntObjectHashMap<ArbitraryPojo> map = state.map;
@@ -66,6 +66,7 @@ public class TroveIntToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
@@ -85,7 +86,7 @@ public class TroveIntToObjectBenchmark {
   }
 
   @Benchmark
-  public gnu.trove.map.hash.TIntObjectHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.TIntObjectHashMap<ArbitraryPojo> map = new gnu.trove.map.hash.TIntObjectHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
@@ -103,7 +104,7 @@ public class TroveIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
+  public Object objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     gnu.trove.map.hash.TObjectIntHashMap<ArbitraryPojo> map = state.map;
@@ -111,10 +112,11 @@ public class TroveIntToObjectBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public gnu.trove.map.hash.TObjectIntHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     gnu.trove.map.hash.TObjectIntHashMap<ArbitraryPojo> map = new gnu.trove.map.hash.TObjectIntHashMap(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;

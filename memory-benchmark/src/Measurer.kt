@@ -16,9 +16,10 @@ internal fun addOperation(operation: String, operations: Object2LongArrayMap<Str
   }
 }
 
-internal fun setup(state: BaseBenchmarkState, size: String) {
+internal fun <T : BaseBenchmarkState> setup(state: T, size: String): T {
   state.mapSize = size
   state.loadFactor = 0.75f
   state.oneFailureOutOf = 2
   state.setup()
+  return state
 }

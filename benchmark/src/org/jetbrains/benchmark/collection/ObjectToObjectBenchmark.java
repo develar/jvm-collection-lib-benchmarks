@@ -17,7 +17,7 @@ import java.util.HashMap;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class ObjectToObjectBenchmark {
+public class ObjectToObjectBenchmark implements ObjectBenchmark<ObjectToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public HashMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -43,8 +43,9 @@ public class ObjectToObjectBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     HashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -55,10 +56,11 @@ public class ObjectToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public HashMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -73,7 +75,7 @@ public class ObjectToObjectBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public HashMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor);
     int add = 0;
     int remove = 0;

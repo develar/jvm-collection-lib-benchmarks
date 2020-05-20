@@ -8,9 +8,9 @@ import org.openjdk.jmh.infra.Blackhole;
 
 import java.util.IdentityHashMap;
 
-public class ReferenceToObjectMapBenchmark {
+public class ReferenceToObjectMapBenchmark implements ObjectBenchmark<ReferenceToObjectMapBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
-  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
@@ -37,8 +37,9 @@ public class ReferenceToObjectMapBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(IdentityBenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     IdentityHashMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -49,6 +50,7 @@ public class ReferenceToObjectMapBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark

@@ -36,4 +36,6 @@ val measurers = listOf(
   EcObjectToIntMemoryBenchmark(),
   EcObjectToObjectMemoryBenchmark(),
   EcReferenceToObjectMemoryBenchmark(),
+  JavaLinkedMapMemoryBenchmark(),
+  FastutilLinkedMapMemoryBenchmark(),
 )

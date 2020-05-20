@@ -23,9 +23,7 @@ mvn package
 
 # sudo is required for JOL for ptrace_scope
 # specify full path to java as under sudo different environment is used
-sudo ~/Downloads/jbr/Contents/Home/bin/java \ 
-  -Djdk.attach.allowAttachSelf=true -Djdk.module.illegalAccess.silent=true \
-  -jar memory-benchmark/target/memory-benchmark.jar
+sudo ~/Downloads/jbr/Contents/Home/bin/java -Djdk.attach.allowAttachSelf=true -Djdk.module.illegalAccess.silent=true -jar memory-benchmark/target/memory-benchmark.jar
 ```
 
 ## Benchmark Results Environment

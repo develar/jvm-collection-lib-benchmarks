@@ -64,6 +64,9 @@ function openTab(tabId) {
     else if (tabId === "refToObject") {
       createChartBox("ReferenceToObject", "Ref to Object", createBox(container))
     }
+    else if (tabId === "linkedMap") {
+      createChartBox("LinkedMap", "LinkedMap", createBox(container))
+    }
   }
 }
 

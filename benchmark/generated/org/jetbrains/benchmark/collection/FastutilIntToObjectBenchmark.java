@@ -56,7 +56,7 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
+  public Object get(IntToObjectGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = state.map;
@@ -66,6 +66,7 @@ public class FastutilIntToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
@@ -85,7 +86,7 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;
@@ -103,7 +104,7 @@ public class FastutilIntToObjectBenchmark {
   }
 
   @Benchmark
-  public void objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
+  public Object objectGet(ObjectToIntGetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = state.map;
@@ -111,10 +112,11 @@ public class FastutilIntToObjectBenchmark {
       result ^= map.getInt(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object objectPut(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap<ArbitraryPojo> map = new it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap(0, state.loadFactor);
     ArbitraryPojo[] keys = state.keys;
     ArbitraryPojo[] keys2 = state.keys2;

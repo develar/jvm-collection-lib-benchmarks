@@ -29,7 +29,7 @@ public class EcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(GetBenchmarkState state, Blackhole blackhole) {
+  public Object get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = state.map;
@@ -37,10 +37,11 @@ public class EcIntToIntBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = new org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap();
     for (int key : state.keys) {
       map.put(key, key);
@@ -54,7 +55,7 @@ public class EcIntToIntBenchmark {
   }
 
   @Benchmark
-  public org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap map = new org.eclipse.collections.impl.map.mutable.primitive.IntIntHashMap();
     int add = 0;
     int remove = 0;

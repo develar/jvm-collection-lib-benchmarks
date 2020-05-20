@@ -6,103 +6,54 @@ import org.openjdk.jmh.infra.Blackhole
 internal class IntToIntMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val benchmark = IntToIntBenchmark()
-    measureGet(benchmark, size, operations, blackhole)
+    addOperation("java_get", operations, benchmark.get(setup(IntToIntBenchmark.GetBenchmarkState(), size), blackhole))
 
-    val state = BaseBenchmarkState.IntPutOrRemoveBenchmarkState()
-    setup(state, size)
+    val state = setup(BaseBenchmarkState.IntPutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.put(state, blackhole))
     addOperation("java_remove", operations, benchmark.remove(state, blackhole))
-  }
-
-  private fun measureGet(benchmark: IntToIntBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = IntToIntBenchmark.GetBenchmarkState()
-    setup(state, size)
-
-    benchmark.get(state, blackhole)
-    addOperation("java_get", operations, state.map)
   }
 }
 
 internal class IntToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val benchmark = IntToObjectBenchmark()
-    measureGet(benchmark, size, operations, blackhole)
+    addOperation("java_get", operations, benchmark.get(setup(IntToObjectBenchmark.IntToObjectGetBenchmarkState(), size), blackhole))
 
-    val state = BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState()
-    setup(state, size)
-
+    val state = setup(BaseBenchmarkState.IntToObjectPutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.put(state, blackhole))
     addOperation("java_remove", operations, benchmark.remove(state, blackhole))
-  }
-
-  private fun measureGet(benchmark: IntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = IntToObjectBenchmark.IntToObjectGetBenchmarkState()
-    setup(state, size)
-
-    benchmark.get(state, blackhole)
-    addOperation("java_get", operations, state.map)
   }
 }
 
 internal class ObjectToIntMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val benchmark = IntToObjectBenchmark()
-    measureGet(benchmark, size, operations, blackhole)
+    addOperation("java_get", operations, benchmark.objectGet(setup(IntToObjectBenchmark.ObjectToIntGetBenchmarkState(), size), blackhole))
 
-    val state = BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState()
-    setup(state, size)
-
+    val state = setup(BaseBenchmarkState.ObjectToIntPutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.objectPut(state, blackhole))
     addOperation("java_remove", operations, benchmark.objectRemove(state, blackhole))
-  }
-
-  private fun measureGet(benchmark: IntToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = IntToObjectBenchmark.ObjectToIntGetBenchmarkState()
-    setup(state, size)
-
-    benchmark.objectGet(state, blackhole)
-    addOperation("java_get", operations, state.map)
   }
 }
 
 internal class ObjectToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val benchmark = ObjectToObjectBenchmark()
-    measureGet(benchmark, size, operations, blackhole)
+    addOperation("java_get", operations, benchmark.get(setup(ObjectToObjectBenchmark.BenchmarkGetState(), size), blackhole))
 
-    val state = BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState()
-    setup(state, size)
-
+    val state = setup(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.put(state, blackhole))
     addOperation("java_remove", operations, benchmark.remove(state, blackhole))
-  }
-
-  private fun measureGet(benchmark: ObjectToObjectBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = ObjectToObjectBenchmark.BenchmarkGetState()
-    setup(state, size)
-
-    benchmark.get(state, blackhole)
-    addOperation("java_get", operations, state.map)
   }
 }
 
 internal class ReferenceToObjectMemoryBenchmark : Measurer {
   override fun measure(size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
     val benchmark = ReferenceToObjectMapBenchmark()
-    measureGet(benchmark, size, operations, blackhole)
+    addOperation("java_get", operations, benchmark.get(setup(ReferenceToObjectMapBenchmark.BenchmarkGetState(), size), blackhole))
 
-    val state = BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState()
-    setup(state, size)
-
+    val state = setup(BaseBenchmarkState.ReferencePutOrRemoveBenchmarkState(), size)
     addOperation("java_put", operations, benchmark.put(state, blackhole))
     addOperation("java_remove", operations, benchmark.remove(state, blackhole))
-  }
-
-  private fun measureGet(benchmark: ReferenceToObjectMapBenchmark, size: String, operations: Object2LongArrayMap<String>, blackhole: Blackhole) {
-    val state = ReferenceToObjectMapBenchmark.IdentityBenchmarkGetState()
-    setup(state, size)
-
-    benchmark.get(state, blackhole)
-    addOperation("java_get", operations, state.map)
   }
 }

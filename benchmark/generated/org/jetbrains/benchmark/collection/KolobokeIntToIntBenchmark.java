@@ -29,7 +29,7 @@ public class KolobokeIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(GetBenchmarkState state, Blackhole blackhole) {
+  public Object get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     com.koloboke.collect.map.hash.HashIntIntMap map = state.map;
@@ -37,10 +37,11 @@ public class KolobokeIntToIntBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public com.koloboke.collect.map.hash.HashIntIntMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashIntIntMap map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
@@ -54,7 +55,7 @@ public class KolobokeIntToIntBenchmark {
   }
 
   @Benchmark
-  public com.koloboke.collect.map.hash.HashIntIntMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashIntIntMap map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(state.loadFactor);
     int add = 0;
     int remove = 0;

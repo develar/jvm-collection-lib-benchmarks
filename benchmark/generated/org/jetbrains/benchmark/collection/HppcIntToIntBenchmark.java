@@ -29,7 +29,7 @@ public class HppcIntToIntBenchmark {
   }
 
   @Benchmark
-  public void get(GetBenchmarkState state, Blackhole blackhole) {
+  public Object get(GetBenchmarkState state, Blackhole blackhole) {
     int result = 0;
     int[] keys = state.keys;
     com.carrotsearch.hppc.IntIntHashMap map = state.map;
@@ -37,10 +37,11 @@ public class HppcIntToIntBenchmark {
       result ^= map.get(key);
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.IntIntHashMap put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(0, state.loadFactor);
     for (int key : state.keys) {
       map.put(key, key);
@@ -54,7 +55,7 @@ public class HppcIntToIntBenchmark {
   }
 
   @Benchmark
-  public com.carrotsearch.hppc.IntIntHashMap remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.IntPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.carrotsearch.hppc.IntIntHashMap map = new com.carrotsearch.hppc.IntIntHashMap(0, state.loadFactor);
     int add = 0;
     int remove = 0;

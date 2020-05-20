@@ -9,7 +9,7 @@ fun main() {
   val blackhole = Blackhole("Today's password is swordfish. I understand instantiating Blackholes directly is dangerous.")
 
   val sizes = sequenceOf(100, 1_000, 10_00, 100_000, 1_000_000, 10_000_000).map { Util.formatSize(it) }.toList()
-  val types = listOf("IntToInt", "IntToObject", "ObjectToInt", "ObjectToObject", "ReferenceToObject")
+  val types = listOf("IntToInt", "IntToObject", "ObjectToInt", "ObjectToObject", "ReferenceToObject", "LinkedMap")
   val typeToData = Object2ObjectArrayMap<String, Object2ObjectArrayMap<String, Object2LongArrayMap<String>>>()
   for (type in types) {
     val sizeToOperations = Object2ObjectArrayMap<String, Object2LongArrayMap<String>>()

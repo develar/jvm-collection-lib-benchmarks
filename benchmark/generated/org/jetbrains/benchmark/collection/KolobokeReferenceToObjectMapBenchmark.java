@@ -7,9 +7,9 @@ import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
 
 
-public class KolobokeReferenceToObjectMapBenchmark {
+public class KolobokeReferenceToObjectMapBenchmark implements ObjectBenchmark<KolobokeReferenceToObjectMapBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
-  public static class IdentityBenchmarkGetState extends BaseBenchmarkState {
+  public static class BenchmarkGetState extends BaseBenchmarkState {
     public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map;
     ArbitraryPojo[] keys;
 
@@ -36,8 +36,9 @@ public class KolobokeReferenceToObjectMapBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(IdentityBenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -48,6 +49,7 @@ public class KolobokeReferenceToObjectMapBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark

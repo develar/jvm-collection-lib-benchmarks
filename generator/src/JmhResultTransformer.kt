@@ -57,6 +57,10 @@ fun main() {
       }
     }
 
+    if (library == javaLibrary && type.startsWith("Java")) {
+      type = type.substring("Java".length)
+    }
+
     if (type == "IntToObject" && operation.startsWith("object")) {
       type = "ObjectToInt"
       operation = operation.removePrefix("object").toLowerCase()

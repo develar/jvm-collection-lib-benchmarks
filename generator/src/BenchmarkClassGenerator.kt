@@ -82,11 +82,12 @@ fun main() {
     code = code
       .replace("class ", "class $classPrefix")
       .replace("java_", "${library.name}_")
-    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark", "ReferenceToObjectMapBenchmark")) {
+    for (name in listOf("IntToIntBenchmark", "IntToObjectBenchmark", "ObjectToObjectBenchmark", "ReferenceToObjectMapBenchmark", "LinkedMapMemoryBenchmark")) {
       code = code
         .replace(" $name(", " ${classPrefix}$name(")
         .replace(": $name", ": ${classPrefix}$name")
         .replace("= $name.", "= ${classPrefix}$name.")
+        .replace("($name.", "(${classPrefix}$name.")
     }
 
     for (name in memoryBenchmarkClassNames) {
@@ -95,6 +96,8 @@ fun main() {
 
     Files.write(memoryBenchmarkOutDir.resolve("${classPrefix}MemoryBenchmark.kt"), code.toByteArray(Charsets.UTF_8))
   }
+  memoryMeasurerListCode += "\n  JavaLinkedMapMemoryBenchmark(),"
+  memoryMeasurerListCode += "\n  FastutilLinkedMapMemoryBenchmark(),"
   memoryMeasurerListCode += "\n)"
   Files.write(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode.toByteArray(Charsets.UTF_8))
 
@@ -127,9 +130,11 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
       when {
         input.name == "ObjectToObjectBenchmark" -> {
           code = replaceNewMap(code, library, useFactory = library.name == "koloboke")
+            .replace("<ObjectToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
         input.name == "ReferenceToObjectMapBenchmark" -> {
           code = replaceNewMap(code, library, useFactory = true)
+            .replace("<ReferenceToObjectMapBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
         library.name == "koloboke" -> {
           if (input.name == "IntToObjectBenchmark") {
@@ -181,6 +186,7 @@ private fun generateLinkedMapBenchmarks(inDir: Path, outDir: Path, existingFiles
       .replace("import java.util.HashMap;", "import ${item.className};")
       .replace("class $inClassName", "class $className")
       .replace("HashMap<", "${shortClassName}<")
+      .replace("<ObjectToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
 
     val outFile = outDir.resolve("$className.java")
     existingFiles.remove(outFile)

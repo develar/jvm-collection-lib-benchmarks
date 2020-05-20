@@ -16,7 +16,7 @@ import org.openjdk.jmh.infra.Blackhole;
  *
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
-public class KolobokeObjectToObjectBenchmark {
+public class KolobokeObjectToObjectBenchmark implements ObjectBenchmark<KolobokeObjectToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
     public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map;
@@ -42,8 +42,9 @@ public class KolobokeObjectToObjectBenchmark {
     }
   }
 
+  @Override
   @Benchmark
-  public void get(BenchmarkGetState state, Blackhole blackhole) {
+  public Object get(BenchmarkGetState state, Blackhole blackhole) {
     int result = 0;
     ArbitraryPojo[] keys = state.keys;
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = state.map;
@@ -54,10 +55,11 @@ public class KolobokeObjectToObjectBenchmark {
       }
     }
     blackhole.consume(result);
+    return map;
   }
 
   @Benchmark
-  public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object put(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(state.loadFactor);
     for (ArbitraryPojo key : state.keys) {
       map.put(key, key);
@@ -72,7 +74,7 @@ public class KolobokeObjectToObjectBenchmark {
 
   @SuppressWarnings("DuplicatedCode")
   @Benchmark
-  public com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
+  public Object remove(BaseBenchmarkState.ObjectPutOrRemoveBenchmarkState state, Blackhole blackhole) {
     com.koloboke.collect.map.hash.HashObjObjMap<ArbitraryPojo, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToObject(state.loadFactor);
     int add = 0;
     int remove = 0;
