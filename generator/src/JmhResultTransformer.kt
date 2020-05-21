@@ -7,8 +7,6 @@ import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
-import it.unimi.dsi.fastutil.objects.Object2FloatArrayMap
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -40,8 +38,8 @@ val librariesWithJava = libraries + javaLibrary
 fun main() {
   val benchmarks = ObjectMapper()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    .readValue(Paths.get("jmh-result.json").toFile(), Array<JmhResult>::class.java)
-  val result = LinkedHashMap<String, Object2ObjectOpenHashMap<Library, Int2ObjectOpenHashMap<Entry>>>()
+    .readValue(Paths.get("result/linux/jmh-result.json").toFile(), Array<JmhResult>::class.java)
+  val result = LinkedHashMap<String, Int2ObjectOpenHashMap<MutableCollection<Entry>>>()
   for (benchmark in benchmarks) {
     val classAndMethod = benchmark.benchmark.substring("org.jetbrains.benchmark.collection.".length)
     val lastDot = classAndMethod.lastIndexOf('.')
@@ -71,12 +69,12 @@ fun main() {
     }
 
     val size = Util.parseSize(benchmark.params.mapSize)
-    val entryMap = result.computeIfAbsent(type) { Object2ObjectOpenHashMap() }.computeIfAbsent(library) { Int2ObjectOpenHashMap() }
-    val entry = entryMap.computeIfAbsent(size, IntFunction { Entry(it) })
-    val value = benchmark.primaryMetric.scorePercentiles.p50
-    if (entry.operations.put(operation, value) > 0) {
+    val entry = Entry(operation, benchmark.primaryMetric.scorePercentiles.p50, library)
+    val list = result.computeIfAbsent(type) { Int2ObjectOpenHashMap() }.computeIfAbsent(size, IntFunction { ArrayList() })
+    if (list.any { it.operation == entry.operation && it.library == entry.library }) {
       throw IllegalStateException("Operation value is already set: $operation")
     }
+    list.add(entry)
   }
 
   writeJson("chartData", Paths.get("site", "data.js")) { writer ->
@@ -97,36 +95,33 @@ inline fun writeJson(variableName: String, outFile: Path, task: (JsonGenerator) 
   }
 }
 
-fun writeSizes(writer: JsonGenerator, sizes: Sequence<Int>) {
+fun writeSizesAndSeries(writer: JsonGenerator, sizes: Sequence<Int>) {
   writer.writeArrayFieldStart("sizes")
   for (size in sizes) {
     writer.writeString(Util.formatSize(size))
   }
   writer.writeEndArray()
+
+  writer.writeArrayFieldStart("series")
+  for (lib in librariesWithJava.sortedBy { it.name }) {
+    writer.writeString(lib.name)
+  }
+  writer.writeEndArray()
 }
 
-private fun writeJson(typeToLibraryResult: Map<String, Map<Library, Int2ObjectOpenHashMap<Entry>>>, writer: JsonGenerator) {
+private fun writeJson(typeToLibraryResult: LinkedHashMap<String, Int2ObjectOpenHashMap<MutableCollection<Entry>>>, writer: JsonGenerator) {
   writer.writeStartObject()
 
-  writeSizes(writer, typeToLibraryResult.values.first().values.first().values.asSequence().map { it.size }.sorted())
+  writeSizesAndSeries(writer, typeToLibraryResult.values.first().keys.asSequence().map { it }.sorted())
 
-  for ((type, libraryToResult) in typeToLibraryResult) {
+  for ((type, sizeToEntries) in typeToLibraryResult) {
     writer.writeArrayFieldStart(type)
-    for (library in libraryToResult.keys.asSequence().sortedBy { it.name }) {
+    for (size in sizeToEntries.keys.asSequence().sortedBy { it }) {
       writer.writeStartObject()
-      writer.writeStringField("name", library.name)
-
-      writer.writeArrayFieldStart("data")
-      for (entry in libraryToResult.getValue(library).values.sortedBy { it.size }) {
-        writer.writeStartObject()
-        writer.writeStringField("size", Util.formatSize(entry.size))
-        for (operationAndValue in entry.operations.object2FloatEntrySet().fastIterator()) {
-          writer.writeNumberField(operationAndValue.key, operationAndValue.floatValue)
-        }
-        writer.writeEndObject()
+      writer.writeStringField("size", Util.formatSize(size))
+      for (entry in sizeToEntries.get(size)) {
+        writer.writeNumberField("${entry.library.name}_${entry.operation}", entry.value)
       }
-      writer.writeEndArray()
-
       writer.writeEndObject()
     }
     writer.writeEndArray()
@@ -147,10 +142,5 @@ private fun writeJson(typeToLibraryResult: Map<String, Map<Library, Int2ObjectOp
   //  }
   //}
 
-internal class Entry(val size: Int) {
-  val operations = Object2FloatArrayMap<String>(3)
-
-  init {
-    operations.defaultReturnValue(-1f)
-  }
+internal class Entry(val operation: String, val value: Float, val library: Library) {
 }

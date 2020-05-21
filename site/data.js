@@ -2,1231 +2,749 @@
 
 const chartData = {
   "sizes" : [ "100", "1K", "10K", "100K", "1M", "10M" ],
+  "series" : [ "ec", "fastutil", "hppc", "java", "koloboke", "trove", "trove-jb" ],
   "IntToInt" : [ {
-    "name" : "ec",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.008393,
-      "put" : 0.035556,
-      "remove" : 0.0249345
-    }, {
-      "size" : "1K",
-      "get" : 0.0399265,
-      "put" : 0.121208,
-      "remove" : 0.161881
-    }, {
-      "size" : "10K",
-      "get" : 0.14663,
-      "put" : 0.525745,
-      "remove" : 0.500287
-    }, {
-      "size" : "100K",
-      "get" : 1.575464,
-      "put" : 5.6718235,
-      "remove" : 6.1132054
-    }, {
-      "size" : "1M",
-      "get" : 29.856354,
-      "put" : 79.44172,
-      "remove" : 65.73357
-    }, {
-      "size" : "10M",
-      "get" : 379.28702,
-      "put" : 1176.0466,
-      "remove" : 918.58484
-    } ]
+    "size" : "100",
+    "ec_get" : 0.006244,
+    "ec_put" : 0.0163855,
+    "ec_remove" : 0.0132795,
+    "fastutil_get" : 0.0037715,
+    "fastutil_put" : 0.012734,
+    "fastutil_remove" : 0.017541,
+    "hppc_get" : 0.004032,
+    "hppc_put" : 0.025127,
+    "hppc_remove" : 0.0233395,
+    "java_get" : 0.0095305,
+    "java_put" : 0.022039,
+    "java_remove" : 0.0300625,
+    "koloboke_get" : 0.006144,
+    "koloboke_put" : 0.0243665,
+    "koloboke_remove" : 0.0348855,
+    "trove_get" : 0.0047935,
+    "trove_put" : 0.0173045,
+    "trove_remove" : 0.0192175,
+    "trove-jb_get" : 0.0053875,
+    "trove-jb_put" : 0.027469,
+    "trove-jb_remove" : 0.017696
   }, {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.004158,
-      "put" : 0.0201045,
-      "remove" : 0.01916
-    }, {
-      "size" : "1K",
-      "get" : 0.0321985,
-      "put" : 0.0913825,
-      "remove" : 0.095946
-    }, {
-      "size" : "10K",
-      "get" : 0.1310575,
-      "put" : 0.4271735,
-      "remove" : 0.459096
-    }, {
-      "size" : "100K",
-      "get" : 1.312501,
-      "put" : 5.7314057,
-      "remove" : 4.8476477
-    }, {
-      "size" : "1M",
-      "get" : 33.005524,
-      "put" : 80.29831,
-      "remove" : 51.19483
-    }, {
-      "size" : "10M",
-      "get" : 585.541,
-      "put" : 1226.4364,
-      "remove" : 1003.55164
-    } ]
+    "size" : "1K",
+    "ec_get" : 0.035412,
+    "ec_put" : 0.1038065,
+    "ec_remove" : 0.105081,
+    "fastutil_get" : 0.0291825,
+    "fastutil_put" : 0.0512275,
+    "fastutil_remove" : 0.0642045,
+    "hppc_get" : 0.048832,
+    "hppc_put" : 0.074071,
+    "hppc_remove" : 0.082318,
+    "java_get" : 0.075314,
+    "java_put" : 0.1373205,
+    "java_remove" : 0.172498,
+    "koloboke_get" : 0.042269,
+    "koloboke_put" : 0.0827745,
+    "koloboke_remove" : 0.0907875,
+    "trove_get" : 0.043559,
+    "trove_put" : 0.0779965,
+    "trove_remove" : 0.222025,
+    "trove-jb_get" : 0.0437155,
+    "trove-jb_put" : 0.0754775,
+    "trove-jb_remove" : 0.083347
   }, {
-    "name" : "hppc",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0042535,
-      "put" : 0.029268,
-      "remove" : 0.029141
-    }, {
-      "size" : "1K",
-      "get" : 0.0350325,
-      "put" : 0.102485,
-      "remove" : 0.0933785
-    }, {
-      "size" : "10K",
-      "get" : 0.1576265,
-      "put" : 0.467611,
-      "remove" : 0.4876425
-    }, {
-      "size" : "100K",
-      "get" : 1.611036,
-      "put" : 6.2123785,
-      "remove" : 5.8438783
-    }, {
-      "size" : "1M",
-      "get" : 36.342075,
-      "put" : 90.37873,
-      "remove" : 55.8786
-    }, {
-      "size" : "10M",
-      "get" : 684.1719,
-      "put" : 1517.8088,
-      "remove" : 1153.6113
-    } ]
+    "size" : "10K",
+    "ec_get" : 0.109026,
+    "ec_put" : 0.4024515,
+    "ec_remove" : 0.5208795,
+    "fastutil_get" : 0.117367,
+    "fastutil_put" : 0.399877,
+    "fastutil_remove" : 0.369905,
+    "hppc_get" : 0.12425,
+    "hppc_put" : 0.4292625,
+    "hppc_remove" : 0.429751,
+    "java_get" : 0.2033365,
+    "java_put" : 0.8150455,
+    "java_remove" : 0.547627,
+    "koloboke_get" : 0.108503,
+    "koloboke_put" : 0.3659745,
+    "koloboke_remove" : 0.3524435,
+    "trove_get" : 0.2516555,
+    "trove_put" : 0.626413,
+    "trove_remove" : 0.79802,
+    "trove-jb_get" : 0.2703825,
+    "trove-jb_put" : 0.656284,
+    "trove-jb_remove" : 0.720742
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0113215,
-      "put" : 0.0287955,
-      "remove" : 0.0217105
-    }, {
-      "size" : "1K",
-      "get" : 0.0816025,
-      "put" : 0.187447,
-      "remove" : 0.1467965
-    }, {
-      "size" : "10K",
-      "get" : 0.2349695,
-      "put" : 0.92832,
-      "remove" : 0.6131465
-    }, {
-      "size" : "100K",
-      "get" : 3.5331895,
-      "put" : 14.141202,
-      "remove" : 6.6562114
-    }, {
-      "size" : "1M",
-      "get" : 63.69939,
-      "put" : 263.4447,
-      "remove" : 126.59588
-    }, {
-      "size" : "10M",
-      "get" : 823.72186,
-      "put" : 4925.869,
-      "remove" : 2375.521
-    } ]
+    "size" : "100K",
+    "ec_get" : 1.07592,
+    "ec_put" : 4.675561,
+    "ec_remove" : 4.7312026,
+    "fastutil_get" : 1.170464,
+    "fastutil_put" : 4.936974,
+    "fastutil_remove" : 4.4944797,
+    "hppc_get" : 1.442406,
+    "hppc_put" : 5.707398,
+    "hppc_remove" : 5.304404,
+    "java_get" : 2.1775236,
+    "java_put" : 8.629416,
+    "java_remove" : 4.886008,
+    "koloboke_get" : 1.154076,
+    "koloboke_put" : 4.2293615,
+    "koloboke_remove" : 4.095235,
+    "trove_get" : 3.076089,
+    "trove_put" : 7.438945,
+    "trove_remove" : 9.355355,
+    "trove-jb_get" : 3.3654375,
+    "trove-jb_put" : 7.846773,
+    "trove-jb_remove" : 6.1023006
   }, {
-    "name" : "koloboke",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0056155,
-      "put" : 0.027514,
-      "remove" : 0.026636
-    }, {
-      "size" : "1K",
-      "get" : 0.04498,
-      "put" : 0.0664405,
-      "remove" : 0.108914
-    }, {
-      "size" : "10K",
-      "get" : 0.1153905,
-      "put" : 0.390728,
-      "remove" : 0.418661
-    }, {
-      "size" : "100K",
-      "get" : 1.148919,
-      "put" : 4.505248,
-      "remove" : 4.6675906
-    }, {
-      "size" : "1M",
-      "get" : 26.046728,
-      "put" : 71.46106,
-      "remove" : 41.823067
-    }, {
-      "size" : "10M",
-      "get" : 496.8947,
-      "put" : 1142.154,
-      "remove" : 914.34894
-    } ]
+    "size" : "1M",
+    "ec_get" : 19.00204,
+    "ec_put" : 51.590508,
+    "ec_remove" : 39.98089,
+    "fastutil_get" : 19.805979,
+    "fastutil_put" : 49.632915,
+    "fastutil_remove" : 41.66413,
+    "hppc_get" : 21.455452,
+    "hppc_put" : 58.868732,
+    "hppc_remove" : 46.140137,
+    "java_get" : 40.318928,
+    "java_put" : 185.21959,
+    "java_remove" : 87.163475,
+    "koloboke_get" : 18.719234,
+    "koloboke_put" : 47.30211,
+    "koloboke_remove" : 37.934776,
+    "trove_get" : 34.952263,
+    "trove_put" : 86.54683,
+    "trove_remove" : 109.21364,
+    "trove-jb_get" : 35.485546,
+    "trove-jb_put" : 85.51388,
+    "trove-jb_remove" : 65.54241
   }, {
-    "name" : "trove",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.00608,
-      "put" : 0.0239665,
-      "remove" : 0.0268385
-    }, {
-      "size" : "1K",
-      "get" : 0.045925,
-      "put" : 0.123257,
-      "remove" : 0.2196155
-    }, {
-      "size" : "10K",
-      "get" : 0.266256,
-      "put" : 0.6819235,
-      "remove" : 0.9489525
-    }, {
-      "size" : "100K",
-      "get" : 3.3256435,
-      "put" : 8.074092,
-      "remove" : 10.279414
-    }, {
-      "size" : "1M",
-      "get" : 57.029007,
-      "put" : 124.953964,
-      "remove" : 116.49931
-    }, {
-      "size" : "10M",
-      "get" : 1266.9363,
-      "put" : 2400.9607,
-      "remove" : 2115.7056
-    } ]
-  }, {
-    "name" : "trove-jb",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0062075,
-      "put" : 0.020364,
-      "remove" : 0.026501
-    }, {
-      "size" : "1K",
-      "get" : 0.051095,
-      "put" : 0.0932955,
-      "remove" : 0.1119595
-    }, {
-      "size" : "10K",
-      "get" : 0.269428,
-      "put" : 0.727782,
-      "remove" : 0.7832635
-    }, {
-      "size" : "100K",
-      "get" : 3.370946,
-      "put" : 8.809768,
-      "remove" : 6.5993466
-    }, {
-      "size" : "1M",
-      "get" : 55.94489,
-      "put" : 138.14742,
-      "remove" : 72.49883
-    }, {
-      "size" : "10M",
-      "get" : 1268.2073,
-      "put" : 2579.6694,
-      "remove" : 1797.893
-    } ]
+    "size" : "10M",
+    "ec_get" : 230.3363,
+    "ec_put" : 797.32465,
+    "ec_remove" : 619.9364,
+    "fastutil_get" : 362.4865,
+    "fastutil_put" : 787.37683,
+    "fastutil_remove" : 663.2882,
+    "hppc_get" : 415.99268,
+    "hppc_put" : 954.77185,
+    "hppc_remove" : 764.74304,
+    "java_get" : 542.74225,
+    "java_put" : 3547.2449,
+    "java_remove" : 1684.2426,
+    "koloboke_get" : 349.3986,
+    "koloboke_put" : 772.34436,
+    "koloboke_remove" : 639.7848,
+    "trove_get" : 757.7117,
+    "trove_put" : 1523.5164,
+    "trove_remove" : 1413.0925,
+    "trove-jb_get" : 785.0793,
+    "trove-jb_put" : 1655.7922,
+    "trove-jb_remove" : 1193.1051
   } ],
   "IntToObject" : [ {
-    "name" : "ec",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.00568,
-      "put" : 0.0193265,
-      "remove" : 0.0169725
-    }, {
-      "size" : "1K",
-      "get" : 0.0390165,
-      "put" : 0.1129125,
-      "remove" : 0.146546
-    }, {
-      "size" : "10K",
-      "get" : 0.1185155,
-      "put" : 0.589671,
-      "remove" : 0.426221
-    }, {
-      "size" : "100K",
-      "get" : 1.7046465,
-      "put" : 6.8799543,
-      "remove" : 6.3444953
-    }, {
-      "size" : "1M",
-      "get" : 36.10484,
-      "put" : 117.468605,
-      "remove" : 79.361206
-    }, {
-      "size" : "10M",
-      "get" : 420.85355,
-      "put" : 1885.721,
-      "remove" : 1239.8506
-    } ]
+    "size" : "100",
+    "ec_get" : 0.00694,
+    "ec_put" : 0.0141605,
+    "ec_remove" : 0.0123825,
+    "fastutil_get" : 0.0045255,
+    "fastutil_put" : 0.01722,
+    "fastutil_remove" : 0.015366,
+    "hppc_get" : 0.0043355,
+    "hppc_put" : 0.0258835,
+    "hppc_remove" : 0.0237305,
+    "java_get" : 0.006624,
+    "java_put" : 0.037908,
+    "java_remove" : 0.026737,
+    "koloboke_get" : 0.0052265,
+    "koloboke_put" : 0.0256505,
+    "koloboke_remove" : 0.0270185,
+    "trove_get" : 0.005722,
+    "trove_put" : 0.0194165,
+    "trove_remove" : 0.023708,
+    "trove-jb_get" : 0.0100145,
+    "trove-jb_put" : 0.021347,
+    "trove-jb_remove" : 0.0212645
   }, {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.004256,
-      "put" : 0.020634,
-      "remove" : 0.0181875
-    }, {
-      "size" : "1K",
-      "get" : 0.033166,
-      "put" : 0.088994,
-      "remove" : 0.1219005
-    }, {
-      "size" : "10K",
-      "get" : 0.135156,
-      "put" : 0.4820275,
-      "remove" : 0.4817585
-    }, {
-      "size" : "100K",
-      "get" : 1.276774,
-      "put" : 7.0542216,
-      "remove" : 5.6363316
-    }, {
-      "size" : "1M",
-      "get" : 30.606686,
-      "put" : 102.4652,
-      "remove" : 58.70645
-    }, {
-      "size" : "10M",
-      "get" : 594.47253,
-      "put" : 1599.2761,
-      "remove" : 1247.4551
-    } ]
+    "size" : "1K",
+    "ec_get" : 0.0349305,
+    "ec_put" : 0.065211,
+    "ec_remove" : 0.1113645,
+    "fastutil_get" : 0.030785,
+    "fastutil_put" : 0.1088675,
+    "fastutil_remove" : 0.1281605,
+    "hppc_get" : 0.0332895,
+    "hppc_put" : 0.0783335,
+    "hppc_remove" : 0.0900835,
+    "java_get" : 0.0472695,
+    "java_put" : 0.1208805,
+    "java_remove" : 0.092604,
+    "koloboke_get" : 0.0431855,
+    "koloboke_put" : 0.0813025,
+    "koloboke_remove" : 0.1007685,
+    "trove_get" : 0.0461875,
+    "trove_put" : 0.133579,
+    "trove_remove" : 0.1654725,
+    "trove-jb_get" : 0.0446475,
+    "trove-jb_put" : 0.0894615,
+    "trove-jb_remove" : 0.0896915
   }, {
-    "name" : "hppc",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.004337,
-      "put" : 0.030162,
-      "remove" : 0.0327
-    }, {
-      "size" : "1K",
-      "get" : 0.035823,
-      "put" : 0.1107515,
-      "remove" : 0.102147
-    }, {
-      "size" : "10K",
-      "get" : 0.1884725,
-      "put" : 0.57734,
-      "remove" : 0.653575
-    }, {
-      "size" : "100K",
-      "get" : 1.627857,
-      "put" : 7.2009034,
-      "remove" : 6.1285043
-    }, {
-      "size" : "1M",
-      "get" : 35.55737,
-      "put" : 130.0814,
-      "remove" : 66.75282
-    }, {
-      "size" : "10M",
-      "get" : 678.5787,
-      "put" : 2040.7926,
-      "remove" : 1427.0887
-    } ]
+    "size" : "10K",
+    "ec_get" : 0.093806,
+    "ec_put" : 0.529709,
+    "ec_remove" : 0.4204185,
+    "fastutil_get" : 0.108023,
+    "fastutil_put" : 0.4505245,
+    "fastutil_remove" : 0.4426635,
+    "hppc_get" : 0.14462,
+    "hppc_put" : 0.4957585,
+    "hppc_remove" : 0.639887,
+    "java_get" : 0.2021875,
+    "java_put" : 0.6624215,
+    "java_remove" : 0.340366,
+    "koloboke_get" : 0.125226,
+    "koloboke_put" : 0.4570835,
+    "koloboke_remove" : 0.456829,
+    "trove_get" : 0.2452565,
+    "trove_put" : 0.706234,
+    "trove_remove" : 0.9314865,
+    "trove-jb_get" : 0.263767,
+    "trove-jb_put" : 0.7362445,
+    "trove-jb_remove" : 0.634331
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0076685,
-      "put" : 0.028703,
-      "remove" : 0.020093
-    }, {
-      "size" : "1K",
-      "get" : 0.0526335,
-      "put" : 0.18132,
-      "remove" : 0.147318
-    }, {
-      "size" : "10K",
-      "get" : 0.229583,
-      "put" : 0.8277535,
-      "remove" : 0.384719
-    }, {
-      "size" : "100K",
-      "get" : 2.8723054,
-      "put" : 10.765861,
-      "remove" : 5.7430973
-    }, {
-      "size" : "1M",
-      "get" : 57.19779,
-      "put" : 251.30301,
-      "remove" : 114.761444
-    }, {
-      "size" : "10M",
-      "get" : 753.0919,
-      "put" : 4217.303,
-      "remove" : 2220.8284
-    } ]
+    "size" : "100K",
+    "ec_get" : 1.2422285,
+    "ec_put" : 6.414125,
+    "ec_remove" : 5.122858,
+    "fastutil_get" : 1.051893,
+    "fastutil_put" : 6.1614127,
+    "fastutil_remove" : 5.278428,
+    "hppc_get" : 1.6056405,
+    "hppc_put" : 6.7933993,
+    "hppc_remove" : 5.686923,
+    "java_get" : 1.6825335,
+    "java_put" : 8.717398,
+    "java_remove" : 5.020945,
+    "koloboke_get" : 1.3207945,
+    "koloboke_put" : 5.9149313,
+    "koloboke_remove" : 4.933579,
+    "trove_get" : 3.0143914,
+    "trove_put" : 7.997332,
+    "trove_remove" : 10.229636,
+    "trove-jb_get" : 3.52383,
+    "trove-jb_put" : 8.5299425,
+    "trove-jb_remove" : 6.397972
   }, {
-    "name" : "koloboke",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.005928,
-      "put" : 0.033404,
-      "remove" : 0.032641
-    }, {
-      "size" : "1K",
-      "get" : 0.047749,
-      "put" : 0.095481,
-      "remove" : 0.114822
-    }, {
-      "size" : "10K",
-      "get" : 0.1271135,
-      "put" : 0.442902,
-      "remove" : 0.5455515
-    }, {
-      "size" : "100K",
-      "get" : 1.2383345,
-      "put" : 6.8847103,
-      "remove" : 5.5551796
-    }, {
-      "size" : "1M",
-      "get" : 29.20525,
-      "put" : 102.87183,
-      "remove" : 62.166378
-    }, {
-      "size" : "10M",
-      "get" : 633.3446,
-      "put" : 1711.1031,
-      "remove" : 1252.3911
-    } ]
+    "size" : "1M",
+    "ec_get" : 20.837769,
+    "ec_put" : 86.19497,
+    "ec_remove" : 53.15156,
+    "fastutil_get" : 18.446766,
+    "fastutil_put" : 79.46517,
+    "fastutil_remove" : 52.968315,
+    "hppc_get" : 23.356615,
+    "hppc_put" : 97.84803,
+    "hppc_remove" : 62.44753,
+    "java_get" : 37.54634,
+    "java_put" : 171.42015,
+    "java_remove" : 79.77212,
+    "koloboke_get" : 20.191797,
+    "koloboke_put" : 75.49207,
+    "koloboke_remove" : 49.366783,
+    "trove_get" : 35.124027,
+    "trove_put" : 109.952225,
+    "trove_remove" : 121.52461,
+    "trove-jb_get" : 41.694008,
+    "trove-jb_put" : 121.93867,
+    "trove-jb_remove" : 71.85984
   }, {
-    "name" : "trove",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.006328,
-      "put" : 0.0271225,
-      "remove" : 0.032548
-    }, {
-      "size" : "1K",
-      "get" : 0.0580025,
-      "put" : 0.107968,
-      "remove" : 0.246165
-    }, {
-      "size" : "10K",
-      "get" : 0.297429,
-      "put" : 0.828302,
-      "remove" : 1.005047
-    }, {
-      "size" : "100K",
-      "get" : 3.2923374,
-      "put" : 9.507689,
-      "remove" : 11.639619
-    }, {
-      "size" : "1M",
-      "get" : 60.723152,
-      "put" : 166.54916,
-      "remove" : 144.93745
-    }, {
-      "size" : "10M",
-      "get" : 1248.7128,
-      "put" : 2876.2715,
-      "remove" : 2575.0671
-    } ]
-  }, {
-    "name" : "trove-jb",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0077095,
-      "put" : 0.0333555,
-      "remove" : 0.0248695
-    }, {
-      "size" : "1K",
-      "get" : 0.0485645,
-      "put" : 0.114088,
-      "remove" : 0.125112
-    }, {
-      "size" : "10K",
-      "get" : 0.3013585,
-      "put" : 0.812004,
-      "remove" : 0.7567165
-    }, {
-      "size" : "100K",
-      "get" : 3.671016,
-      "put" : 10.042195,
-      "remove" : 6.9655023
-    }, {
-      "size" : "1M",
-      "get" : 68.59373,
-      "put" : 178.98335,
-      "remove" : 93.940315
-    }, {
-      "size" : "10M",
-      "get" : 1435.3414,
-      "put" : 3053.0413,
-      "remove" : 2345.743
-    } ]
+    "size" : "10M",
+    "ec_get" : 259.105,
+    "ec_put" : 1304.1162,
+    "ec_remove" : 886.4323,
+    "fastutil_get" : 361.66617,
+    "fastutil_put" : 1259.6389,
+    "fastutil_remove" : 949.0449,
+    "hppc_get" : 469.0493,
+    "hppc_put" : 1824.1235,
+    "hppc_remove" : 1127.9941,
+    "java_get" : 491.75742,
+    "java_put" : 3084.471,
+    "java_remove" : 1488.9688,
+    "koloboke_get" : 427.98898,
+    "koloboke_put" : 1452.6936,
+    "koloboke_remove" : 924.0357,
+    "trove_get" : 763.38995,
+    "trove_put" : 2086.074,
+    "trove_remove" : 1744.5607,
+    "trove-jb_get" : 864.4386,
+    "trove-jb_put" : 2305.9512,
+    "trove-jb_remove" : 1681.4576
   } ],
   "ObjectToInt" : [ {
-    "name" : "ec",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.008862,
-      "put" : 0.0258235,
-      "remove" : 0.026026
-    }, {
-      "size" : "1K",
-      "get" : 0.0524885,
-      "put" : 0.1197665,
-      "remove" : 0.109208
-    }, {
-      "size" : "10K",
-      "get" : 0.2511355,
-      "put" : 0.8358215,
-      "remove" : 0.5654095
-    }, {
-      "size" : "100K",
-      "get" : 2.9292414,
-      "put" : 13.611414,
-      "remove" : 9.446276
-    }, {
-      "size" : "1M",
-      "get" : 85.20218,
-      "put" : 229.36224,
-      "remove" : 171.20595
-    }, {
-      "size" : "10M",
-      "get" : 927.4891,
-      "put" : 4122.5757,
-      "remove" : 2675.4136
-    } ]
+    "size" : "100",
+    "ec_get" : 0.007288,
+    "ec_put" : 0.017076,
+    "ec_remove" : 0.014364,
+    "fastutil_get" : 0.0054055,
+    "fastutil_put" : 0.0175615,
+    "fastutil_remove" : 0.0192255,
+    "hppc_get" : 0.0059435,
+    "hppc_put" : 0.026434,
+    "hppc_remove" : 0.027373,
+    "java_get" : 0.007168,
+    "java_put" : 0.020365,
+    "java_remove" : 0.0156935,
+    "koloboke_get" : 0.0071725,
+    "koloboke_put" : 0.0344815,
+    "koloboke_remove" : 0.0307845,
+    "trove_get" : 0.007753,
+    "trove_put" : 0.0211645,
+    "trove_remove" : 0.02747,
+    "trove-jb_get" : 0.0080015,
+    "trove-jb_put" : 0.0332745,
+    "trove-jb_remove" : 0.022884
   }, {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.005335,
-      "put" : 0.022494,
-      "remove" : 0.022714
-    }, {
-      "size" : "1K",
-      "get" : 0.035416,
-      "put" : 0.091057,
-      "remove" : 0.139916
-    }, {
-      "size" : "10K",
-      "get" : 0.2129465,
-      "put" : 0.697624,
-      "remove" : 0.6476775
-    }, {
-      "size" : "100K",
-      "get" : 2.344145,
-      "put" : 10.998103,
-      "remove" : 9.242961
-    }, {
-      "size" : "1M",
-      "get" : 67.3533,
-      "put" : 263.1976,
-      "remove" : 167.8665
-    }, {
-      "size" : "10M",
-      "get" : 1161.1714,
-      "put" : 3821.4878,
-      "remove" : 3116.6821
-    } ]
+    "size" : "1K",
+    "ec_get" : 0.0397585,
+    "ec_put" : 0.0751195,
+    "ec_remove" : 0.0926805,
+    "fastutil_get" : 0.0336145,
+    "fastutil_put" : 0.08276,
+    "fastutil_remove" : 0.0882495,
+    "hppc_get" : 0.0337775,
+    "hppc_put" : 0.149034,
+    "hppc_remove" : 0.102772,
+    "java_get" : 0.0588585,
+    "java_put" : 0.114991,
+    "java_remove" : 0.0849055,
+    "koloboke_get" : 0.0425975,
+    "koloboke_put" : 0.1053495,
+    "koloboke_remove" : 0.1090405,
+    "trove_get" : 0.04626,
+    "trove_put" : 0.102384,
+    "trove_remove" : 0.2243395,
+    "trove-jb_get" : 0.050765,
+    "trove-jb_put" : 0.097951,
+    "trove-jb_remove" : 0.0913025
   }, {
-    "name" : "hppc",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.006247,
-      "put" : 0.030677,
-      "remove" : 0.034491
-    }, {
-      "size" : "1K",
-      "get" : 0.03614,
-      "put" : 0.1272695,
-      "remove" : 0.1133435
-    }, {
-      "size" : "10K",
-      "get" : 0.1929955,
-      "put" : 0.6701185,
-      "remove" : 0.642596
-    }, {
-      "size" : "100K",
-      "get" : 2.263275,
-      "put" : 11.306181,
-      "remove" : 9.774815
-    }, {
-      "size" : "1M",
-      "get" : 71.62018,
-      "put" : 350.83252,
-      "remove" : 195.59785
-    }, {
-      "size" : "10M",
-      "get" : 1302.9309,
-      "put" : 4927.424,
-      "remove" : 3712.0159
-    } ]
+    "size" : "10K",
+    "ec_get" : 0.114664,
+    "ec_put" : 0.6752075,
+    "ec_remove" : 0.447661,
+    "fastutil_get" : 0.1758595,
+    "fastutil_put" : 0.6014545,
+    "fastutil_remove" : 0.5702255,
+    "hppc_get" : 0.1908265,
+    "hppc_put" : 0.624279,
+    "hppc_remove" : 0.5942335,
+    "java_get" : 0.11363,
+    "java_put" : 0.7649965,
+    "java_remove" : 0.345167,
+    "koloboke_get" : 0.16876,
+    "koloboke_put" : 0.596434,
+    "koloboke_remove" : 0.567123,
+    "trove_get" : 0.292022,
+    "trove_put" : 0.961835,
+    "trove_remove" : 0.9296585,
+    "trove-jb_get" : 0.285989,
+    "trove-jb_put" : 0.869609,
+    "trove-jb_remove" : 0.6632725
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.007496,
-      "put" : 0.027495,
-      "remove" : 0.020326
-    }, {
-      "size" : "1K",
-      "get" : 0.0613065,
-      "put" : 0.1695565,
-      "remove" : 0.136219
-    }, {
-      "size" : "10K",
-      "get" : 0.1318995,
-      "put" : 0.838536,
-      "remove" : 0.389787
-    }, {
-      "size" : "100K",
-      "get" : 2.952694,
-      "put" : 21.414165,
-      "remove" : 9.973853
-    }, {
-      "size" : "1M",
-      "get" : 79.18594,
-      "put" : 341.21744,
-      "remove" : 154.72005
-    }, {
-      "size" : "10M",
-      "get" : 1066.7202,
-      "put" : 5219.642,
-      "remove" : 2812.082
-    } ]
+    "size" : "100K",
+    "ec_get" : 1.721704,
+    "ec_put" : 8.695951,
+    "ec_remove" : 5.9851084,
+    "fastutil_get" : 1.6403085,
+    "fastutil_put" : 8.773926,
+    "fastutil_remove" : 7.6224136,
+    "hppc_get" : 1.471912,
+    "hppc_put" : 10.01593,
+    "hppc_remove" : 7.976871,
+    "java_get" : 1.7972465,
+    "java_put" : 14.942426,
+    "java_remove" : 7.6801233,
+    "koloboke_get" : 1.3656785,
+    "koloboke_put" : 10.014618,
+    "koloboke_remove" : 7.4951987,
+    "trove_get" : 3.694265,
+    "trove_put" : 11.284184,
+    "trove_remove" : 10.524414,
+    "trove-jb_get" : 3.7153766,
+    "trove-jb_put" : 10.346278,
+    "trove-jb_remove" : 7.4580917
   }, {
-    "name" : "koloboke",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0078405,
-      "put" : 0.0383465,
-      "remove" : 0.037527
-    }, {
-      "size" : "1K",
-      "get" : 0.047822,
-      "put" : 0.126006,
-      "remove" : 0.156218
-    }, {
-      "size" : "10K",
-      "get" : 0.1824175,
-      "put" : 0.927677,
-      "remove" : 0.667716
-    }, {
-      "size" : "100K",
-      "get" : 2.1068804,
-      "put" : 14.660184,
-      "remove" : 11.130368
-    }, {
-      "size" : "1M",
-      "get" : 61.19124,
-      "put" : 265.73294,
-      "remove" : 178.03148
-    }, {
-      "size" : "10M",
-      "get" : 1207.4927,
-      "put" : 3779.1562,
-      "remove" : 3033.8984
-    } ]
+    "size" : "1M",
+    "ec_get" : 56.91407,
+    "ec_put" : 145.24644,
+    "ec_remove" : 108.86052,
+    "fastutil_get" : 42.935402,
+    "fastutil_put" : 180.0528,
+    "fastutil_remove" : 105.0753,
+    "hppc_get" : 46.42011,
+    "hppc_put" : 242.65144,
+    "hppc_remove" : 120.78383,
+    "java_get" : 56.064022,
+    "java_put" : 226.34984,
+    "java_remove" : 102.079414,
+    "koloboke_get" : 39.874474,
+    "koloboke_put" : 184.33409,
+    "koloboke_remove" : 122.81525,
+    "trove_get" : 78.182396,
+    "trove_put" : 223.71912,
+    "trove_remove" : 155.01328,
+    "trove-jb_get" : 77.24497,
+    "trove-jb_put" : 244.1321,
+    "trove-jb_remove" : 108.047066
   }, {
-    "name" : "trove",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.008622,
-      "put" : 0.027601,
-      "remove" : 0.042344
-    }, {
-      "size" : "1K",
-      "get" : 0.0563985,
-      "put" : 0.2091715,
-      "remove" : 0.326158
-    }, {
-      "size" : "10K",
-      "get" : 0.3047635,
-      "put" : 1.089949,
-      "remove" : 1.0390385
-    }, {
-      "size" : "100K",
-      "get" : 5.995483,
-      "put" : 17.538542,
-      "remove" : 11.704606
-    }, {
-      "size" : "1M",
-      "get" : 133.71928,
-      "put" : 348.8195,
-      "remove" : 242.06677
-    }, {
-      "size" : "10M",
-      "get" : 2026.8926,
-      "put" : 6034.8984,
-      "remove" : 6877.8022
-    } ]
-  }, {
-    "name" : "trove-jb",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0092285,
-      "put" : 0.0315075,
-      "remove" : 0.025347
-    }, {
-      "size" : "1K",
-      "get" : 0.051335,
-      "put" : 0.1557675,
-      "remove" : 0.1530135
-    }, {
-      "size" : "10K",
-      "get" : 0.3164785,
-      "put" : 0.9755805,
-      "remove" : 0.7618205
-    }, {
-      "size" : "100K",
-      "get" : 4.0174675,
-      "put" : 15.286713,
-      "remove" : 8.612805
-    }, {
-      "size" : "1M",
-      "get" : 128.13223,
-      "put" : 343.40555,
-      "remove" : 165.59334
-    }, {
-      "size" : "10M",
-      "get" : 1936.2283,
-      "put" : 5779.345,
-      "remove" : 4101.5835
-    } ]
+    "size" : "10M",
+    "ec_get" : 590.0524,
+    "ec_put" : 3039.0518,
+    "ec_remove" : 2009.7365,
+    "fastutil_get" : 676.5432,
+    "fastutil_put" : 2781.465,
+    "fastutil_remove" : 2231.198,
+    "hppc_get" : 762.0356,
+    "hppc_put" : 3425.17,
+    "hppc_remove" : 2609.8733,
+    "java_get" : 672.1337,
+    "java_put" : 3962.6152,
+    "java_remove" : 1914.4733,
+    "koloboke_get" : 695.43335,
+    "koloboke_put" : 2712.6084,
+    "koloboke_remove" : 2196.9385,
+    "trove_get" : 1147.267,
+    "trove_put" : 4383.8047,
+    "trove_remove" : 4937.4517,
+    "trove-jb_get" : 1218.3007,
+    "trove-jb_put" : 4495.3154,
+    "trove-jb_remove" : 2849.9858
   } ],
   "ObjectToObject" : [ {
-    "name" : "ec",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.006531,
-      "put" : 0.0356565,
-      "remove" : 0.024611
-    }, {
-      "size" : "1K",
-      "get" : 0.0370055,
-      "put" : 0.2456395,
-      "remove" : 0.179683
-    }, {
-      "size" : "10K",
-      "get" : 0.176464,
-      "put" : 0.7501805,
-      "remove" : 0.525059
-    }, {
-      "size" : "100K",
-      "get" : 2.4896076,
-      "put" : 18.582447,
-      "remove" : 8.55507
-    }, {
-      "size" : "1M",
-      "get" : 75.73685,
-      "put" : 332.602,
-      "remove" : 174.1294
-    }, {
-      "size" : "10M",
-      "get" : 980.6853,
-      "put" : 4521.022,
-      "remove" : 3003.944
-    } ]
+    "size" : "100",
+    "ec_get" : 0.0060175,
+    "ec_put" : 0.045924,
+    "ec_remove" : 0.0192875,
+    "fastutil_get" : 0.005573,
+    "fastutil_put" : 0.0228895,
+    "fastutil_remove" : 0.0191365,
+    "hppc_get" : 0.0060655,
+    "hppc_put" : 0.034342,
+    "hppc_remove" : 0.0294385,
+    "koloboke_get" : 0.0111495,
+    "koloboke_put" : 0.034369,
+    "koloboke_remove" : 0.036938,
+    "java_get" : 0.004321,
+    "java_put" : 0.018304,
+    "java_remove" : 0.025267,
+    "trove-jb_get" : 0.0144905,
+    "trove-jb_put" : 0.038489,
+    "trove-jb_remove" : 0.023203,
+    "trove_get" : 0.0081045,
+    "trove_put" : 0.0218365,
+    "trove_remove" : 0.0327495
   }, {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0055775,
-      "put" : 0.0251935,
-      "remove" : 0.027564
-    }, {
-      "size" : "1K",
-      "get" : 0.036099,
-      "put" : 0.113721,
-      "remove" : 0.15204
-    }, {
-      "size" : "10K",
-      "get" : 0.192949,
-      "put" : 0.717164,
-      "remove" : 0.6613285
-    }, {
-      "size" : "100K",
-      "get" : 2.3347814,
-      "put" : 15.825611,
-      "remove" : 9.60565
-    }, {
-      "size" : "1M",
-      "get" : 69.205696,
-      "put" : 354.37543,
-      "remove" : 178.64084
-    }, {
-      "size" : "10M",
-      "get" : 1177.8326,
-      "put" : 4390.5845,
-      "remove" : 3494.5728
-    } ]
+    "size" : "1K",
+    "ec_get" : 0.033697,
+    "ec_put" : 0.100927,
+    "ec_remove" : 0.1316465,
+    "fastutil_get" : 0.0349055,
+    "fastutil_put" : 0.0878855,
+    "fastutil_remove" : 0.1555135,
+    "hppc_get" : 0.0351635,
+    "hppc_put" : 0.1081055,
+    "hppc_remove" : 0.106546,
+    "koloboke_get" : 0.0696755,
+    "koloboke_put" : 0.119056,
+    "koloboke_remove" : 0.121492,
+    "java_get" : 0.0311005,
+    "java_put" : 0.09223,
+    "java_remove" : 0.0762815,
+    "trove-jb_get" : 0.0462985,
+    "trove-jb_put" : 0.1042495,
+    "trove-jb_remove" : 0.0988965,
+    "trove_get" : 0.0469555,
+    "trove_put" : 0.1030145,
+    "trove_remove" : 0.209419
   }, {
-    "name" : "hppc",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.006576,
-      "put" : 0.0407445,
-      "remove" : 0.0369925
-    }, {
-      "size" : "1K",
-      "get" : 0.0379645,
-      "put" : 0.1458665,
-      "remove" : 0.1178295
-    }, {
-      "size" : "10K",
-      "get" : 0.2217825,
-      "put" : 0.714618,
-      "remove" : 0.6630355
-    }, {
-      "size" : "100K",
-      "get" : 2.366197,
-      "put" : 16.033487,
-      "remove" : 9.532635
-    }, {
-      "size" : "1M",
-      "get" : 73.86376,
-      "put" : 403.52197,
-      "remove" : 199.48639
-    }, {
-      "size" : "10M",
-      "get" : 1292.5522,
-      "put" : 4851.16,
-      "remove" : 3775.3594
-    } ]
+    "size" : "10K",
+    "ec_get" : 0.1575645,
+    "ec_put" : 0.681315,
+    "ec_remove" : 0.4664815,
+    "fastutil_get" : 0.195592,
+    "fastutil_put" : 0.6339825,
+    "fastutil_remove" : 0.605492,
+    "hppc_get" : 0.1935115,
+    "hppc_put" : 0.656563,
+    "hppc_remove" : 0.6098,
+    "koloboke_get" : 0.1780365,
+    "koloboke_put" : 0.634442,
+    "koloboke_remove" : 0.6030675,
+    "java_get" : 0.111547,
+    "java_put" : 0.446534,
+    "java_remove" : 0.33523,
+    "trove-jb_get" : 0.2787155,
+    "trove-jb_put" : 0.908315,
+    "trove-jb_remove" : 0.723331,
+    "trove_get" : 0.2851905,
+    "trove_put" : 1.0081315,
+    "trove_remove" : 0.9441995
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0049365,
-      "put" : 0.026588,
-      "remove" : 0.01745
-    }, {
-      "size" : "1K",
-      "get" : 0.0338015,
-      "put" : 0.138141,
-      "remove" : 0.1017875
-    }, {
-      "size" : "10K",
-      "get" : 0.121223,
-      "put" : 0.578939,
-      "remove" : 0.3555225
-    }, {
-      "size" : "100K",
-      "get" : 2.490822,
-      "put" : 22.331152,
-      "remove" : 7.0834694
-    }, {
-      "size" : "1M",
-      "get" : 73.585106,
-      "put" : 308.73358,
-      "remove" : 128.99762
-    }, {
-      "size" : "10M",
-      "get" : 983.0442,
-      "put" : 4788.098,
-      "remove" : 2609.3262
-    } ]
+    "size" : "100K",
+    "ec_get" : 1.4664975,
+    "ec_put" : 13.397861,
+    "ec_remove" : 7.7213144,
+    "fastutil_get" : 1.7125275,
+    "fastutil_put" : 10.5033,
+    "fastutil_remove" : 7.839748,
+    "hppc_get" : 1.678888,
+    "hppc_put" : 11.021183,
+    "hppc_remove" : 8.733121,
+    "koloboke_get" : 1.3472714,
+    "koloboke_put" : 11.340248,
+    "koloboke_remove" : 8.266387,
+    "java_get" : 1.554675,
+    "java_put" : 14.315927,
+    "java_remove" : 6.0897403,
+    "trove-jb_get" : 3.8145316,
+    "trove-jb_put" : 11.355528,
+    "trove-jb_remove" : 7.659948,
+    "trove_get" : 3.613186,
+    "trove_put" : 12.169124,
+    "trove_remove" : 10.171734
   }, {
-    "name" : "koloboke",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0079865,
-      "put" : 0.0535285,
-      "remove" : 0.0386965
-    }, {
-      "size" : "1K",
-      "get" : 0.0492395,
-      "put" : 0.129675,
-      "remove" : 0.145383
-    }, {
-      "size" : "10K",
-      "get" : 0.19984,
-      "put" : 0.7128485,
-      "remove" : 0.625969
-    }, {
-      "size" : "100K",
-      "get" : 2.321975,
-      "put" : 20.434694,
-      "remove" : 9.744171
-    }, {
-      "size" : "1M",
-      "get" : 72.13574,
-      "put" : 325.5355,
-      "remove" : 181.47893
-    }, {
-      "size" : "10M",
-      "get" : 1146.1849,
-      "put" : 4091.1296,
-      "remove" : 3327.2537
-    } ]
+    "size" : "1M",
+    "ec_get" : 47.511154,
+    "ec_put" : 241.48497,
+    "ec_remove" : 120.95561,
+    "fastutil_get" : 48.082867,
+    "fastutil_put" : 245.1736,
+    "fastutil_remove" : 122.004135,
+    "hppc_get" : 47.281517,
+    "hppc_put" : 292.3619,
+    "hppc_remove" : 134.4418,
+    "koloboke_get" : 45.25703,
+    "koloboke_put" : 250.94272,
+    "koloboke_remove" : 126.714264,
+    "java_get" : 48.68529,
+    "java_put" : 200.5262,
+    "java_remove" : 84.14405,
+    "trove-jb_get" : 78.663086,
+    "trove-jb_put" : 296.33694,
+    "trove-jb_remove" : 116.924385,
+    "trove_get" : 79.075554,
+    "trove_put" : 292.95547,
+    "trove_remove" : 162.31477
   }, {
-    "name" : "trove",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.009,
-      "put" : 0.038038,
-      "remove" : 0.0442345
-    }, {
-      "size" : "1K",
-      "get" : 0.051784,
-      "put" : 0.1558825,
-      "remove" : 0.327474
-    }, {
-      "size" : "10K",
-      "get" : 0.3004105,
-      "put" : 1.0739605,
-      "remove" : 1.0401825
-    }, {
-      "size" : "100K",
-      "get" : 4.8317704,
-      "put" : 14.173118,
-      "remove" : 15.543826
-    }, {
-      "size" : "1M",
-      "get" : 131.01654,
-      "put" : 391.77176,
-      "remove" : 255.75038
-    }, {
-      "size" : "10M",
-      "get" : 2110.5752,
-      "put" : 6128.295,
-      "remove" : 6886.7407
-    } ]
-  }, {
-    "name" : "trove-jb",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0095855,
-      "put" : 0.030853,
-      "remove" : 0.029335
-    }, {
-      "size" : "1K",
-      "get" : 0.0509585,
-      "put" : 0.1319425,
-      "remove" : 0.1411865
-    }, {
-      "size" : "10K",
-      "get" : 0.31338,
-      "put" : 1.0196815,
-      "remove" : 0.7969055
-    }, {
-      "size" : "100K",
-      "get" : 4.451144,
-      "put" : 15.469257,
-      "remove" : 8.196157
-    }, {
-      "size" : "1M",
-      "get" : 130.14352,
-      "put" : 363.09253,
-      "remove" : 174.07202
-    }, {
-      "size" : "10M",
-      "get" : 1873.4983,
-      "put" : 5986.694,
-      "remove" : 4102.3486
-    } ]
+    "size" : "10M",
+    "ec_get" : 635.7028,
+    "ec_put" : 3258.5144,
+    "ec_remove" : 1977.2957,
+    "fastutil_get" : 730.96014,
+    "fastutil_put" : 3546.2131,
+    "fastutil_remove" : 2615.4,
+    "hppc_get" : 774.2431,
+    "hppc_put" : 4062.246,
+    "hppc_remove" : 2969.3145,
+    "koloboke_get" : 705.5353,
+    "koloboke_put" : 3414.8792,
+    "koloboke_remove" : 2461.9724,
+    "java_get" : 624.7973,
+    "java_put" : 3351.3218,
+    "java_remove" : 1841.15,
+    "trove-jb_get" : 1209.7457,
+    "trove-jb_put" : 4976.3174,
+    "trove-jb_remove" : 3163.5457,
+    "trove_get" : 1167.3262,
+    "trove_put" : 5053.5137,
+    "trove_remove" : 5086.123
   } ],
   "ReferenceToObject" : [ {
-    "name" : "ec",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.005921,
-      "put" : 0.029243,
-      "remove" : 0.022706
-    }, {
-      "size" : "1K",
-      "get" : 0.035821,
-      "put" : 0.192216,
-      "remove" : 0.1872945
-    }, {
-      "size" : "10K",
-      "get" : 0.145656,
-      "put" : 0.7208855,
-      "remove" : 0.487882
-    }, {
-      "size" : "100K",
-      "get" : 1.857499,
-      "put" : 15.897386,
-      "remove" : 10.594631
-    }, {
-      "size" : "1M",
-      "get" : 52.31751,
-      "put" : 299.93768,
-      "remove" : 165.81721
-    }, {
-      "size" : "10M",
-      "get" : 678.8731,
-      "put" : 3868.3064,
-      "remove" : 2596.548
-    } ]
+    "size" : "100",
+    "ec_get" : 0.005346,
+    "ec_put" : 0.023369,
+    "ec_remove" : 0.0179135,
+    "fastutil_get" : 0.0043985,
+    "fastutil_put" : 0.03172,
+    "fastutil_remove" : 0.0228535,
+    "hppc_get" : 0.0049995,
+    "hppc_put" : 0.0292575,
+    "hppc_remove" : 0.026024,
+    "koloboke_get" : 0.006812,
+    "koloboke_put" : 0.037173,
+    "koloboke_remove" : 0.0356795,
+    "java_get" : 0.004251,
+    "java_put" : 0.022828,
+    "java_remove" : 0.01586,
+    "trove-jb_get" : 0.0074565,
+    "trove-jb_put" : 0.0217245,
+    "trove-jb_remove" : 0.0212555,
+    "trove_get" : 0.014242,
+    "trove_put" : 0.020883,
+    "trove_remove" : 0.023508
   }, {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0042255,
-      "put" : 0.0258845,
-      "remove" : 0.028171
-    }, {
-      "size" : "1K",
-      "get" : 0.033647,
-      "put" : 0.10033,
-      "remove" : 0.132827
-    }, {
-      "size" : "10K",
-      "get" : 0.1422455,
-      "put" : 0.580152,
-      "remove" : 0.5892155
-    }, {
-      "size" : "100K",
-      "get" : 1.264388,
-      "put" : 9.220174,
-      "remove" : 8.1064005
-    }, {
-      "size" : "1M",
-      "get" : 37.806335,
-      "put" : 225.8831,
-      "remove" : 155.53085
-    }, {
-      "size" : "10M",
-      "get" : 613.4899,
-      "put" : 3015.7275,
-      "remove" : 2632.3367
-    } ]
+    "size" : "1K",
+    "ec_get" : 0.0339315,
+    "ec_put" : 0.1567225,
+    "ec_remove" : 0.1092355,
+    "fastutil_get" : 0.032373,
+    "fastutil_put" : 0.0856985,
+    "fastutil_remove" : 0.090056,
+    "hppc_get" : 0.032969,
+    "hppc_put" : 0.0972855,
+    "hppc_remove" : 0.103716,
+    "koloboke_get" : 0.043285,
+    "koloboke_put" : 0.137293,
+    "koloboke_remove" : 0.120709,
+    "java_get" : 0.032253,
+    "java_put" : 0.073776,
+    "java_remove" : 0.0789765,
+    "trove-jb_get" : 0.0456815,
+    "trove-jb_put" : 0.097036,
+    "trove-jb_remove" : 0.100989,
+    "trove_get" : 0.0446855,
+    "trove_put" : 0.1505315,
+    "trove_remove" : 0.2176475
   }, {
-    "name" : "hppc",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0051345,
-      "put" : 0.0380385,
-      "remove" : 0.0340035
-    }, {
-      "size" : "1K",
-      "get" : 0.035317,
-      "put" : 0.1228725,
-      "remove" : 0.122761
-    }, {
-      "size" : "10K",
-      "get" : 0.1664835,
-      "put" : 0.6793545,
-      "remove" : 0.6559985
-    }, {
-      "size" : "100K",
-      "get" : 1.2882695,
-      "put" : 11.014587,
-      "remove" : 9.3868685
-    }, {
-      "size" : "1M",
-      "get" : 40.269,
-      "put" : 328.5367,
-      "remove" : 206.87404
-    }, {
-      "size" : "10M",
-      "get" : 730.2911,
-      "put" : 4129.9624,
-      "remove" : 3512.9968
-    } ]
+    "size" : "10K",
+    "ec_get" : 0.137469,
+    "ec_put" : 0.624872,
+    "ec_remove" : 0.4579375,
+    "fastutil_get" : 0.126838,
+    "fastutil_put" : 0.594301,
+    "fastutil_remove" : 0.5336935,
+    "hppc_get" : 0.1372935,
+    "hppc_put" : 0.601233,
+    "hppc_remove" : 0.5926935,
+    "koloboke_get" : 0.1421865,
+    "koloboke_put" : 0.610459,
+    "koloboke_remove" : 0.5738815,
+    "java_get" : 0.1247,
+    "java_put" : 0.51197,
+    "java_remove" : 0.4530465,
+    "trove-jb_get" : 0.25236,
+    "trove-jb_put" : 0.8649225,
+    "trove-jb_remove" : 0.6747205,
+    "trove_get" : 0.259251,
+    "trove_put" : 0.910324,
+    "trove_remove" : 0.9454675
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0045945,
-      "put" : 0.0192625,
-      "remove" : 0.0182845
-    }, {
-      "size" : "1K",
-      "get" : 0.0344085,
-      "put" : 0.1206455,
-      "remove" : 0.1064175
-    }, {
-      "size" : "10K",
-      "get" : 0.147488,
-      "put" : 0.546102,
-      "remove" : 0.528019
-    }, {
-      "size" : "100K",
-      "get" : 1.437776,
-      "put" : 8.291012,
-      "remove" : 6.6874623
-    }, {
-      "size" : "1M",
-      "get" : 41.853004,
-      "put" : 211.51094,
-      "remove" : 136.32243
-    }, {
-      "size" : "10M",
-      "get" : 640.54333,
-      "put" : 2649.6042,
-      "remove" : 2356.369
-    } ]
+    "size" : "100K",
+    "ec_get" : 1.3077755,
+    "ec_put" : 11.127941,
+    "ec_remove" : 7.3689265,
+    "fastutil_get" : 1.143818,
+    "fastutil_put" : 8.272212,
+    "fastutil_remove" : 7.2621965,
+    "hppc_get" : 1.1552895,
+    "hppc_put" : 9.563226,
+    "hppc_remove" : 8.255169,
+    "koloboke_get" : 1.087852,
+    "koloboke_put" : 10.25184,
+    "koloboke_remove" : 7.900391,
+    "java_get" : 1.112208,
+    "java_put" : 7.303278,
+    "java_remove" : 5.933499,
+    "trove-jb_get" : 3.0142634,
+    "trove-jb_put" : 9.975517,
+    "trove-jb_remove" : 7.048098,
+    "trove_get" : 3.105064,
+    "trove_put" : 10.245821,
+    "trove_remove" : 9.689805
   }, {
-    "name" : "koloboke",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0074795,
-      "put" : 0.0524785,
-      "remove" : 0.0365745
-    }, {
-      "size" : "1K",
-      "get" : 0.0466335,
-      "put" : 0.14157,
-      "remove" : 0.1795705
-    }, {
-      "size" : "10K",
-      "get" : 0.1511055,
-      "put" : 0.6557805,
-      "remove" : 0.660351
-    }, {
-      "size" : "100K",
-      "get" : 1.322722,
-      "put" : 12.100339,
-      "remove" : 8.607942
-    }, {
-      "size" : "1M",
-      "get" : 52.944344,
-      "put" : 259.35095,
-      "remove" : 170.19478
-    }, {
-      "size" : "10M",
-      "get" : 704.8898,
-      "put" : 3402.5156,
-      "remove" : 2979.0317
-    } ]
+    "size" : "1M",
+    "ec_get" : 32.36149,
+    "ec_put" : 212.44753,
+    "ec_remove" : 112.742546,
+    "fastutil_get" : 22.720863,
+    "fastutil_put" : 169.43909,
+    "fastutil_remove" : 113.522064,
+    "hppc_get" : 23.726822,
+    "hppc_put" : 259.91943,
+    "hppc_remove" : 141.38432,
+    "koloboke_get" : 24.180573,
+    "koloboke_put" : 184.84334,
+    "koloboke_remove" : 121.93649,
+    "java_get" : 22.811064,
+    "java_put" : 154.41132,
+    "java_remove" : 95.0977,
+    "trove-jb_get" : 35.695316,
+    "trove-jb_put" : 224.35738,
+    "trove-jb_remove" : 108.84875,
+    "trove_get" : 38.038628,
+    "trove_put" : 230.38803,
+    "trove_remove" : 153.57703
   }, {
-    "name" : "trove",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.00968,
-      "put" : 0.0346555,
-      "remove" : 0.0348875
-    }, {
-      "size" : "1K",
-      "get" : 0.050198,
-      "put" : 0.1753605,
-      "remove" : 0.313068
-    }, {
-      "size" : "10K",
-      "get" : 0.279208,
-      "put" : 0.997316,
-      "remove" : 0.9871765
-    }, {
-      "size" : "100K",
-      "get" : 3.676121,
-      "put" : 11.550045,
-      "remove" : 11.00867
-    }, {
-      "size" : "1M",
-      "get" : 61.183765,
-      "put" : 322.55557,
-      "remove" : 222.8283
-    }, {
-      "size" : "10M",
-      "get" : 1188.3453,
-      "put" : 5433.9463,
-      "remove" : 6302.132
-    } ]
-  }, {
-    "name" : "trove-jb",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0091755,
-      "put" : 0.0261705,
-      "remove" : 0.0254645
-    }, {
-      "size" : "1K",
-      "get" : 0.0496405,
-      "put" : 0.1244875,
-      "remove" : 0.1156705
-    }, {
-      "size" : "10K",
-      "get" : 0.271373,
-      "put" : 0.944795,
-      "remove" : 0.7497285
-    }, {
-      "size" : "100K",
-      "get" : 3.497217,
-      "put" : 11.758666,
-      "remove" : 7.7572865
-    }, {
-      "size" : "1M",
-      "get" : 57.549896,
-      "put" : 313.4779,
-      "remove" : 138.36494
-    }, {
-      "size" : "10M",
-      "get" : 1166.9269,
-      "put" : 5058.535,
-      "remove" : 3243.1506
-    } ]
+    "size" : "10M",
+    "ec_get" : 421.11383,
+    "ec_put" : 2900.6494,
+    "ec_remove" : 1795.831,
+    "fastutil_get" : 407.7086,
+    "fastutil_put" : 2629.7168,
+    "fastutil_remove" : 2025.6674,
+    "hppc_get" : 464.9714,
+    "hppc_put" : 3515.4136,
+    "hppc_remove" : 2402.719,
+    "koloboke_get" : 415.416,
+    "koloboke_put" : 2949.2148,
+    "koloboke_remove" : 2182.47,
+    "java_get" : 363.53162,
+    "java_put" : 2352.498,
+    "java_remove" : 1678.5215,
+    "trove-jb_get" : 740.58374,
+    "trove-jb_put" : 4310.916,
+    "trove-jb_remove" : 2547.3276,
+    "trove_get" : 776.65393,
+    "trove_put" : 4368.2407,
+    "trove_remove" : 4381.5166
   } ],
   "LinkedMap" : [ {
-    "name" : "fastutil",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0055695,
-      "put" : 0.026682,
-      "remove" : 0.02673
-    }, {
-      "size" : "1K",
-      "get" : 0.038133,
-      "put" : 0.118639,
-      "remove" : 0.1953845
-    }, {
-      "size" : "10K",
-      "get" : 0.193784,
-      "put" : 0.770564,
-      "remove" : 0.7208015
-    }, {
-      "size" : "100K",
-      "get" : 2.2775974,
-      "put" : 24.59481,
-      "remove" : 11.611818
-    }, {
-      "size" : "1M",
-      "get" : 69.308334,
-      "put" : 585.71027,
-      "remove" : 309.02502
-    }, {
-      "size" : "10M",
-      "get" : 1167.7655,
-      "put" : 6897.2935,
-      "remove" : 5269.5625
-    } ]
+    "size" : "100",
+    "fastutil_get" : 0.0052625,
+    "fastutil_put" : 0.021353,
+    "fastutil_remove" : 0.021479,
+    "java_get" : 0.0048355,
+    "java_put" : 0.017926,
+    "java_remove" : 0.016696
   }, {
-    "name" : "java",
-    "data" : [ {
-      "size" : "100",
-      "get" : 0.0049265,
-      "put" : 0.0273265,
-      "remove" : 0.0215175
-    }, {
-      "size" : "1K",
-      "get" : 0.0336415,
-      "put" : 0.1237525,
-      "remove" : 0.110163
-    }, {
-      "size" : "10K",
-      "get" : 0.143359,
-      "put" : 0.675151,
-      "remove" : 0.441686
-    }, {
-      "size" : "100K",
-      "get" : 2.761009,
-      "put" : 14.758723,
-      "remove" : 7.9529657
-    }, {
-      "size" : "1M",
-      "get" : 72.606384,
-      "put" : 333.71918,
-      "remove" : 158.21422
-    }, {
-      "size" : "10M",
-      "get" : 947.42694,
-      "put" : 5541.9316,
-      "remove" : 3052.731
-    } ]
+    "size" : "1K",
+    "fastutil_get" : 0.0348355,
+    "fastutil_put" : 0.1059435,
+    "fastutil_remove" : 0.1185045,
+    "java_get" : 0.03307,
+    "java_put" : 0.0957435,
+    "java_remove" : 0.0867035
+  }, {
+    "size" : "10K",
+    "fastutil_get" : 0.170706,
+    "fastutil_put" : 0.695769,
+    "fastutil_remove" : 0.668036,
+    "java_get" : 0.107023,
+    "java_put" : 0.5750735,
+    "java_remove" : 0.419827
+  }, {
+    "size" : "100K",
+    "fastutil_get" : 1.714923,
+    "fastutil_put" : 15.695683,
+    "fastutil_remove" : 10.15171,
+    "java_get" : 1.7082485,
+    "java_put" : 11.395658,
+    "java_remove" : 6.836881
+  }, {
+    "size" : "1M",
+    "fastutil_get" : 49.715122,
+    "fastutil_put" : 397.96387,
+    "fastutil_remove" : 197.2028,
+    "java_get" : 48.443165,
+    "java_put" : 233.11203,
+    "java_remove" : 110.32279
+  }, {
+    "size" : "10M",
+    "fastutil_get" : 715.32,
+    "fastutil_put" : 5272.2925,
+    "fastutil_remove" : 3646.113,
+    "java_get" : 631.58905,
+    "java_put" : 4130.418,
+    "java_remove" : 2123.27
   } ]
 }

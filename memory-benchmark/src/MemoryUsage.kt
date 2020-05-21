@@ -29,13 +29,7 @@ fun main() {
 
   writeJson("memoryChartData", Paths.get("site", "memory-data.js")) { writer ->
     writer.writeStartObject()
-    writeSizes(writer, sizes.asSequence().map { Util.parseSize(it) })
-
-    writer.writeArrayFieldStart("series")
-    for (lib in librariesWithJava.sortedBy { it.name }) {
-      writer.writeString(lib.name)
-    }
-    writer.writeEndArray()
+    writeSizesAndSeries(writer, sizes.asSequence().map { Util.parseSize(it) })
 
     for (entry in typeToData.object2ObjectEntrySet().fastIterator()) {
       writer.writeArrayFieldStart(entry.key)

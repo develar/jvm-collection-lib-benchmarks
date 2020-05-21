@@ -28,7 +28,7 @@ function buildMemoryChart(type, operation, titleText, data, container) {
   }
 }
 
-function buildClusteredMemoryChart(type, operation, titleText, data, container) {
+function buildClusteredChart(type, operation, titleText, data, container, numberFormat) {
   const element = document.createElement("div")
   element.className = "resultChart column"
   container.appendChild(element)
@@ -36,7 +36,6 @@ function buildClusteredMemoryChart(type, operation, titleText, data, container) 
   const chart = am4core.create(element, am4charts.XYChart)
   chart.colors.step = 3
   chart.data = data[type]
-  chart.numberFormatter.numberFormat = "#.#b"
   configureTitle(chart, titleText)
 
   const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
@@ -50,22 +49,26 @@ function buildClusteredMemoryChart(type, operation, titleText, data, container) 
   valueAxis.renderer.opposite = true
   valueAxis.logarithmic = true
 
+  const valueSuffix = numberFormat == null ? " ms" : ""
+
   for (const libraryName of data.series) {
     const series = chart.series.push(new am4charts.ColumnSeries())
     series.dataFields.valueX = `${libraryName}_${operation}`
     series.dataFields.categoryY = "size"
     series.name = libraryName
-    series.columns.template.tooltipText = "{name}: [bold]{valueX}[/]"
+    series.columns.template.tooltipText = `{name}: [bold]{valueX}[/]${valueSuffix}`
     series.columns.template.height = am4core.percent(100)
     series.sequencedInterpolation = true
 
     const categoryLabel = series.bullets.push(new am4charts.LabelBullet())
+    categoryLabel.interactionsEnabled = false
     categoryLabel.label.text = "{name}"
     categoryLabel.label.horizontalCenter = "right"
     categoryLabel.label.dx = -10
     categoryLabel.label.fill = am4core.color("#fff")
     categoryLabel.label.hideOversized = false
     categoryLabel.label.truncate = false
-    categoryLabel.label.tooltipText = "{name}: [bold]{valueX}[/]"
+    // categoryLabel.label.tooltipText = `{name}: [bold]{valueX}[/]${valueSuffix}`
+    categoryLabel.label.inter = `{name}: [bold]{valueX}[/]${valueSuffix}`
   }
 }

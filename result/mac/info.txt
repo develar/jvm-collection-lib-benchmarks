@@ -1,0 +1,10 @@
+Model Name                           MacBook Pro
+Model Identifier                     MacBookPro15,1
+Processor Name:	6-Core Intel Core i7
+Processor Speed                      2,6 GHz
+Number of Processors                 1
+Total Number of Cores                6
+L2 Cache (per Core)                  256 KB
+L3 Cache                             9 MB
+Hyper-Threading Technology:	Enabled
+Memory:	32 GB

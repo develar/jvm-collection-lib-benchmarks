@@ -29,7 +29,7 @@ sudo ~/Downloads/jbr/Contents/Home/bin/java -Djdk.attach.allowAttachSelf=true -D
 ## Benchmark Results Environment
 Presented data were computed on: 
 
-* JVM: JDK 11.0.7, OpenJDK 64-Bit Server VM, 11.0.7+10-b912 ([JetBrains Runtime](https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime)).
+* JVM: OpenJDK 64-Bit Server VM, 11.0.7+10-post-Ubuntu-2ubuntu218.04.
 * Machine:
     ```
     Model Name                           MacBook Pro   

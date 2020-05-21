@@ -70,18 +70,22 @@ function openTab(tabId) {
   }
 }
 
-function createChartBox(type, typeTitle, box) {
-  let subGroup = createDiv(box)
+function createChartBox(type, typeTitle, container) {
+  const cpuGroup = createDiv()
+  container.appendChild(cpuGroup)
+
   for (const operation of operations) {
-    buildChart(type, operation, `${typeTitle} ${operationToChartTitle(operation)}`, chartData, subGroup)
+    buildClusteredChart(type, operation, `${typeTitle} ${operationToChartTitle(operation)}`, chartData, cpuGroup, null)
   }
   // subGroup = createDiv(box)
   // for (const operation of operations) {
   //   buildMemoryChart(type, operation, "Memory", memoryChartData, subGroup)
   // }
-  subGroup = createDiv(box)
+  const memoryGroup = createDiv()
+  container.appendChild(memoryGroup)
+
   for (const operation of operations) {
-    buildClusteredMemoryChart(type, operation, "Memory", memoryChartData, subGroup)
+    buildClusteredChart(type, operation, "Memory", memoryChartData, memoryGroup, "#.#b")
   }
 }
 
@@ -104,11 +108,10 @@ function createBox(container) {
   // return element
 }
 
-function createDiv(container) {
+function createDiv() {
   const element = document.createElement("div")
   // noinspection SpellCheckingInspection
   element.className = "columns is-gapless"
-  container.appendChild(element)
   return element
 }
 

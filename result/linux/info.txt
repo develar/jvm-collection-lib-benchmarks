@@ -1,0 +1,99 @@
+    description: Computer
+    product: SBI-4119MG-X (1B3D15D9)
+    vendor: Supermicro
+    version: 123456789
+    serial: S359905X9820471
+    width: 64 bits
+    capabilities: smbios-3.2 dmi-3.2 smp vsyscall32
+    configuration: boot=normal family=SMC B11 sku=1B3D15D9 uuid=500C8A83-0000-0000-C00C-AC1F6BC5EC86
+  *-core
+       description: Motherboard
+       product: B11SCG-CTF
+       vendor: Supermicro
+       physical id: 0
+       version: 1.01
+       serial: OD197S003211
+       slot: Default string
+     *-firmware
+          description: BIOS
+          vendor: American Megatrends Inc.
+          physical id: 0
+          version: 1.1
+          date: 06/28/2019
+          size: 64KiB
+          capacity: 15MiB
+          capabilities: pci upgrade shadowing cdboot bootselect socketedrom edd int13floppy1200 int13floppy720 int13floppy2880 int5printscreen int14serial int17printer acpi usb biosbootspecification uefi
+     *-memory
+          description: System Memory
+          physical id: 26
+          slot: System board or motherboard
+          size: 32GiB
+          capabilities: ecc
+          configuration: errordetection=ecc
+        *-bank:0
+             description: [empty]
+             physical id: 0
+             slot: DIMMA1
+        *-bank:1
+             description: DIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+             product: 18ADF2G72AZ-2G6E1
+             vendor: Micron
+             physical id: 1
+             serial: F02362CA
+             slot: DIMMA2
+             size: 16GiB
+             width: 64 bits
+             clock: 2667MHz (0.4ns)
+        *-bank:2
+             description: [empty]
+             physical id: 2
+             slot: DIMMB1
+        *-bank:3
+             description: DIMM DDR4 Synchronous 2667 MHz (0.4 ns)
+             product: 18ADF2G72AZ-2G6E1
+             vendor: Micron
+             physical id: 3
+             serial: F02362F2
+             slot: DIMMB2
+             size: 16GiB
+             width: 64 bits
+             clock: 2667MHz (0.4ns)
+     *-cache:0
+          description: L1 cache
+          physical id: 31
+          slot: L1 Cache
+          size: 384KiB
+          capacity: 384KiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=1
+     *-cache:1
+          description: L2 cache
+          physical id: 32
+          slot: L2 Cache
+          size: 1536KiB
+          capacity: 1536KiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=2
+     *-cache:2
+          description: L3 cache
+          physical id: 33
+          slot: L3 Cache
+          size: 12MiB
+          capacity: 12MiB
+          capabilities: synchronous internal write-back unified
+          configuration: level=3
+     *-cpu
+          description: CPU
+          product: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+          vendor: Intel Corp.
+          physical id: 34
+          bus info: cpu@0
+          version: Intel(R) Xeon(R) E-2176G CPU @ 3.70GHz
+          serial: To Be Filled By O.E.M.
+          slot: CPU1
+          size: 4302MHz
+          capacity: 4700MHz
+          width: 64 bits
+          clock: 100MHz
+          capabilities: x86-64 fpu fpu_exception wp vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp md_clear flush_l1d cpufreq
+          configuration: cores=6 enabledcores=6 threads=12
