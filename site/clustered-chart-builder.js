@@ -36,6 +36,9 @@ function buildClusteredChart(type, operation, titleText, data, container, number
   const chart = am4core.create(element, am4charts.XYChart)
   chart.colors.step = 3
   chart.data = data[type]
+  if (numberFormat != null) {
+    chart.numberFormatter.numberFormat = numberFormat
+  }
   configureTitle(chart, titleText)
 
   const categoryAxis = chart.yAxes.push(new am4charts.CategoryAxis())
