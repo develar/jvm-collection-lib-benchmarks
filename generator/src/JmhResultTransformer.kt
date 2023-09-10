@@ -38,7 +38,7 @@ val librariesWithJava = libraries + javaLibrary
 fun main() {
   val benchmarks = ObjectMapper()
     .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-    .readValue(Paths.get("result/linux/jmh-result.json").toFile(), Array<JmhResult>::class.java)
+    .readValue(Path.of("result/mac/jmh-result.json").toFile(), Array<JmhResult>::class.java)
   val result = LinkedHashMap<String, Int2ObjectOpenHashMap<MutableCollection<Entry>>>()
   for (benchmark in benchmarks) {
     val classAndMethod = benchmark.benchmark.substring("org.jetbrains.benchmark.collection.".length)

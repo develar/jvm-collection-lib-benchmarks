@@ -1,10 +1,8 @@
-Model Name                           MacBook Pro
-Model Identifier                     MacBookPro15,1
-Processor Name:	6-Core Intel Core i7
-Processor Speed                      2,6 GHz
-Number of Processors                 1
-Total Number of Cores                6
-L2 Cache (per Core)                  256 KB
-L3 Cache                             9 MB
-Hyper-Threading Technology:	Enabled
-Memory:	32 GB
+  Model Name:	MacBook Pro
+  Model Identifier:	Mac14,6
+  Model Number:	Z1780017JD/A
+  Chip:	Apple M2 Max
+  Total Number of Cores:	12 (8 performance and 4 efficiency)
+  Memory:	64 GB
+  System Firmware Version:	8422.141.2
+  OS Loader Version:	8422.141.2
