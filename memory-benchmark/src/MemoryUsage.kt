@@ -2,7 +2,7 @@ import it.unimi.dsi.fastutil.objects.Object2LongArrayMap
 import it.unimi.dsi.fastutil.objects.Object2ObjectArrayMap
 import org.jetbrains.benchmark.collection.*
 import org.openjdk.jmh.infra.Blackhole
-import java.nio.file.Paths
+import java.nio.file.Path
 
 fun main() {
   @Suppress("SpellCheckingInspection")
@@ -11,6 +11,7 @@ fun main() {
   val sizes = sequenceOf(100, 1_000, 10_00, 100_000, 1_000_000, 10_000_000).map { Util.formatSize(it) }.toList()
   val types = listOf("IntToInt", "IntToObject", "ObjectToInt", "ObjectToObject", "ReferenceToObject", "LinkedMap")
   val typeToData = Object2ObjectArrayMap<String, Object2ObjectArrayMap<String, Object2LongArrayMap<String>>>()
+  val measurers = measurers + KotlinObjectToObjectMemoryBenchmark() + KotlinLinkedMapMemoryBenchmark()
   for (type in types) {
     val sizeToOperations = Object2ObjectArrayMap<String, Object2LongArrayMap<String>>()
     typeToData.put(type, sizeToOperations)
@@ -27,7 +28,7 @@ fun main() {
     }
   }
 
-  writeJson("memoryChartData", Paths.get("site", "memory-data.js")) { writer ->
+  writeJson("memoryChartData", Path.of("site", "memory-data.js")) { writer ->
     writer.writeStartObject()
     writeSizesAndSeries(writer, sizes.asSequence().map { Util.parseSize(it) })
 

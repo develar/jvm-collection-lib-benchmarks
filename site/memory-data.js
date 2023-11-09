@@ -2,7 +2,7 @@
 
 const memoryChartData = {
   "sizes" : [ "100", "1K", "1K", "100K", "1M", "10M" ],
-  "series" : [ "ec", "fastutil", "hppc", "java", "koloboke", "trove", "trove-jb" ],
+  "series" : [ "ec", "fastutil", "hppc", "java", "koloboke", "kotlin", "trove", "trove-jb" ],
   "IntToInt" : [ {
     "size" : "100",
     "java_get" : 7488,
@@ -373,7 +373,10 @@ const memoryChartData = {
     "koloboke_remove" : 2472,
     "ec_get" : 7488,
     "ec_put" : 7472,
-    "ec_remove" : 2720
+    "ec_remove" : 2720,
+    "kotlin_get" : 6752,
+    "kotlin_put" : 6840,
+    "kotlin_remove" : 2416
   }, {
     "size" : "1K",
     "java_get" : 88256,
@@ -396,7 +399,10 @@ const memoryChartData = {
     "koloboke_remove" : 20440,
     "ec_get" : 70128,
     "ec_put" : 70064,
-    "ec_remove" : 23872
+    "ec_remove" : 23872,
+    "kotlin_get" : 74608,
+    "kotlin_put" : 74104,
+    "kotlin_remove" : 24352
   }, {
     "size" : "100K",
     "java_get" : 9048640,
@@ -419,7 +425,10 @@ const memoryChartData = {
     "koloboke_remove" : 2248824,
     "ec_get" : 7402128,
     "ec_put" : 7399344,
-    "ec_remove" : 2508784
+    "ec_remove" : 2508784,
+    "kotlin_get" : 6948072,
+    "kotlin_put" : 6944120,
+    "kotlin_remove" : 2449312
   }, {
     "size" : "1M",
     "java_get" : 88387128,
@@ -442,7 +451,10 @@ const memoryChartData = {
     "koloboke_remove" : 20388472,
     "ec_get" : 70793744,
     "ec_put" : 70777616,
-    "ec_remove" : 24246480
+    "ec_remove" : 24246480,
+    "kotlin_get" : 74060984,
+    "kotlin_put" : 74054368,
+    "kotlin_remove" : 24059864
   }, {
     "size" : "10M",
     "java_get" : 866882456,
@@ -465,7 +477,10 @@ const memoryChartData = {
     "koloboke_remove" : 187074600,
     "ec_get" : 684933216,
     "ec_put" : 684343984,
-    "ec_remove" : 235453264
+    "ec_remove" : 235453264,
+    "kotlin_get" : 700323448,
+    "kotlin_put" : 698574808,
+    "kotlin_remove" : 222007096
   } ],
   "ReferenceToObject" : [ {
     "size" : "100",
@@ -487,9 +502,9 @@ const memoryChartData = {
     "koloboke_get" : 5920,
     "koloboke_put" : 4720,
     "koloboke_remove" : 2496,
-    "ec_get" : 6128,
-    "ec_put" : 4992,
-    "ec_remove" : 2624
+    "ec_get" : 6272,
+    "ec_put" : 5040,
+    "ec_remove" : 2656
   }, {
     "size" : "1K",
     "java_get" : 52440,
@@ -510,9 +525,9 @@ const memoryChartData = {
     "koloboke_get" : 52656,
     "koloboke_put" : 40656,
     "koloboke_remove" : 20464,
-    "ec_get" : 58128,
-    "ec_put" : 46432,
-    "ec_remove" : 24608
+    "ec_get" : 58208,
+    "ec_put" : 46784,
+    "ec_remove" : 24192
   }, {
     "size" : "100K",
     "java_get" : 5697208,
@@ -533,9 +548,9 @@ const memoryChartData = {
     "koloboke_get" : 5697424,
     "koloboke_put" : 4497424,
     "koloboke_remove" : 2248848,
-    "ec_get" : 6204096,
-    "ec_put" : 4997152,
-    "ec_remove" : 2506064
+    "ec_get" : 6202224,
+    "ec_put" : 5003136,
+    "ec_remove" : 2508544
   }, {
     "size" : "1M",
     "java_get" : 52777272,
@@ -556,9 +571,9 @@ const memoryChartData = {
     "koloboke_get" : 52777488,
     "koloboke_put" : 40777488,
     "koloboke_remove" : 20388880,
-    "ec_get" : 58813184,
-    "ec_put" : 46815952,
-    "ec_remove" : 24262576
+    "ec_get" : 58780912,
+    "ec_put" : 46809344,
+    "ec_remove" : 24251440
   }, {
     "size" : "10M",
     "java_get" : 494217784,
@@ -579,9 +594,9 @@ const memoryChartData = {
     "koloboke_get" : 494218000,
     "koloboke_put" : 374218000,
     "koloboke_remove" : 187109136,
-    "ec_get" : 565192656,
-    "ec_put" : 445166656,
-    "ec_remove" : 235609568
+    "ec_get" : 565146336,
+    "ec_put" : 445203520,
+    "ec_remove" : 235598064
   } ],
   "LinkedMap" : [ {
     "size" : "100",
@@ -590,7 +605,10 @@ const memoryChartData = {
     "java_remove" : 3784,
     "fastutil_get" : 9048,
     "fastutil_put" : 9048,
-    "fastutil_remove" : 3400
+    "fastutil_remove" : 3400,
+    "kotlin_get" : 9200,
+    "kotlin_put" : 9288,
+    "kotlin_remove" : 3664
   }, {
     "size" : "1K",
     "java_get" : 96264,
@@ -598,7 +616,10 @@ const memoryChartData = {
     "java_remove" : 36168,
     "fastutil_get" : 80920,
     "fastutil_put" : 80920,
-    "fastutil_remove" : 28536
+    "fastutil_remove" : 28536,
+    "kotlin_get" : 98656,
+    "kotlin_put" : 98152,
+    "kotlin_remove" : 36400
   }, {
     "size" : "100K",
     "java_get" : 9848648,
@@ -606,7 +627,10 @@ const memoryChartData = {
     "java_remove" : 3724360,
     "fastutil_get" : 8994456,
     "fastutil_put" : 8994456,
-    "fastutil_remove" : 3297304
+    "fastutil_remove" : 3297304,
+    "kotlin_get" : 9348120,
+    "kotlin_put" : 9344168,
+    "kotlin_remove" : 3649360
   }, {
     "size" : "1M",
     "java_get" : 96386784,
@@ -614,7 +638,10 @@ const memoryChartData = {
     "java_remove" : 36192536,
     "fastutil_get" : 81553384,
     "fastutil_put" : 81549688,
-    "fastutil_remove" : 28776984
+    "fastutil_remove" : 28776984,
+    "kotlin_get" : 98060432,
+    "kotlin_put" : 98051968,
+    "kotlin_remove" : 36058952
   }, {
     "size" : "10M",
     "java_get" : 946856208,
@@ -622,6 +649,9 @@ const memoryChartData = {
     "java_remove" : 353348960,
     "fastutil_get" : 748294728,
     "fastutil_put" : 747878424,
-    "fastutil_remove" : 254183368
+    "fastutil_remove" : 254183368,
+    "kotlin_get" : 940253056,
+    "kotlin_put" : 938296264,
+    "kotlin_remove" : 341902480
   } ]
 }

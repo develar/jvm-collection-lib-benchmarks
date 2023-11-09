@@ -55,6 +55,10 @@ function buildClusteredChart(type, operation, titleText, data, container, number
   const valueSuffix = numberFormat == null ? " ms" : ""
 
   for (const libraryName of data.series) {
+    if (libraryName === "trove" || libraryName === "koloboke" || libraryName === "trove-jb") {
+      continue
+    }
+
     const series = chart.series.push(new am4charts.ColumnSeries())
     series.dataFields.valueX = `${libraryName}_${operation}`
     series.dataFields.categoryY = "size"

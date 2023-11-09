@@ -1,6 +1,6 @@
 package org.jetbrains.benchmark.collection
 
-val measurers = listOf(
+val measurers: List<Measurer> = listOf(
   IntToIntMemoryBenchmark(),
   IntToObjectMemoryBenchmark(),
   ObjectToIntMemoryBenchmark(),

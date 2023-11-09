@@ -17,7 +17,7 @@
   </modules>
 
   <properties>
-    <kotlin.version>1.9.10</kotlin.version>
+    <kotlin.version>1.9.20</kotlin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <javac.target>17</javac.target>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>

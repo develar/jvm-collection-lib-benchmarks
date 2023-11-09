@@ -10,6 +10,7 @@ import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
+import java.util.function.BiFunction
 import java.util.function.IntFunction
 
 private class JmhResult @JsonCreator constructor(
@@ -33,7 +34,16 @@ private val javaLibrary = Library(
   intToObjectClassName = "HashMap",
 )
 
-val librariesWithJava = libraries + javaLibrary
+private val kotlinLibrary = Library(
+  name = "kotlin",
+  objectToObjectClassName = "",
+  referenceToObjectClassName = "",
+  intToIntClassName = "",
+  objectToIntClassName = "",
+  intToObjectClassName = "",
+)
+
+private val librariesWithJava = libraries + javaLibrary + kotlinLibrary
 
 fun main() {
   val benchmarks = ObjectMapper()
@@ -46,7 +56,7 @@ fun main() {
     var operation = classAndMethod.substring(lastDot + 1)
 
     var type = classAndMethod.substring(0, lastDot).removeSuffix("Benchmark")
-    var library = javaLibrary
+    var library = if (classAndMethod.contains("Kotlin")) kotlinLibrary else javaLibrary
     for (l in libraries) {
       if (type.startsWith(l.classPrefix)) {
         type = type.substring(l.classPrefix.length)
@@ -61,7 +71,14 @@ fun main() {
 
     if (type == "IntToObject" && operation.startsWith("object")) {
       type = "ObjectToInt"
-      operation = operation.removePrefix("object").toLowerCase()
+      operation = operation.removePrefix("object").lowercase()
+    }
+
+    if (type == "KotlinxOrderedObjectToObject") {
+      type = "LinkedMap"
+    }
+    else if (type == "KotlinxObjectToObject") {
+      type = "ObjectToObject"
     }
 
     if (!(operation == "get" || operation == "remove" || operation == "put")) {
@@ -77,7 +94,7 @@ fun main() {
     list.add(entry)
   }
 
-  writeJson("chartData", Paths.get("site", "data.js")) { writer ->
+  writeJson("chartData", Path.of("site", "data.js")) { writer ->
     writeJson(result, writer)
   }
 }
@@ -142,5 +159,4 @@ private fun writeJson(typeToLibraryResult: LinkedHashMap<String, Int2ObjectOpenH
   //  }
   //}
 
-internal class Entry(val operation: String, val value: Float, val library: Library) {
-}
+internal data class Entry(val operation: String, val value: Float, val library: Library)

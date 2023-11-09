@@ -64,13 +64,13 @@ internal val libraries = listOf(
 private val memoryBenchmarkClassNames = listOf("IntToIntMemoryBenchmark", "IntToObjectMemoryBenchmark", "ObjectToIntMemoryBenchmark", "ObjectToObjectMemoryBenchmark", "ReferenceToObjectMemoryBenchmark")
 
 fun main() {
-  val inDir = Paths.get("benchmark/src/$packageDir")
+  val inDir = Path.of("benchmark/src/$packageDir")
 
-  val outDir = Paths.get("benchmark/generated/$packageDir")
+  val outDir = Path.of("benchmark/generated/$packageDir")
   val existingFiles = Files.newDirectoryStream(outDir).use { it.toHashSet() }
 
   val memoryBenchmarkCode = Files.readAllBytes(Paths.get("memory-benchmark/src/MemoryBenchmark.kt")).toString(Charsets.UTF_8)
-  val memoryBenchmarkOutDir = Paths.get("memory-benchmark/generated")
+  val memoryBenchmarkOutDir = Path.of("memory-benchmark/generated")
   Files.createDirectories(memoryBenchmarkOutDir)
   var memoryMeasurerListCode = "package org.jetbrains.benchmark.collection\n\nval measurers = listOf("
   for (name in memoryBenchmarkClassNames) {
@@ -251,7 +251,7 @@ private fun replaceNewMap(code: String, library: Library, useFactory: Boolean): 
 private fun toCamelCase(s: String): String {
   val builder = StringBuilder()
   for (part in s.splitToSequence("-")) {
-    builder.append(part.substring(0, 1).toUpperCase() + part.substring(1))
+    builder.append(part.substring(0, 1).uppercase() + part.substring(1))
   }
   return builder.toString()
 }

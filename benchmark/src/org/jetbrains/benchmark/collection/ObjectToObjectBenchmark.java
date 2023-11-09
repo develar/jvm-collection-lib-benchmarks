@@ -13,10 +13,11 @@ import java.util.HashMap;
  * For non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
 
  * "Put/update" test: Add a pre-generated set of keys to the map.
- * In the second loop add the equal set of keys (different objects with the same values) to this map again (make the updates).
- *
+ * In the second loop, add the equal set of keys (different objects with the same values) to this map again (make the updates).
+ * <p>
  * “Put/remove” test: In a loop: add 2 entries to a map, remove 1 of existing entries (“add” pointer is increased by 2 on each iteration, “remove” pointer is increased by 1).
  */
+@SuppressWarnings("DuplicatedCode")
 public class ObjectToObjectBenchmark implements ObjectBenchmark<ObjectToObjectBenchmark.BenchmarkGetState> {
   @State(Scope.Thread)
   public static class BenchmarkGetState extends BaseBenchmarkState {
@@ -29,7 +30,7 @@ public class ObjectToObjectBenchmark implements ObjectBenchmark<ObjectToObjectBe
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       HashMap<ArbitraryPojo, ArbitraryPojo> map = new HashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
-        // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
+        // for non-identity maps with object keys, we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
         if (i % oneFailureOutOf == 0) {

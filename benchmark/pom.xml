@@ -28,11 +28,15 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Fastutil -->
     <dependency>
       <groupId>it.unimi.dsi</groupId>
       <artifactId>fastutil</artifactId>
       <version>8.5.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jetbrains.kotlinx</groupId>
+      <artifactId>kotlinx-collections-immutable-jvm</artifactId>
+      <version>0.3.6</version>
     </dependency>
 
     <!-- Trove -->
