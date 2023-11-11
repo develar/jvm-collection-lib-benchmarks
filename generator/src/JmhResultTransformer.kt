@@ -94,7 +94,7 @@ fun main() {
     list.add(entry)
   }
 
-  writeJson("chartData", Path.of("site", "data.js")) { writer ->
+  writeJson("chartData", Path.of("site", "data.ts")) { writer ->
     writeJson(result, writer)
   }
 }
@@ -102,8 +102,7 @@ fun main() {
 inline fun writeJson(variableName: String, outFile: Path, task: (JsonGenerator) -> Unit) {
   Files.createDirectories(outFile.parent)
   Files.newBufferedWriter(outFile).use { out ->
-    out.write("\"use strict\"\n")
-    out.write("\nconst $variableName = ")
+    out.write("\nexport const $variableName = ")
 
     val jsonGenerator = JsonFactory().createGenerator(out).useDefaultPrettyPrinter()
     jsonGenerator.use {

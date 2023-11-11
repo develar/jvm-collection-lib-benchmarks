@@ -1,6 +1,4 @@
-"use strict"
-
-const memoryChartData = {
+export const memoryChartData = {
   "sizes" : [ "100", "1K", "1K", "100K", "1M", "10M" ],
   "series" : [ "ec", "fastutil", "hppc", "java", "koloboke", "kotlin", "trove", "trove-jb" ],
   "IntToInt" : [ {

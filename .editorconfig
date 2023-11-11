@@ -12,3 +12,6 @@ ij_any_line_comment_at_first_column = false
 ij_javascript_force_semicolon_style = true
 ij_typescript_force_semicolon_style = true
 ij_javascript_use_semicolon_after_statement = false
+ij_javascript_use_double_quotes = true
+ij_typescript_use_semicolon_after_statement = false
+ij_typescript_use_double_quotes = true

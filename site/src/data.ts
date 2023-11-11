@@ -1,6 +1,4 @@
-"use strict"
-
-const chartData = {
+export const chartData = {
   "sizes" : [ "100", "1K", "10K", "100K", "1M", "10M" ],
   "series" : [ "ec", "fastutil", "hppc", "java", "koloboke", "kotlin", "trove", "trove-jb" ],
   "IntToInt" : [ {
