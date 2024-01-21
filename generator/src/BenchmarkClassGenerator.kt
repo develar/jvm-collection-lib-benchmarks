@@ -59,6 +59,15 @@ internal val libraries = listOf(
     objectToIntClassName = "org.eclipse.collections.impl.map.mutable.primitive.ObjectIntHashMap",
     factory = "EcFactory"
   ),
+  Library(
+    name = "androidx",
+    objectToObjectClassName = "androidx.collection.MutableScatterMap",
+    referenceToObjectClassName = "androidx.collection.MutableScatterMap",
+    intToIntClassName = "androidx.collection.MutableIntIntMap",
+    intToObjectClassName = "androidx.collection.MutableIntObjectMap",
+    objectToIntClassName = "androidx.collection.MutableObjectIntMap",
+    factory = "AndroidxFactory"
+  ),
 )
 
 private val memoryBenchmarkClassNames = listOf("IntToIntMemoryBenchmark", "IntToObjectMemoryBenchmark", "ObjectToIntMemoryBenchmark", "ObjectToObjectMemoryBenchmark", "ReferenceToObjectMemoryBenchmark")
@@ -129,7 +138,7 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
 
       when {
         input.name == "ObjectToObjectBenchmark" -> {
-          code = replaceNewMap(code, library, useFactory = library.name == "koloboke")
+          code = replaceNewMap(code, library, useFactory = library.name == "koloboke" || library.name == "androidx")
             .replace("<ObjectToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
         input.name == "ReferenceToObjectBenchmark" -> {
@@ -149,6 +158,31 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
               .replace("new HashMap<>(0, state.loadFactor)", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(state.loadFactor)")
               .replace("new HashMap<>(", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(")
           }
+        }
+        library.name == "androidx" -> {
+          if (input.name == "IntToObjectBenchmark") {
+            code = code
+              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(0, state.loadFactor)", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.AndroidxFactory.createObjectToInt(state.loadFactor)")
+              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.AndroidxFactory.createObjectToInt(")
+              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor)", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.AndroidxFactory.createIntToObject(state.loadFactor)")
+              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.AndroidxFactory.createIntToObject(")
+          }
+          else {
+            code = code
+              .replace("new HashMap<>(0, state.loadFactor)", "org.jetbrains.benchmark.collection.factory.AndroidxFactory.createIntToInt(state.loadFactor)")
+              .replace("new HashMap<>(", "org.jetbrains.benchmark.collection.factory.AndroidxFactory.createIntToInt(")
+          }
+        }
+      }
+      
+      if (library.name == "androidx") {
+        code = code.replace("map.size()", "map._size")
+        if (input.name == "IntToIntBenchmark") {
+          code = code.replace("Objects.requireNonNullElse(map.get(key), -1)", "map.getOrDefault(key, -1)")
+          code = code.replace("map.get(key)", "map.getOrDefault(key, 0)")
+        } else {
+          code = code.replace("Objects.requireNonNullElse(map.get(key), -1)", "map.getOrDefault(key, -1)")
+          code = code.replace("map.get(key)", "map.getOrDefault(key, null)")
         }
       }
 
