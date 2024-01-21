@@ -36,6 +36,11 @@ val measurers: List<Measurer> = listOf(
   EcObjectToIntMemoryBenchmark(),
   EcObjectToObjectMemoryBenchmark(),
   EcReferenceToObjectMemoryBenchmark(),
+  AndroidxIntToIntMemoryBenchmark(),
+  AndroidxIntToObjectMemoryBenchmark(),
+  AndroidxObjectToIntMemoryBenchmark(),
+  AndroidxObjectToObjectMemoryBenchmark(),
+  AndroidxReferenceToObjectMemoryBenchmark(),
   JavaLinkedMapMemoryBenchmark(),
   FastutilLinkedMapMemoryBenchmark(),
 )
