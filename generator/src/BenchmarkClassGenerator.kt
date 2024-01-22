@@ -2,7 +2,6 @@ package org.jetbrains.benchmark.collection
 
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
 
 private const val packageDir = "org/jetbrains/benchmark/collection"
 
@@ -42,15 +41,6 @@ internal val libraries = listOf(
     objectToIntClassName = "com.carrotsearch.hppc.ObjectIntHashMap",
   ),
   Library(
-    name = "koloboke",
-    objectToObjectClassName = "com.koloboke.collect.map.hash.HashObjObjMap",
-    referenceToObjectClassName = "com.koloboke.collect.map.hash.HashObjObjMap",
-    intToIntClassName = "com.koloboke.collect.map.hash.HashIntIntMap",
-    intToObjectClassName = "com.koloboke.collect.map.hash.HashIntObjMap",
-    objectToIntClassName = "com.koloboke.collect.map.hash.HashObjIntMap",
-    factory = "KolobokeFactory"
-  ),
-  Library(
     name = "ec",
     objectToObjectClassName = "org.eclipse.collections.impl.map.mutable.UnifiedMap",
     referenceToObjectClassName = "org.eclipse.collections.impl.map.strategy.mutable.UnifiedMapWithHashingStrategy",
@@ -78,13 +68,14 @@ fun main() {
   val outDir = Path.of("benchmark/generated/$packageDir")
   val existingFiles = Files.newDirectoryStream(outDir).use { it.toHashSet() }
 
-  val memoryBenchmarkCode = Files.readAllBytes(Paths.get("memory-benchmark/src/MemoryBenchmark.kt")).toString(Charsets.UTF_8)
+  val memoryBenchmarkCode = Files.readString(Path.of("memory-benchmark/src/MemoryBenchmark.kt"))
   val memoryBenchmarkOutDir = Path.of("memory-benchmark/generated")
   Files.createDirectories(memoryBenchmarkOutDir)
   var memoryMeasurerListCode = "package org.jetbrains.benchmark.collection\n\nval measurers = listOf("
   for (name in memoryBenchmarkClassNames) {
     memoryMeasurerListCode += "\n  $name(),"
   }
+
   for (library in libraries) {
     var code = memoryBenchmarkCode
     val classPrefix = library.classPrefix
@@ -103,19 +94,20 @@ fun main() {
       memoryMeasurerListCode += "\n  $classPrefix$name(),"
     }
 
-    Files.write(memoryBenchmarkOutDir.resolve("${classPrefix}MemoryBenchmark.kt"), code.toByteArray(Charsets.UTF_8))
+    Files.writeString(memoryBenchmarkOutDir.resolve("${classPrefix}MemoryBenchmark.kt"), code)
   }
+
   memoryMeasurerListCode += "\n  JavaLinkedMapMemoryBenchmark(),"
   memoryMeasurerListCode += "\n  FastutilLinkedMapMemoryBenchmark(),"
   memoryMeasurerListCode += "\n)"
-  Files.write(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode.toByteArray(Charsets.UTF_8))
+  Files.writeString(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode)
 
   generateBenchmarks(inDir, outDir, existingFiles)
   generateLinkedMapBenchmarks(inDir, outDir, existingFiles)
 
-  existingFiles.forEach {
-    println("remove outdated file $it")
-    Files.delete(it)
+  for (file in existingFiles) {
+    println("remove outdated file $file")
+    Files.delete(file)
   }
 }
 
@@ -125,7 +117,7 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
     val inPath = inDir.resolve("$inClassName.java")
     Files.createDirectories(outDir)
 
-    val inputCode = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
+    val inputCode = Files.readString(inPath)
 
     for (library in libraries) {
       val className = "${library.classPrefix}$inClassName"
@@ -145,20 +137,6 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
           code = replaceNewMap(code, library, useFactory = true)
             .replace("<ReferenceToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
         }
-        library.name == "koloboke" -> {
-          if (input.name == "IntToObjectBenchmark") {
-            code = code
-              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(0, state.loadFactor)", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToInt(state.loadFactor)")
-              .replace("HashMap<ArbitraryPojo, Integer> map = new HashMap<>(", "HashMap<ArbitraryPojo, Integer> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createObjectToInt(")
-              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(0, state.loadFactor)", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToObject(state.loadFactor)")
-              .replace("HashMap<Integer, ArbitraryPojo> map = new HashMap<>(", "HashMap<Integer, ArbitraryPojo> map = org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToObject(")
-          }
-          else {
-            code = code
-              .replace("new HashMap<>(0, state.loadFactor)", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(state.loadFactor)")
-              .replace("new HashMap<>(", "org.jetbrains.benchmark.collection.factory.KolobokeFactory.createIntToInt(")
-          }
-        }
         library.name == "androidx" -> {
           if (input.name == "IntToObjectBenchmark") {
             code = code
@@ -174,7 +152,7 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
           }
         }
       }
-      
+
       if (library.name == "androidx") {
         code = code.replace("map.size()", "map._size")
         if (input.name == "IntToIntBenchmark") {
@@ -264,7 +242,7 @@ private fun replaceInt(code: String, input: Input, library: Library): String {
   return code
 }
 
-private data class Input(val name: String)
+private data class Input(@JvmField val name: String)
 
 private fun replaceNewMap(code: String, library: Library, useFactory: Boolean): String {
   val factory = if (useFactory) library.factory?.let { "org.jetbrains.benchmark.collection.factory.$it" } else null

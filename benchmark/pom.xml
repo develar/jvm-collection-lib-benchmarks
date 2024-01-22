@@ -59,19 +59,6 @@
       <version>1.0.20200330</version>
     </dependency>
 
-    <!-- Koloboke -->
-    <dependency>
-      <groupId>com.koloboke</groupId>
-      <artifactId>koloboke-api-jdk8</artifactId>
-      <version>1.0.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.koloboke</groupId>
-      <artifactId>koloboke-impl-jdk8</artifactId>
-      <version>1.0.0</version>
-      <scope>runtime</scope>
-    </dependency>
-
     <!-- Goldman Sachs, now Eclipse, collections -->
     <dependency>
       <groupId>org.eclipse.collections</groupId>
