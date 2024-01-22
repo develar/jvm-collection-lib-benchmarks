@@ -51,6 +51,18 @@ fun main() {
   val outDir = Path.of("benchmark/generated/$packageDir")
   val existingFiles = Files.newDirectoryStream(outDir).use { it.toHashSet() }
 
+  generateMemoryBenchmarks()
+
+  generateBenchmarks(inDir, outDir, existingFiles)
+  generateLinkedMapBenchmarks(inDir, outDir, existingFiles)
+
+  for (file in existingFiles) {
+    println("remove outdated file $file")
+    Files.delete(file)
+  }
+}
+
+private fun generateMemoryBenchmarks() {
   val memoryBenchmarkCode = Files.readString(Path.of("memory-benchmark/src/MemoryBenchmark.kt"))
   val memoryBenchmarkOutDir = Path.of("memory-benchmark/generated")
   Files.createDirectories(memoryBenchmarkOutDir)
@@ -84,14 +96,6 @@ fun main() {
   memoryMeasurerListCode += "\n  FastutilLinkedMapMemoryBenchmark(),"
   memoryMeasurerListCode += "\n)"
   Files.writeString(memoryBenchmarkOutDir.resolve("list.kt"), memoryMeasurerListCode)
-
-  generateBenchmarks(inDir, outDir, existingFiles)
-  generateLinkedMapBenchmarks(inDir, outDir, existingFiles)
-
-  for (file in existingFiles) {
-    println("remove outdated file $file")
-    Files.delete(file)
-  }
 }
 
 private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
