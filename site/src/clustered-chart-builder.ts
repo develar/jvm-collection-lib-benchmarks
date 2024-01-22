@@ -103,8 +103,6 @@ export function buildClusteredChart(type: string, operation: string, chartData: 
       type: "scroll",
       // disable by default
       selected: {
-        "trove-jb": false,
-        "trove": false,
         "koloboke": false,
         "hppc": false,
         "ec": false,

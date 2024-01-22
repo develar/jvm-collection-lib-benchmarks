@@ -15,24 +15,6 @@ internal val libraries = listOf(
     intToObjectClassName = "it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap",
   ),
   Library(
-    name = "trove-jb",
-    objectToObjectClassName = "gnu.trove.THashMap",
-    referenceToObjectClassName = "gnu.trove.THashMap",
-    intToIntClassName = "gnu.trove.TIntIntHashMap",
-    intToObjectClassName = "gnu.trove.TIntObjectHashMap",
-    objectToIntClassName = "gnu.trove.TObjectIntHashMap",
-    factory = "TroveJbFactory"
-  ),
-  Library(
-    name = "trove",
-    objectToObjectClassName = "gnu.trove.map.hash.THashMap",
-    referenceToObjectClassName = "gnu.trove.map.hash.TCustomHashMap",
-    intToIntClassName = "gnu.trove.map.hash.TIntIntHashMap",
-    intToObjectClassName = "gnu.trove.map.hash.TIntObjectHashMap",
-    objectToIntClassName = "gnu.trove.map.hash.TObjectIntHashMap",
-    factory = "TroveFactory",
-  ),
-  Library(
     name = "hppc",
     objectToObjectClassName = "com.carrotsearch.hppc.ObjectObjectHashMap",
     referenceToObjectClassName = "com.carrotsearch.hppc.ObjectObjectIdentityHashMap",

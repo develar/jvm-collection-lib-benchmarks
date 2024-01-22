@@ -8,7 +8,7 @@
     <version>${revision}</version>
   </parent>
   <artifactId>benchmark</artifactId>
-  
+
   <repositories>
     <repository>
       <id>google</id>
@@ -45,18 +45,6 @@
       <groupId>org.jetbrains.kotlinx</groupId>
       <artifactId>kotlinx-collections-immutable-jvm</artifactId>
       <version>0.3.6</version>
-    </dependency>
-
-    <!-- Trove -->
-    <dependency>
-      <groupId>net.sf.trove4j</groupId>
-      <artifactId>trove4j</artifactId>
-      <version>3.0.3</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jetbrains.intellij.deps</groupId>
-      <artifactId>trove4j</artifactId>
-      <version>1.0.20200330</version>
     </dependency>
 
     <!-- Goldman Sachs, now Eclipse, collections -->
