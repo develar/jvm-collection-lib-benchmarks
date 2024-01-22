@@ -12,6 +12,10 @@ mvn package
 
 java -jar benchmark/target/benchmarks.jar -bm ss -wi 40 -i 40 -f 1 -foe true -rf json \
   -p mapSize=100,1K,10K,100K,1M,10M -tu ms
+  
+  
+java -jar benchmark/target/benchmarks.jar -bm ss -wi 40 -i 40 -f 1 -foe true -rf json \
+    -p mapSize=2,100,1K,10K -p loadFactor=0.5,0.75 -tu ms
 ```
 
 ## Memory Usage Measurement

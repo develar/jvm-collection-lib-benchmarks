@@ -1,5 +1,8 @@
 package org.jetbrains.benchmark.collection;
 
+import com.maximeroussy.invitrode.WordGenerator;
+
+import java.util.Map;
 import java.util.Random;
 
 public final class Util {
@@ -45,6 +48,24 @@ public final class Util {
       }
     }
     return Integer.toString(value);
+  }
+
+  public static String[] generateWords(int size, Map<String, String> map, int oneFailureOutOf) {
+    WordGenerator generator = new WordGenerator(/* same words for consistent benchmark results */ 42);
+    String[] keys = new String[size];
+    for (int i = 0; i < keys.length; i++) {
+      keys[i] = generator.newWord(generator.random.nextInt(3, 33));
+    }
+
+    for (int i = 0; i < keys.length; i++) {
+      String key = keys[i];
+      String newKey = key;
+      if (i % oneFailureOutOf == 0) {
+        newKey = newKey.substring(0, (int)Math.ceil((double)newKey.length() / 2)) + generator.newWord(generator.random.nextInt(3, 5));
+      }
+      map.put(newKey, key);
+    }
+    return keys;
   }
 }
 

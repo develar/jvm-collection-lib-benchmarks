@@ -1,8 +1,21 @@
+export type CategoryToValue = { [key: string]: number }
+export type SizeToOperationData = { [key: string]: CategoryToValue }
+
+export interface ChartData {
+  readonly sizes: Array<string>
+  readonly groups: { [key: string]: SizeToOperationData }
+}
+
 export const tabs = [
   {
     label: "Object",
     path: "/object-to-object",
     type: "ObjectToObject",
+  },
+  {
+    label: "String",
+    path: "/string",
+    type: "String",
   },
   {
     label: "Ordered Object",

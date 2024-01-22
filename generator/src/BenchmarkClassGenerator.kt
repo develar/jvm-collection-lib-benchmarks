@@ -53,6 +53,8 @@ fun main() {
 
   generateMemoryBenchmarks()
 
+  Files.createDirectories(outDir)
+
   generateBenchmarks(inDir, outDir, existingFiles)
   generateLinkedMapBenchmarks(inDir, outDir, existingFiles)
 
@@ -99,15 +101,24 @@ private fun generateMemoryBenchmarks() {
 }
 
 private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
-  for (input in listOf(Input("ObjectToObjectBenchmark"), Input("ReferenceToObjectBenchmark"), Input("IntToIntBenchmark"), Input("IntToObjectBenchmark"))) {
+  for (input in listOf(
+    Input("ObjectToObjectBenchmark"),
+    Input("ReferenceToObjectBenchmark"),
+    Input("IntToIntBenchmark"),
+    Input("IntToObjectBenchmark"),
+    Input("HashMapStringBenchmark"),
+  )) {
     val inClassName = input.name
     val inPath = inDir.resolve("$inClassName.java")
-    Files.createDirectories(outDir)
 
     val inputCode = Files.readString(inPath)
 
     for (library in libraries) {
-      val className = "${library.classPrefix}$inClassName"
+      if (input.name == "HashMapStringBenchmark" && library.name != "fastutil") {
+        continue
+      }
+
+      val className = "${library.classPrefix}${inClassName.removePrefix("Hash")}"
       var code = inputCode
       code = code
         .replace("import java.util.HashMap;\n", "")
@@ -117,8 +128,12 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
 
       when {
         input.name == "ObjectToObjectBenchmark" -> {
-          code = replaceNewMap(code, library, useFactory = library.name == "koloboke" || library.name == "androidx")
+          code = replaceNewMap(code = code, library = library, useFactory = false)
             .replace("<ObjectToObjectBenchmark.BenchmarkGetState>", "<$className.BenchmarkGetState>")
+        }
+        input.name == "HashMapStringBenchmark" -> {
+          code = replaceNewMap(code = code, library = library, useFactory = false)
+            .replace("<HashMapStringBenchmark.StringBenchmarkState>", "<$className.StringBenchmarkState>")
         }
         input.name == "ReferenceToObjectBenchmark" -> {
           code = replaceNewMap(code, library, useFactory = true)
@@ -158,6 +173,7 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
         // space before is important - avoid replacing THashMap
         code = code
           .replace(" HashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.objectToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
+          .replace(" HashMap<String, String> ", " ${library.objectToObjectClassName}<String, String> ")
           .replace(" IdentityHashMap<ArbitraryPojo, ArbitraryPojo> ", " ${library.referenceToObjectClassName}<ArbitraryPojo, ArbitraryPojo> ")
       }
 
@@ -171,7 +187,6 @@ private fun generateBenchmarks(inDir: Path, outDir: Path, existingFiles: Mutable
 private fun generateLinkedMapBenchmarks(inDir: Path, outDir: Path, existingFiles: MutableSet<Path>) {
   val inClassName = "ObjectToObjectBenchmark"
   val inPath = inDir.resolve("$inClassName.java")
-  Files.createDirectories(outDir)
 
   val inputCode = Files.readAllBytes(inPath).toString(Charsets.UTF_8)
 
@@ -218,12 +233,6 @@ private fun replaceInt(code: String, input: Input, library: Library): String {
       code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
     }
     code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeInt(keys2[remove++]);")
-  }
-  else if (library.name == "koloboke") {
-    if (input.name == "IntToObjectBenchmark") {
-      code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.getInt(key)")
-    }
-    code = code.replace("map.remove(keys2[remove++]); // removeInt", "map.removeAsInt(keys2[remove++]);")
   }
   code = code.replace("result ^= Objects.requireNonNullElse(map.get(key), -1)", "result ^= map.get(key)")
   return code

@@ -8,3 +8,8 @@
 target
 ./site/node_modules
 ./site/dist
+dependency-reduced-pom.xml
+
+.DS_Store
+
+/jmh-result.json

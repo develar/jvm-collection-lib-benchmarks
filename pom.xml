@@ -17,9 +17,10 @@
   </modules>
 
   <properties>
-    <kotlin.version>1.9.20</kotlin.version>
+    <kotlin.version>1.9.21</kotlin.version>
+    <serialization.version>1.6.2</serialization.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <javac.target>17</javac.target>
+    <javac.target>21</javac.target>
     <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
   </properties>
 

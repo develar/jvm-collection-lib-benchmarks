@@ -9,14 +9,6 @@
   </parent>
   <artifactId>benchmark</artifactId>
 
-  <repositories>
-    <repository>
-      <id>google</id>
-      <name>Google Maven</name>
-      <url>https://maven.google.com</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>org.jetbrains.benchmark.collection</groupId>
@@ -45,6 +37,11 @@
       <groupId>org.jetbrains.kotlinx</groupId>
       <artifactId>kotlinx-collections-immutable-jvm</artifactId>
       <version>0.3.6</version>
+    </dependency>
+    <dependency>
+      <groupId>com.jetbrains.intellij.platform</groupId>
+      <artifactId>util</artifactId>
+      <version>233.11799.30-EAP-SNAPSHOT</version>
     </dependency>
 
     <!-- Goldman Sachs, now Eclipse, collections -->
@@ -138,4 +135,15 @@
       </plugin>
     </plugins>
   </build>
+  <repositories>
+    <repository>
+      <id>google</id>
+      <name>Google Maven</name>
+      <url>https://maven.google.com</url>
+    </repository>
+    <repository>
+      <id>ij-platform</id>
+      <url>https://www.jetbrains.com/intellij-repository/snapshots</url>
+    </repository>
+  </repositories>
 </project>

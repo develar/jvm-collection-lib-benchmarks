@@ -1,49 +1,35 @@
-import {init} from "echarts"
+import {init} from "echarts/core"
 import prettyBytes from "pretty-bytes"
-import prettyMilliseconds from 'pretty-ms'
-const numberFormat = new Intl.NumberFormat(undefined, {maximumSignificantDigits: 3})
+import prettyMilliseconds from "pretty-ms"
+import type {ChartData} from "./benchmarkMenuModel"
+import type { EChartsType } from "echarts/core"
 
-export function buildClusteredChart(type: string, operation: string, chartData: any, container: HTMLElement, isMemory: Boolean) {
+export function buildClusteredChart(type: string,
+                                    operation: string,
+                                    chartData: ChartData,
+                                    container: HTMLElement,
+                                    isMemory: Boolean,
+                                    isDark: Boolean): EChartsType | null {
   const chartDom = container
-  // chartDom.className = "resultChart column"
-  // container.appendChild(chartDom)
 
-  function findData(size: string, name: string) {
-    //@ts-ignore
-    for (const sizeData of chartData[type]) {
-      if (sizeData.size === size) {
-        return sizeData[name + "_" + operation]
-      }
-    }
-
-    throw new Error(`no size for ${size}`)
-  }
-
-  function hasData(name: string) {
-    //@ts-ignore
-    for (const sizeData of chartData[type]) {
-      if (name + "_" + operation in sizeData) {
-        return true
-      }
-    }
-
-    return false
+  const groupData = chartData.groups[type]
+  if (groupData == null) {
+    console.error(`no data (type=${type}, operation=${operation})`)
+    return null
   }
 
   const series = []
   const xAxis = []
   const yAxis = []
   const grid = []
-  const h = Math.floor(100 / chartData.sizes.length)
-  const gap = 3
-  //@ts-ignore
-  for (const size of chartData.sizes.toReversed()) {
+  const h = Math.floor(92 / chartData.sizes.length)
+  for (const size of chartData.sizes) {
     grid.push({
       left: "0%",
       // space for bar label (right)
-      right: "6%",
-      bottom: `${h * grid.length}%`,
-      height: (h - gap) + "%",
+      right: "10%",
+      top: `${(h * grid.length) + 10}%`,
+      height: h + "%",
       containLabel: true,
     })
     xAxis.push({
@@ -58,14 +44,9 @@ export function buildClusteredChart(type: string, operation: string, chartData: 
       gridIndex: grid.length - 1
     })
 
-    let libraryNames = chartData.series.filter((it: string) => hasData(it))
-    if (type !== "ObjectToObject" && type !== "LinkedMap") {
-      libraryNames = libraryNames.filter((it: string) => it !== "kotlin")
-    }
-
-    series.push(...libraryNames.map((name: string) => {
+    series.push(...Object.entries(groupData[size][operation]).map(([name, value]) => {
       return {
-        data: [findData(size, name)],
+        data: [value],
         xAxisIndex: xAxis.length - 1,
         yAxisIndex: yAxis.length - 1,
         type: "bar",
@@ -87,7 +68,7 @@ export function buildClusteredChart(type: string, operation: string, chartData: 
     }))
   }
 
-  const chart = init(chartDom)
+  const chart = init(chartDom, isDark ? "dark" : null)
   const valueFormatter = isMemory
     ? (value: number | string) => prettyBytes(value as number, {binary: true})
     : (value: number | string) => prettyMilliseconds(value as number, {formatSubMilliseconds: true})
@@ -100,12 +81,12 @@ export function buildClusteredChart(type: string, operation: string, chartData: 
       valueFormatter: valueFormatter
     },
     legend: {
-      type: "scroll",
       // disable by default
       selected: {
-        "koloboke": false,
         "hppc": false,
         "ec": false,
+        "ec-0.5": false,
+        "hppc-0.5": false,
       },
     },
     grid: grid,

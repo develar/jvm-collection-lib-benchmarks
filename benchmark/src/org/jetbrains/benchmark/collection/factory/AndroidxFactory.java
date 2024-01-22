@@ -4,9 +4,6 @@ import androidx.collection.MutableIntIntMap;
 import androidx.collection.MutableIntObjectMap;
 import androidx.collection.MutableObjectIntMap;
 import androidx.collection.MutableScatterMap;
-import com.koloboke.collect.Equivalence;
-import com.koloboke.collect.hash.HashConfig;
-import com.koloboke.collect.map.hash.*;
 
 public class AndroidxFactory {
   public static <K, V> MutableScatterMap<K, V> createReferenceToObject(int expectedSize, float loadFactor) {
