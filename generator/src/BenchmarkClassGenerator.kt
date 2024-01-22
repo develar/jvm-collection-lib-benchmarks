@@ -42,7 +42,8 @@ internal val libraries = listOf(
   ),
 )
 
-private val memoryBenchmarkClassNames = listOf("IntToIntMemoryBenchmark", "IntToObjectMemoryBenchmark", "ObjectToIntMemoryBenchmark", "ObjectToObjectMemoryBenchmark", "ReferenceToObjectMemoryBenchmark")
+private val memoryBenchmarkClassNames =
+  listOf("IntToIntMemoryBenchmark", "IntToObjectMemoryBenchmark", "ObjectToIntMemoryBenchmark", "ObjectToObjectMemoryBenchmark", "ReferenceToObjectMemoryBenchmark")
 
 fun main() {
   val inDir = Path.of("benchmark/src/$packageDir")
@@ -53,7 +54,7 @@ fun main() {
   val memoryBenchmarkCode = Files.readString(Path.of("memory-benchmark/src/MemoryBenchmark.kt"))
   val memoryBenchmarkOutDir = Path.of("memory-benchmark/generated")
   Files.createDirectories(memoryBenchmarkOutDir)
-  var memoryMeasurerListCode = "package org.jetbrains.benchmark.collection\n\nval measurers = listOf("
+  var memoryMeasurerListCode = "package org.jetbrains.benchmark.collection\n\nval measurers: List<Measurer> = listOf("
   for (name in memoryBenchmarkClassNames) {
     memoryMeasurerListCode += "\n  $name(),"
   }

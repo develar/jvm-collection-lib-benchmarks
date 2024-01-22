@@ -30,7 +30,7 @@ public class FastutilLinkedMapBenchmark implements ObjectBenchmark<FastutilLinke
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       Object2ObjectLinkedOpenHashMap<ArbitraryPojo, ArbitraryPojo> map = new Object2ObjectLinkedOpenHashMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
-        // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
+        // for non-identity maps with object keys, we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
         if (i % oneFailureOutOf == 0) {

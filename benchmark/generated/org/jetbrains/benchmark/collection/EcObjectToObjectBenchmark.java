@@ -29,7 +29,7 @@ public class EcObjectToObjectBenchmark implements ObjectBenchmark<EcObjectToObje
       ArbitraryPojo[] keys = Util.loadObjectArray(mapSize);
       org.eclipse.collections.impl.map.mutable.UnifiedMap<ArbitraryPojo, ArbitraryPojo> map = new org.eclipse.collections.impl.map.mutable.UnifiedMap<>(keys.length, loadFactor);
       for (int i = 0, l = keys.length; i < l; i++) {
-        // for non-identity maps with object keys we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
+        // for non-identity maps with object keys, we use a distinct set of keys (the different object with the same value is used for successful “get” calls).
         ArbitraryPojo key = keys[i];
         ArbitraryPojo newKey = new ArbitraryPojo(key.obj1, key.obj2);
         if (i % oneFailureOutOf == 0) {
